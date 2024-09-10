@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetroSole @ Főoldal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="media/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="header">
+                <div class="col-lg-12 topnav" id="myTopnav">
+                <img src="media/logo.png" alt="Logó"></a>
+                        <a href="index.html" class="active">Main page
+                        <a href="shoes.html">Sneakers</a>
+                        <a href="login.html">Log in</a>
+                        <a href="javascript:void(0);" class="icon" onclick="openWindow()">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 pt-5">
+               <p>Üdvözöljük a MetroSole Sneaker and Streetwear Store-ban, ahol a városi stílus találkozik a kifinomult lábbeli művészettel! A MetroSole-nál elkötelezettek vagyunk az egyedi dizájn és a prémium minőségű utcai divat iránt, amely a városi dzsungel nyüzsgése közepette emeli a stílusodat.</p> 
+
+                <p>We offer a wide range of MetroSole collections, including the latest sneaker trends and fashionable streetwear pieces. In our store, you'll find not only shoes but also accessories and garments that can make your look truly unique.</p>
+
+                <p>Our goal is to provide excellent quality, comfortable, and stylish footwear for every lifestyle and taste. We strive to offer a unique shopping experience where everyone can find what they are looking for and discover accessories that emphasize their individual style.</p>
+
+                <p>Explore the world of urban fashion with us at MetroSole, where footwear is not just an accessory but an expressive tool that highlights your personality in the urban jungle. We welcome you to our store to discover the harmony of style and comfort together!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="text"></div>
+      </div>
+
+    <script>
+    class TextScramble {
+        constructor(el) {
+          this.el = el;
+          this.chars = '!<>-_\\/[]{}—=+*^?#________';
+          this.update = this.update.bind(this);
+        }
+        setText(newText) {
+          const oldText = this.el.innerText;
+          const length = Math.max(oldText.length, newText.length);
+          const promise = new Promise(resolve => this.resolve = resolve);
+          this.queue = [];
+          for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+          }
+          cancelAnimationFrame(this.frameRequest);
+          this.frame = 0;
+          this.update();
+          return promise;
+        }
+        update() {
+          let output = '';
+          let complete = 0;
+          for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+              complete++;
+              output += to;
+            } else if (this.frame >= start) {
+              if (!char || Math.random() < 0.28) {
+                char = this.randomChar();
+                this.queue[i].char = char;
+              }
+              output += `<span class="dud">${char}</span>`;
+            } else {
+              output += from;
+            }
+          }
+          this.el.innerHTML = output;
+          if (complete === this.queue.length) {
+            this.resolve();
+          } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+          }
+        }
+        randomChar() {
+          return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }}
+    
+      const phrases = [
+      'metrosole',
+      'sneakers & streetwear',
+      'since 2024',
+      'borsod-abaúj-zemplén county #1 streetwear store',
+      'created and made by: mettyu',
+      'eskü én csináltam nem codepen :P',];
+      
+      
+      const el = document.querySelector('.text');
+      const fx = new TextScramble(el);
+      
+      let counter = 0;
+      const next = () => {
+        fx.setText(phrases[counter]).then(() => {
+          setTimeout(next, 800);
+        });
+        counter = (counter + 1) % phrases.length;
+      };
+      
+      next();</script>
+</body>
+</html>
