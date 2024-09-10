@@ -1,6 +1,28 @@
 body{
-        background-image: url(/media/background-gradient.jpg);
-        color: white;
-        font-family:'Satoshi-Bold';
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+  color: white;
+font-family:'Satoshi-Bold';
+}
+
+.fejlec
+{
+  opacity: 0.;
+}
+.hatter{
+  height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    position: absolute;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    width: 100%;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     
-    }
+    left: 0;
+    z-index: -1;
+}
