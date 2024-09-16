@@ -26,16 +26,19 @@
 </body>
 </html>
 <?php
-$con=mysqli_connect("localhost","root","");
+$con=mysqli_connect("localhost","root","","adatok");
 if(isset($_POST['login_Btn'])){
     $username=$_POST ['username'];
     $password = $_POST['password'];
-    $sql = "SELECT * from websitelogin.logindetails WHERE username = '$username'";
+    $sql = "SELECT * from register r WHERE username = '$username'";
     $result = mysqli_query($con,$sql);
     while($row = mysqli_fetch_assoc($result)){
         $resultPassword = $row['password'];
         if($password == $resultPassword){
             header('Location:index.html');
+            echo("<script>
+                alert('Login succesful');
+                </script>");
         }else{
             echo "<script>
                 alert('Login unuccesful');
