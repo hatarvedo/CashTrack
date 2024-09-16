@@ -5,11 +5,6 @@ body{
   color: white;
 font-family:'Satoshi-Bold';
 }
-
-.fejlec
-{
-  opacity: 0.;
-}
 .hatter{
   height: 100%;
     -o-object-fit: cover;
@@ -26,3 +21,4 @@ font-family:'Satoshi-Bold';
     left: 0;
     z-index: -1;
 }
+
