@@ -1,12 +1,3 @@
-<?php
-session_start();
-include("connect.php")
-?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="hu">
   <head>
@@ -27,7 +18,7 @@ include("connect.php")
          <img class="cashTrack-logo" src="media/logo/CashTrack-ver2.png" alt="CashTrack Logo">
       </div>
       <div class="buttons colored col-7 col-lg-6 col-md-8 col-sm-7">
-        <a href="#">Bejelentkezés</a>
+        <a href="login.php">Bejelentkezés</a>
         <a href="#">Rólunk</a>
         <a href="#">Kapcsolat</a>
         <a href="javascript:void(0);" class="icon" onclick="navDropdown()">
@@ -35,23 +26,5 @@ include("connect.php")
         </a>
       </div>
     </div>
-<div style="color: white; text-align:center" class="belepesKoszonto">
-  <p>
-    Helló, 
-      <?php
-        if(isset($_SESSION['email'])){
-          $email=$_SESSION['email'];
-          $query=mysqli_query($conn,"SELECT users.* FROM `users` WHERE users.email='$email'");
-          while($row=mysqli_fetch_array($query)){
-            echo $row['KeresztNev'];
-          }
-        }
-      ?>
-
-      <!--LOGOUT -->
-      <a  href="logout.php">Kijelentkezés</a>
-  </p>
-</div>
-
   </body>
 </html>

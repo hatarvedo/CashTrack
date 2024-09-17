@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("connect.php")
+?>
 <!DOCTYPE html>
 <html lang="hu">
   <head>
@@ -11,6 +15,22 @@
       <link rel="stylesheet" href="css/satoshi.css">
       <link rel="shortcut icon" href="media/logo/money-base.png" type="image/x-icon">
       <title>Főoldal @ CashTrack</title>
+
+      <style>
+        @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .offlineblink{
+        color:#f35a5a;
+        text-shadow: 0px 0px 5px #f35a5a;
+        text-transform: uppercase;
+        animation: blinker 1s linear infinite;
+        f
+      }
+      </style>
   </head>
   <body>
     <div class="header mt-3" id="header">
@@ -18,7 +38,7 @@
          <img class="cashTrack-logo" src="media/logo/CashTrack-ver2.png" alt="CashTrack Logo">
       </div>
       <div class="buttons colored col-7 col-lg-6 col-md-8 col-sm-7">
-        <a href="login.html">Bejelentkezés</a>
+        <a href="#">Bejelentkezés</a>
         <a href="#">Rólunk</a>
         <a href="#">Kapcsolat</a>
         <a href="javascript:void(0);" class="icon" onclick="navDropdown()">
@@ -26,5 +46,27 @@
         </a>
       </div>
     </div>
+<div style="color: white; text-align:center" class="belepesKoszonto">
+  <p class="mt-3">
+    Helló, 
+      <?php
+        if(isset($_SESSION['email'])){
+          $email=$_SESSION['email'];
+          $query=mysqli_query($conn,"SELECT users.* FROM `users` WHERE users.email='$email'");
+          while($row=mysqli_fetch_array($query)){
+            echo $row['KeresztNev'];
+          }
+        }
+      ?>
+
+    <br>
+      <!--LOGOUT -->
+      <a  href="logout.php">Kijelentkezés</a>
+  </p>
+  
+  <p class="offlineblink">FEJLESZTÉS ALATT!</p>
+
+</div>
+
   </body>
 </html>
