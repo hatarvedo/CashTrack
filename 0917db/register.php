@@ -1,5 +1,5 @@
 <?php 
-include 'conncect.php';
+include 'connect.php';
 if(isset($_POST['signUp'])){
     $vNev=$_POST['vNev'];
     $kNev=$_POST['kNev'];
