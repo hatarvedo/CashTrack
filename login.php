@@ -18,7 +18,7 @@
            <img class="cashTrack-logo" src="media/logo/CashTrack-ver2.png" alt="CashTrack Logo">
         </div>
         <div class="buttons colored col-7 col-lg-6 col-md-8 col-sm-7">
-          <a class="button-active" href="login.html">Bejelentkezés</a>
+          <a class="button-active" href="login.php">Bejelentkezés</a>
           <a href="#">Rólunk</a>
           <a href="#">Kapcsolat</a>
           <a href="javascript:void(0);" class="icon" onclick="navDropdown()">
