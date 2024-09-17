@@ -28,7 +28,7 @@
       </div>
 
     <!--Regisztáció kód-->
-    <div class="containerr" id="signup" style="display: none;">
+    <div class="container" id="signup" style="display: none;">
         <h1 class="form-title">Regisztráció</h1>
         <form method="post" action="register.php">
             <div class="input-group">
@@ -73,7 +73,8 @@
         <div class="input-group">
             <i class="fas fa-lock"></i>
             <input type="password" name="password" id="password" placeholder="Jelszó" required>
-            <label for="password">Jelszó</label> </div>
+            <label for="password">Jelszó</label> 
+        </div>
             <input type="submit" class="btn" value="Belépés" name="signIn">
              
         </form>
