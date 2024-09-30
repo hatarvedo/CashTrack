@@ -15,13 +15,14 @@
   </head>
   <body>
     <div class="header mt-3" id="header">
-      <div class="col-5 col-lg-6 col-md-4 col-sm-5">     
+      <div class="col-5 col-lg-6 col-md-4 col-sm-5 inline">     
          <img class="cashTrack-logo" src="media/logo/CashTrack-ver2.png" alt="CashTrack Logo">
+         <h3 class="text-light">CashTrack</h3>
       </div>
       <div class="buttons colored col-7 col-lg-6 col-md-8 col-sm-7">
-        <a href="login.php">Bejelentkezés</a>
+        <a href="connection.html">Kapcsolat</a>
         <a href="#">Rólunk</a>
-        <a href="#">Kapcsolat</a>
+        <a href="login.php">Bejelentkezés</a>
         <a href="javascript:void(0);" class="icon" onclick="navDropdown()">
           <i class="fa fa-bars"></i>
         </a>
@@ -31,7 +32,7 @@
     <div class="container mt-5" style="color: white;">
       <div class="row">
         <div class="col-4 textCenter">
-          <img class="devPics" src="https://scontent-vie1-1.xx.fbcdn.net/v/t39.30808-6/277297818_1310833092761982_4664776459811350227_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=1Y61kfe-NzsQ7kNvgGBq2yt&_nc_ht=scontent-vie1-1.xx&_nc_gid=A80H60v8GlaFtIQ2qAphZ41&oh=00_AYDEb-9v0rvItUNIWeiMO9kZplO7g_DK145u4pFcs07iJA&oe=66EF9AEC" alt="Profilfotó">
+          <img class="devPics" src="media/connections/mettyu.jpg" alt="Profilfotó">
           <br>
           <h4 class="mt-3">Martocean Máté</h4>
           <h5>Frontend fejlesztő</h5>
@@ -42,7 +43,7 @@
         </div>
 
         <div class="col-4 textCenter">
-          <img class="devPics" src="https://scontent-vie1-1.xx.fbcdn.net/v/t39.30808-6/454032640_2949899678494918_6213667899249628944_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EFWETAJ_KWAQ7kNvgFAsB9g&_nc_ht=scontent-vie1-1.xx&_nc_gid=AcqAEDROpgsRf4Q6w96nHRW&oh=00_AYB9mZVdpDmpjtGYY4rHY1KzYzVqJMNJmtAg8pbmGDiHMQ&oe=66EFB040" alt="Profilfotó">
+          <img class="devPics" src="media/connections/dominik.jpg" alt="Profilfotó">
           <br>
           <h4 class="mt-3">Pacza Dominik</h4>
           <h5>Adatbázis fejlesztő</h5>
@@ -53,7 +54,7 @@
         </div>
 
         <div class="col-4 textCenter">
-          <img class="devPics" src="https://scontent-vie1-1.xx.fbcdn.net/v/t39.30808-6/449162006_3832709270343611_5464234149871952726_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Ke1j0sEG8KkQ7kNvgHe5vYv&_nc_ht=scontent-vie1-1.xx&oh=00_AYCUbdBldO8jxcGsXZ60ukxm4j6xSk90rzjd4nnaauo07w&oe=66EFA32C" alt="Profilfotó">
+          <img class="devPics" src="media/connections/martin.jpg"Profilfotó">
           <br>
           <h4 class="mt-3">Porkoláb Martin</h4>
           <h5>Backend fejlesztő</h5>
@@ -63,8 +64,36 @@
           </p>
         </div>
 
+        <div class="container mt-5 textCenter">
+            <h3>Kérdésed van? Kérdezz bátran!</h3>
+            <form action="vendor/sendEmail.php" class="mt-3">
+                <input type="text" name="nev" id="nev" placeholder="Név" class="mt-2">
+                <br>
+                <input type="text" name="email" id="email" placeholder="E-mail" class="mt-2">
+                <br>
+                <input type="text" name="targy" id="targy" placeholder="Tárgy" class="mt-2">
+                <br>
+                <input type="text" name="uzenet" id="uzenet" placeholder="Üzenet" class="mt-2 uzenet">
+                <br>
+                <button class="gomb mt-3 mb-5" type="submit">Küldés</button>
+            </form>
+        </div>
+
       </div>
     </div>
+
+    <script>
+      function navDropdown() {
+    var element = document.getElementById("header");
+    if (element.className === "header") 
+    {
+        element.className += " responsive";
+    } else 
+    {
+        element.className = "header";
+    }
+  }
+    </script>
 
   </body>
 </html>

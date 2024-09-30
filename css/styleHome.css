@@ -13,7 +13,7 @@ body{
 }
 
 .container{
-    background-color: rgba(38, 38, 38, 0.91);
+    /*background-color: rgba(38, 38, 38, 0.91);*/
     width: 450px;
     padding: 1.5em;
     margin-top: 30px;

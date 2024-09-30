@@ -34,8 +34,9 @@ include("connect.php")
   </head>
   <body>
     <div class="header mt-3" id="header">
-      <div class="col-5 col-lg-6 col-md-4 col-sm-5">     
+    <div class="col-5 col-lg-6 col-md-4 col-sm-5 inline">     
          <img class="cashTrack-logo" src="media/logo/CashTrack-ver2.png" alt="CashTrack Logo">
+         <h3 class="text-light">CashTrack</h3>
       </div>
       <div class="buttons colored col-7 col-lg-6 col-md-8 col-sm-7">
         <a href="#">Bejelentkezés</a>
