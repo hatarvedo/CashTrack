@@ -67,4 +67,4 @@ ADD CONSTRAINT `fk_jovedelem_2` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felha
 
 ALTER TABLE `felhasznalo_kiadas_kategoriak`
 ADD PRIMARY KEY (`felhasznalo_id`,`kategoria_id`),
-ADD KEY `category_id` (`category_id`);
+ADD KEY `kategoria_id` (`kategoria_id`);
