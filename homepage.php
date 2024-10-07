@@ -65,6 +65,34 @@ include("connect.php")
       <a  href="logout.php">Kijelentkezés</a>
   </p>
   
+
+<div class="container-fluid menu-alignment">
+  <div class="row">
+    <div class="col-1">Menu</div>
+  </div>
+  <div class="row">
+    <div class="col-1">
+      <button>Jövedelem</button>
+    </div>
+    <div class="col-1">
+      <input type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1">
+      <button>Kiadások</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1">
+      <button></button>
+    </div>
+  </div>
+  
+
+</div>
+
+
   <p class="offlineblink">FEJLESZTÉS ALATT!</p>
 
 </div>

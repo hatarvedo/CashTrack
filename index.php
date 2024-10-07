@@ -7,9 +7,10 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="css/style.css">
+      
       <link rel="stylesheet" href="css/satoshi.css">
       <link rel="shortcut icon" href="media/logo/money-base.png" type="image/x-icon">
+      <link rel="stylesheet" href="css/style.css">
       <title>Főoldal @ CashTrack</title>
   </head>
   <body>
@@ -25,6 +26,20 @@
         <a href="javascript:void(0);" class="icon" onclick="navDropdown()">
           <i class="fa fa-bars"></i>
         </a>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="index-szoveg-php">
+          <h1 class="szoveg">CashTrack, <br>
+            az ön költségvetés <br>
+            kezelője.
+          </h1>
+          
+        </div>
+        <div class="index-button-reg">
+          <button>Regisztáció</button> <!--Ez a gomb regisztációs felületre kéne hogy dobjon, Azt meg kellene oldani. xoxo-->
+        </div>
       </div>
     </div>
   </body>

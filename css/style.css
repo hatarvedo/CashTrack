@@ -95,8 +95,40 @@ body{
   padding-top: 25px;
   padding-left: 20px;
 }
+/*INDEX.PHP */ 
+.index-szoveg-php{
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+}
+.szoveg{
+  
+  color: white;
+  grid-column: 1/6;
+  
+}
 
 
+
+
+/*MENU IN HOMEPAGE */
+
+
+.menu-alignment{
+  margin-top: 10%;
+  background-color: rgba(0, 0, 0, 0.3);
+  
+  
+}
+input{
+  color:inherit;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  padding-left: 1.5em;
+  font-size: 15px;
+
+}
 
 
 /*@media screen and (max-width: 400px) {
