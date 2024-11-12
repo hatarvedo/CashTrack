@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files 
+@import url("app//assets/css/style.css");
+@import url("app/assets/css/satoshi.css");
+body{
+    background-image: url('/assets/media/bg.jpg');
+    background-repeat: repeat-x;
+    background-color: black;
+   
+  }
+ */
+
+ /* CSS fájlok importálása */
+@import url('assets/style.css');
+
+
+/* Body stílus */
+body {
+    background-image: url('assets/bg.jpg'); /* A helyes útvonalat használd */
+    background-repeat: repeat-x;
+    background-color: black;
+}
