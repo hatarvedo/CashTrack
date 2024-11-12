@@ -24,11 +24,15 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets",
+              "src/images",
+              "src/app/assets"
+
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/style.css"
+              "src/styles.css"
+              
             ],
             "scripts": [],
             "server": "src/main.server.ts",

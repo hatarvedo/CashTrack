@@ -9,6 +9,7 @@ import { NgOptimizedImage } from '@angular/common'
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  logoPath = '/assets/logo.png';
+  
+
  
 }

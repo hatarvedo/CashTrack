@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AdatokService } from '../../service/adatok.service'; 
+import { CommonModule } from '@angular/common';
+import { _AdatokService } from '../../service/adatok.service'; 
 import { Felhasznalo } from '../../felhasznalo';
+import { NgOptimizedImage } from '@angular/common';
+
 
 @Component({
   selector: 'app-felhasznalok',
@@ -12,12 +15,13 @@ import { Felhasznalo } from '../../felhasznalo';
 export class FelhasznalokComponent implements OnInit{
   felhasznalok:any;
   felhasznalo = new Felhasznalo();
+  
  
   
-  constructor(private adatokService:AdatokService){}
+  constructor(private adatokService:_AdatokService){}
   ngOnInit(): void {
     this.getFelhasznaloAdatok();
-    throw new Error('Method not implemented.');
+    
   }
 
   getFelhasznaloAdatok(){

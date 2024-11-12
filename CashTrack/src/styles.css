@@ -10,12 +10,12 @@ body{
  */
 
  /* CSS fájlok importálása */
-@import url('assets/style.css');
+/* @import url('assets/style.css'); */
 
 
 /* Body stílus */
 body {
-    background-image: url('assets/bg.jpg'); /* A helyes útvonalat használd */
+    background-image: url('app/assets/bg.jpg'); /* A helyes útvonalat használd */
     background-repeat: repeat-x;
     background-color: black;
 }

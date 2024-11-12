@@ -20,18 +20,6 @@
 
 
 
-/*INDEX.PHP */ 
-.index-szoveg-php{
-  display: grid;
-  grid-template-columns: repeat(12,1fr);
-}
-.szoveg{
-  
-  color: white;
-  grid-column: 1/6;
-  
-}
-
 
 
 

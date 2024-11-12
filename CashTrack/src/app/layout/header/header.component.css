@@ -82,3 +82,7 @@
     padding-top: 25px;
     padding-left: 20px;
   }
+  .cashTracklogo {
+    
+    object-fit: cover; /* vagy 'cover', hogy a teljes konténerhez igazodjon */
+  }

@@ -1,24 +1,23 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import internal from 'stream';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdatokService {
+export class _AdatokService {
 
-  constructor(private httpClient:HttpClient) { }
-
+http = inject(HttpClient);
   getData(){
-    return this.httpClient.get('http://127.0.0.1:8000/api/felhasznalok');
+    return this.http.get('http://127.0.0.1:8000/api/felhasznalok');
   }
 
   insertData(data: any){
-    return this.httpClient.post('http://127.0.0.1:8000/api/addFelhasznalo', data);
+    return this.http.post('http://127.0.0.1:8000/api/addFelhasznalo', data);
   }
 
   deleteData(id: BigInteger){
-    return this.httpClient.delete('http://127.0.0.1:8000/api/deleteFelhasznalo'+id); 
+    return this.http.delete('http://127.0.0.1:8000/api/deleteFelhasznalo'+id); 
   }
 }
