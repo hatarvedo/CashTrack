@@ -86,3 +86,8 @@
     
     object-fit: cover; /* vagy 'cover', hogy a teljes konténerhez igazodjon */
   }
+
+  .ct-homebtn{
+    text-decoration: none;
+    color: white;
+  }

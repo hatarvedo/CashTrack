@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+}
+.doboz{
+    display: grid;
+    justify-content: center;
+    margin-top: 100px;
+    padding: 50px;
+    grid-template-columns: repeat(12,1fr);
+    
+}
+.szoveg{
+    text-align: left;
+    display: grid;
+  
+  
+  grid-column: 3/6;
+    font-size: 50px;
+
+  
+  
+}
