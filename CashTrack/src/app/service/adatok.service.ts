@@ -10,7 +10,7 @@ export class _AdatokService {
 
 http = inject(HttpClient);
   getData(){
-    return this.http.get('http://127.0.0.1:8000/api/felhasznalok');
+    return this.http.get('http://127.0.0.1:8000/api/felhasznalo/{felhasznaloId}');
   }
 
   insertData(data: any){
