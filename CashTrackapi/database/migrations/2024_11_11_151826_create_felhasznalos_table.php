@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('keresztnev');
             $table->string('email');
             $table->string('jelszo');
-            $table->string('profilkepUrl')->nullable();
+            $table->string('profilkepUrl')->default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y");
         });
     }
 

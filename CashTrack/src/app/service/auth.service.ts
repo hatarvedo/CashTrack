@@ -7,12 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private loginUrl = 'https://your-api-url.com/login'; // Cseréld ki a szervered URL-jére
+  private loginUrl = 'http://127.0.0.1:8000/api/felhasznalo/{felhasznaloID}'; // Cseréld ki a szervered URL-jére
 
   constructor(private http: HttpClient) { }
 
   // Belépési kérés küldése
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(this.loginUrl, { username, password });
-  }
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(this.loginUrl, { email, password });
+1  }
+  register(vezeteknev: string, keresztnev: string, email: string, password: string):        Observable<any> {
+  const data = { vezeteknev, keresztnev, email, password };
+  return this.http.post('http://127.0.0.1:8000/api/addFelhasznalo', data);
+}
 }

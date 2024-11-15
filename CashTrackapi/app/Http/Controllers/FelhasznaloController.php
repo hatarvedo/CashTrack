@@ -27,6 +27,13 @@ class FelhasznaloController extends Controller
         }
         return response()->json($felhasznalo, 200);
     }
+    public function getFelhasznaloByEmail($email){
+        if(is_null($email)){
+            return response()->json(['message' => 'Felhasznalo nem talalhato'], 404);
+        }
+        return response()->json(Felhasznalo::where('email','=',$email)->first(), 200);
+
+    }
     public function addFelhasznalo(request $request){
         $felhasznalok = Felhasznalo::create($request->all());
         return response($felhasznalok,201);

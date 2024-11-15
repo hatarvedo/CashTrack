@@ -1,18 +1,25 @@
 <!--Belépés kód-->
+
 <div class="container" id="signIn">
     <h1 class="form-title">Belépés</h1>
-    <form ngSubmit="onLogin()">
+    <form formGroup="loginForm" ngSubmit="onLogin()">
     <div class="input-group">
         <i class="fas fa-envelope"></i>
         <input type="email" [(ngModel)]="email" id="email" placeholder="Email" required>
         <label for="email">Email</label>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            Az email megadaása kötelező.
+          </div>
     </div>
     <div class="input-group">
         <i class="fas fa-lock"></i>
         <input type="password" [(ngModel)]="password"  id="password" placeholder="Jelszó" required>
         <label for="password">Jelszó</label> 
     </div>
-        <input type="submit" class="btn" value="Belépés" name="signIn">
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        A Jelszó megadása kötelező.
+    </div>
+        <input type="submit" class="btn" value="Belépés" name="signIn" routerLink="/manager">
          
     </form>
       <!-- reg gomb login oldalon-->
@@ -21,5 +28,6 @@
         <button id="signUpButton" routerLink="/register">Regisztálj!</button>
     </div>
 </div>
+
 
 
