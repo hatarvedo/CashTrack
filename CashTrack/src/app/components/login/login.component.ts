@@ -15,10 +15,10 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
 
   // Az előre definiált helyes jelszó
-  correctPassword = 'mySecretPassword';
+
   
   // Felhasználó által megadott jelszó
-  enteredPassword: string = '';
+  
   //Előre megadott email
  /*  correctEmail = 'http:/127.0.0.1/api/felhasznalo/s */
   
@@ -39,9 +39,7 @@ export class LoginComponent {
      }
   
     onLogin(): void {
-      if (this.password === this.correctPassword && this.email == this.correctEmail) {
-
-        
+      /* if (this.password === && this.email )
       }
       if(this.loginForm.valid){
         this.authService.login(this.email, this.password).subscribe(
@@ -55,10 +53,10 @@ export class LoginComponent {
             console.error('Hiba a belépés során', error);
             this.errorMessage = 'Hibás felhasználónév vagy jelszó.';
           }
-        );
+        ); */
       }
      
-    } }
+    } 
 
   
 
