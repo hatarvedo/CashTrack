@@ -1,26 +1,26 @@
-<p>manager works!</p>
-
-<div class="sidebar">
-    <ul>
-        <li><!-- "Felhasználó profilkép" --> <p>Üdv, "felhasználónév"</p></li>
-        <li><a routerLink="/manager"></a>Statisztika</li> <!-- Statisztika oldala, statisztika -->
-        <li>Bevétel hozzáadása</li>  <!-- Bevétel hozzáadása egy popup ablakban  -->
-        <li>Kiadás hozzáadása</li>  <!-- Kiadás hozzáadása egy popup ablakban  -->
-        <li></li>
-        <li>Beállítások</li>    <!-- Beállítások oldala -->
-        <li>Kijelentkezés</li> <!-- Logout -->
-    </ul>
-</div>
-<div class="tartalom">  <!-- Content Box -->
-    <div class="overview">  <!-- Áttekintés doboz -->
-        <div class="egyenlegBox"></div>
-        <div class="haviKoltseg"></div>
-        <div class="haviBevetel"></div>
-        <div class="elozoHonap"></div> <!-- Előző hónaphoz hasonlítás --> 
+<div class="doboz">
+    <div class="sidebar">
+        <ul class="buttons colored">
+            <div class="sidebar-buttons"><!-- "Felhasználó profilkép" --> <p>Üdv, "felhasználónév"</p></div>
+            <div class="sidebar-buttons"><a routerLink="/manager">Statisztika</a></div> <!-- Statisztika oldala, statisztika -->
+            <div class="sidebar-buttons"><a routerLink="/manager">Bevétel hozzáadása</a></div>  <!-- Bevétel hozzáadása egy popup ablakban  -->
+            <div class="sidebar-buttons"><a routerLink="/manager">Kiadás hozzáadása</a></div>  <!-- Kiadás hozzáadása egy popup ablakban  -->
+            <div class="sidebar-buttons"><a href="">Beállítások</a></div>    <!-- Beállítások oldala -->
+            <div class="sidebar-buttons"><a href="">Kijelentkezés</a></div> <!-- Logout -->
+        </ul>
     </div>
-    <div class="koltsegChart">  <!-- Chart doboza -->
-
+    <div class="tartalom">  <!-- Content Box -->
+        <div class="overview">  <!-- Áttekintés doboz -->
+            <div class="egyenlegBox"></div>
+            <div class="haviKoltseg"></div>
+            <div class="haviBevetel"></div>
+            <div class="elozoHonap"></div> <!-- Előző hónaphoz hasonlítás --> 
+        </div>
+        <div class="koltsegChart">  <!-- Chart doboza -->
+    
+        </div>
+        <div></div>
+        <div class="recentExpense"></div> <!-- Utolsó kiadások doboza -->
     </div>
-    <div></div>
-    <div class="recentExpense"></div> <!-- Utolsó kiadások doboza -->
 </div>
+
