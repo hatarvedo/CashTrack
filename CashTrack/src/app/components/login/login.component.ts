@@ -39,9 +39,8 @@ export class LoginComponent {
      }
   
     onLogin(): void {
-      /* if (this.password === && this.email )
-      }
-      if(this.loginForm.valid){
+    
+   /*    if(this.loginForm.valid){
         this.authService.login(this.email, this.password).subscribe(
           (response) => {
             // Sikeres belépés esetén
@@ -53,8 +52,10 @@ export class LoginComponent {
             console.error('Hiba a belépés során', error);
             this.errorMessage = 'Hibás felhasználónév vagy jelszó.';
           }
-        ); */
-      }
+        ); 
+      } */
+     if()
+
      
     } 
 
@@ -62,3 +63,4 @@ export class LoginComponent {
 
 
 
+  }
