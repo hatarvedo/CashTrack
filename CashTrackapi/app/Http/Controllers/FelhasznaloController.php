@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Felhasznalo;
 use Illuminate\Http\Request;
+use  Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FelhasznaloController extends Controller
 {
@@ -27,12 +30,43 @@ class FelhasznaloController extends Controller
         }
         return response()->json($felhasznalo, 200);
     }
-    public function getFelhasznaloByEmail($email){
-        if(is_null($email)){
+
+public function authentication(Request $request){
+    $credentials = $request->only(['email', 'password']);
+    if(Auth::attempt($credentials)){
+        return response()->json(['message' => 'Sikeres belépés']);
+
+    }   
+    else{
+        return response()->json(['error' => 'Hibás email vagy jelszó'],401);
+    }
+}
+
+
+    public function belepes(request $request){
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|email',
+            'jelszo' => 'required',
+            'password_confirm' => 'required|same:jelszo',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json(['message' => 'Hibás email vagy jelszó'], 400);
+        }
+        $email = $request->input('email');
+        $password = $request->input('jelszo');
+        return response()->json(['message' => 'Sikeres belepés'], 201);
+    }
+    public function getFelhasznaloByEmail(string $email)
+    {
+        $felhasznalo = Felhasznalo::where('email', $email)->first();
+
+        if (is_null($felhasznalo)) {
             return response()->json(['message' => 'Felhasznalo nem talalhato'], 404);
         }
-        return response()->json(Felhasznalo::where('email','=',$email)->first(), 200);
 
+        return response()->json($felhasznalo, 200);
     }
     public function addFelhasznalo(request $request){
         $felhasznalok = Felhasznalo::create($request->all());

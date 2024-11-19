@@ -2,7 +2,7 @@
 
 <div class="container" id="signIn">
     <h1 class="form-title">Belépés</h1>
-    <form formGroup="loginForm" ngSubmit="onLogin()">
+    <form formGroup="loginForm"  (ngSubmit)="onSubmit()">
     <div class="input-group">
         <i class="fas fa-envelope"></i>
         <input type="email" [(ngModel)]="email" id="email" placeholder="Email" required>
@@ -16,10 +16,8 @@
         <input type="password" [(ngModel)]="password"  id="password" placeholder="Jelszó" required>
         <label for="password">Jelszó</label> 
     </div>
-    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-        A Jelszó megadása kötelező.
-    </div>
-        <input type="submit" class="btn" value="Belépés" name="signIn" routerLink="/manager">
+   
+        <input type="submit" class="btn" value="Belépés" name="signIn" >
          
     </form>
       <!-- reg gomb login oldalon-->

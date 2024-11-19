@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { FormBuilder,FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { response } from 'express';
 
 @Component({
   selector: 'app-login',
@@ -12,50 +14,44 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
-  // Az előre definiált helyes jelszó
-
-  
-  // Felhasználó által megadott jelszó
-  
-  //Előre megadott email
- /*  correctEmail = 'http:/127.0.0.1/api/felhasznalo/s */
-  
+ 
   // Hibajelzés
   errorMessage: string = '';
 
     email: string = '';
     password: string = '';
+    passwordConfirm: string = '';
+    
    
     loginForm: FormGroup;
+
     
   
-    constructor(private fb:FormBuilder,  private authService: AuthService, private router: Router) {
+    constructor(private fb:FormBuilder,  private authService: AuthService, private router: Router, private http: HttpClient) {
       this.loginForm = this.fb.group({
         email:['',[Validators.required]],
         password :['',[Validators.required,],Validators.minLength(3)]
       })
      }
-  
-    onLogin(): void {
-      /* if (this.password === && this.email )
-      }
-      if(this.loginForm.valid){
-        this.authService.login(this.email, this.password).subscribe(
-          (response) => {
-            // Sikeres belépés esetén
-            console.log('Sikeres belépés', response);
-            this.router.navigate(['/manager']); 
-          },
-          (error) => {
-            // Hiba esetén
-            console.error('Hiba a belépés során', error);
-            this.errorMessage = 'Hibás felhasználónév vagy jelszó.';
-          }
-        ); */
-      }
-     
+     ngOnInit(): void {
+       
+     }
+     onSubmit(): void{
+      
+      this.http.post('http://127.0.0.1:8000/api/belepes', {email:this.email, jelszo: this.password}).subscribe((res: { message: string, error: string } | any) => {
+        console.log(res);
+        if(res.message === 'Sikeres belépés'){
+            this.router.navigate(['/manager']);
+            alert('sikeres login'); 
+        }
+        else{
+          console.log((response as any).error);
+        }
+        
+      });
+     }
     } 
 
   

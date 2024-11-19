@@ -23,7 +23,9 @@ Route::get('/felhasznalok',[FelhasznaloController::class,'index']);
 //Get specific Felhasznalo
 Route::get('/felhasznalo/{felhasznaloID}', [FelhasznaloController::class, 'getFelhasznaloById']);
 //Get specific Felhasznalo by email
-Route::get('/felhasznalo/{email}', [FelhasznaloController::class, 'getFelhasznaloByEmail']);
+Route::get('/felhasznaloEmail/{email}', [FelhasznaloController::class, 'getFelhasznaloByEmail']);
+
+Route::post('/belepes', [FelhasznaloController::class, 'authentication']);
 
 //Új felhasznalo hozzáadása
 Route::post('/addFelhasznalo',[FelhasznaloController::class, 'addFelhasznalo']);

@@ -15,7 +15,7 @@ export class AuthService {
 
   // Belépési kérés küldése
   login(email: string, jelszo: string): Observable<any> {
-    return this.http.post(this.loginUrl, { email, jelszo });
+    return this.http.post(`${this.apiUrl}`, { email, jelszo });
 1  }
   register(vezeteknev: string, keresztnev: string, email: string, jelszo : string):        Observable<any> {
   const data = { vezeteknev, keresztnev, email, jelszo };
