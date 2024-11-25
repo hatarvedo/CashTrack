@@ -6,7 +6,7 @@
     <div class="input-group">
         <i class="fas fa-envelope"></i>
         <input type="email" [(ngModel)]="email" id="email" placeholder="Email" required>
-        <label for="email">Email</label>
+        <label class="user-label" for="email">Email</label>
         <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
             Az email megadaása kötelező.
           </div>
@@ -14,7 +14,7 @@
     <div class="input-group">
         <i class="fas fa-lock"></i>
         <input type="password" [(ngModel)]="password"  id="password" placeholder="Jelszó" required>
-        <label for="password">Jelszó</label> 
+        <label class="user-label" for="password">Jelszó</label> 
     </div>
    
         <input type="submit" class="btn" value="Belépés" name="signIn" >
