@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jovedelem_kategoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class JovedelemKategoriaController extends Controller
 {
@@ -20,15 +21,27 @@ class JovedelemKategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'jovedelemKategoria' => 'required'
+        ]);
+        if($validator->fails()){
+            return response()->json(['message' => 'Nem megfelelő adatok'],400);
+        }
+        $kategoria = Jovedelem::create($request->all());
+        return response($kategoria,201);
     }
+    
 
     /**
      * Display the specified resource.
      */
     public function show(jovedelemKategoria $jovedelemKategoria)
     {
-        //
+        $jovedelem = Jovedelem::find($kategoriaID);
+        if(is_null($jovedelem)){
+            return response()->json(['message' => 'Felhasznalo nem talalhato'],404);
+        }
+        return response()->json($jovedelem,200);
     }
 
     /**

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('felhasznaloID')->references('felhasznaloID')->on('felhasznalok');
             $table->integer('bevetelMennyiseg');
             $table->date('bevetelDatum')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->foreignId('kategoriaID')->references('kategoriaID')->on('kiadasKategoriak');
+            $table->foreignId('kategoriaID')->references('kategoriaID')->on('jovedelemKategoriak');
         });
     }
 

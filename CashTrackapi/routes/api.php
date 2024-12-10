@@ -6,6 +6,7 @@ use App\Http\Controllers\FelhasznaloController;
 use App\Http\Controllers\JovedelemController;
 use App\Http\Controllers\JovedelemKategoriaController;
 use App\Http\Controllers\KiadasController;
+use App\Http\Controllers\KiadasKategoria;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,26 +18,37 @@ use App\Http\Controllers\KiadasController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-//Get all Felhasznalo
+
+//Felhasználó Route-ok
 Route::get('/felhasznalok',[FelhasznaloController::class,'index']);
+Route::get('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'getFelhasznaloById']);
+Route::get('/felhasznalok/email/{email}', [FelhasznaloController::class, 'getFelhasznaloByEmail']);
+Route::post('/felhasznalok',[FelhasznaloController::class, 'addFelhasznalo']);
+Route::put('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'updateFelhasznalo']);
+Route::delete('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'deleteFelhasznalo']);
 
-//Get specific Felhasznalo
-Route::get('/felhasznalo/{felhasznaloID}', [FelhasznaloController::class, 'getFelhasznaloById']);
-//Get specific Felhasznalo by email
-Route::get('/felhasznaloEmail/{email}', [FelhasznaloController::class, 'getFelhasznaloByEmail']);
 
-Route::post('/belepes', [FelhasznaloController::class, 'authentication']);
 
-//Új felhasznalo hozzáadása
-Route::post('/addFelhasznalo',[FelhasznaloController::class, 'addFelhasznalo']);
-
-//Felhasznalo frissítés 
-Route::put('/updateFelhasznalo/{felhasznaloID}', [FelhasznaloController::class, 'updateFelhasznalo']);
-//Felhasznalo törlés
-Route::delete('/deleteFelhasznalo/{felhasznaloID}', [FelhasznaloController::class, 'deleteFelhasznalo']);
-
-Route::get('/jovedelemkategoriak',[JovedelemKategoriaController::class,'index']);
+//Jövedelem Route-ok
 Route::get('/jovedelmek',[JovedelemController::class,'index']);
-Route::get('/kiadasok', [KiadasController::class,'index']);
+Route::post('/jovedelmek',[JovedelemController::class,'store']);
+Route::get('/jovedelmek/{jovedelemID}',[JovedelemController::class, 'show']);
+Route::delete('/jovedelmek/{jovedelemID}',[JovedelemController::class,'destroy']);
+
+//Kiadás Kategóriák Route-ok
+Route::get('/kiadaskategoriak',[KiadasKategoria::class,'index']);
+
+
+//Jövedelem Kategóriák Route-ok
+Route::get('/jovedelemkategoriak',[JovedelemKategoriaController::class,'index']);
+
+
+//Kiadások Route-ok
+Route::get('/kiadasok',[KiadasController::class,'index']);
+Route::post('/kiadasok',[KiadasController::class,'store']);
+Route::get('/kiadasok/showid/{kiadasID}',[KiadasController::class, 'show']);
+Route::delete('/kiadasok/delete/{kiadasID}',[KiadasController::class,'destroy']);
+
+
 
 

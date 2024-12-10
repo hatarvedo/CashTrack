@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class FelhasznaloController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return Felhasznalo::all();
@@ -31,33 +28,9 @@ class FelhasznaloController extends Controller
         return response()->json($felhasznalo, 200);
     }
 
-public function authentication(Request $request){
-    $credentials = $request->only(['email', 'password']);
-    if(Auth::attempt($credentials)){
-        return response()->json(['message' => 'Sikeres belépés']);
-
-    }   
-    else{
-        return response()->json(['error' => 'Hibás email vagy jelszó'],401);
-    }
-}
 
 
-    public function belepes(request $request){
-        $validator = Validator::make($request->all(),[
-            'email' => 'required|email',
-            'jelszo' => 'required',
-            'password_confirm' => 'required|same:jelszo',
-        ]);
 
-        if($validator->fails())
-        {
-            return response()->json(['message' => 'Hibás email vagy jelszó'], 400);
-        }
-        $email = $request->input('email');
-        $password = $request->input('jelszo');
-        return response()->json(['message' => 'Sikeres belepés'], 201);
-    }
     public function getFelhasznaloByEmail(string $email)
     {
         $felhasznalo = Felhasznalo::where('email', $email)->first();
@@ -69,6 +42,16 @@ public function authentication(Request $request){
         return response()->json($felhasznalo, 200);
     }
     public function addFelhasznalo(request $request){
+        $validator = Validator::make($request->all(),[
+            'vezeteknev' => 'required',
+            'keresztnev' => 'required',
+            'email' => 'required',
+            'jelszo' => 'required'
+
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
         $felhasznalok = Felhasznalo::create($request->all());
         return response($felhasznalok,201);
     }

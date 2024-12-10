@@ -1,0 +1,34 @@
+
+<div class="container" id="signup" >
+    <h1 class="form-title">Regisztráció</h1>
+    <form >
+        <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" name="vNev" id="vNev" placeholder="Vezetéknév" required>
+        <label for="vNev">Vezetéknév</label>
+    
+    </div>
+    <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" name="kNev" id="kNev" placeholder="Keresztnév" required>
+        <label for="kNev">Keresztnév</label>
+    </div>
+    <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <label for="email">Email</label>
+    </div>
+    <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" id="password" placeholder="Jelszó" required>
+        <label for="password">Jelszó</label></div>
+        <input type="submit" class="btn" value="Regisztráció" name="signUp">
+    
+    </form>
+      <!-- Belépés gomb reg oldalon-->
+    <div class="signInDiv">
+        <p>Van már fiókod?</p>
+        <button id="signInButton" routerLink="/login">Belépés</button>
+    </div>
+</div>
+

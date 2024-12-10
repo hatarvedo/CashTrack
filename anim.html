@@ -4,33 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        svg path{
+            fill: transparent;
+            stroke: #fff;
+            stroke-width: 0.3;
+            stroke-dasharray: 450;
+            stroke-dashoffset: 450;
+            animation: textAnimation 3s ease-in-out 1 forwards;
+            
+        }
+         @keyframes textAnimation{
+            0%{
+                stroke-dashoffset: 450;
+            }
+            80%{
+                fill: transparent;
+            }
+            100%{
+                fill: #fff;
+                stroke-dashoffset: 0;
+            }
+            
+        } 
+        
+        </style>
 </head>
 <body style="background-color: black;">
-<style>
-svg path{
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 0.3;
-    stroke-dasharray: 450;
-    stroke-dashoffset: 450;
-    animation: textAnimation 3s ease-in-out 1 forwards;
     
-}
- @keyframes textAnimation{
-    0%{
-        stroke-dashoffset: 450;
-    }
-    80%{
-        fill: transparent;
-    }
-    100%{
-        fill: #fff;
-        stroke-dashoffset: 0;
-    }
-    
-} 
-
-</style>
     <div class="banner">
         <div class="title">
             <svg width="360" height="360" viewBox="0 0 610 98" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +40,8 @@ svg path{
                 
         </div>
     </div>
-    
+
+   
 
 
 </body>

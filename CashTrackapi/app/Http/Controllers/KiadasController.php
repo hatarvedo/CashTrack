@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kiadas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KiadasController extends Controller
 {
@@ -20,7 +21,18 @@ class KiadasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'felhasznaloID' => 'required',
+            'kiadasHUF' => 'required',
+            'kiadasDatum' => 'required',
+            'kategoriaID' => 'required'
+
+        ]);
+        if($validator->fails()){
+            return response()->json(['message' => 'Nem megfelelő adatok'],400);
+        }
+        $kiadas = Kiadas::create($request->all());
+        return response()->json($kiadas->all(),201);
     }
 
     /**
@@ -28,7 +40,7 @@ class KiadasController extends Controller
      */
     public function show(Kiadas $kiadas)
     {
-        //
+        
     }
 
     /**
@@ -36,7 +48,12 @@ class KiadasController extends Controller
      */
     public function update(Request $request, Kiadas $kiadas)
     {
-        //
+        $kiadas = Kiadas::find($request->kiadasID);
+        if(is_null($kiadas)){
+            return response()->json(['message' => 'Nem található a kiadás'],400);
+        }
+        $kiadas->update($request->all());
+        return response()->json($kiadas,200);
     }
 
     /**
@@ -44,6 +61,11 @@ class KiadasController extends Controller
      */
     public function destroy(Kiadas $kiadas)
     {
-        //
+        $kiadas =Kiadas::find($request->kiadasID);
+        if(is_null($kiadas)){
+            return response()->json(['message' => 'Nem található a kiadás'],400);
+        }
+        $kiadas->delete();
+        return response()->json(null,204);
     }
 }

@@ -10,4 +10,6 @@ class Jovedelem extends Model
     use HasFactory;
     public $table = "jovedelmek";
     public $timestamps = false;
+    protected $primaryKey = "jovedelemID";
+    public $guarded = [];
 }

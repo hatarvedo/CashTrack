@@ -9,5 +9,8 @@ class Kiadas_kategoria extends Model
 {
     use HasFactory;
     public $table = "kiadasKategoriak";
+    
     public $timestamps = false;
+    protected $primaryKey = "kategoriaID";
+    public $guarded = [];
 }
