@@ -1,12 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 

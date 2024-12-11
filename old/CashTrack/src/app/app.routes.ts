@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { FelhasznalokComponent } from './components/felhasznalok/felhasznalok.component';
 import { LoginComponent } from './components/login/login.component';
 import { KapcsolatComponent } from './components/kapcsolat/kapcsolat.component';
+import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AboutComponent } from './components/about/about.component';
-
+import { ManagerComponent } from './components/manager/manager.component';
 
 export const routes: Routes = [
     {
-        path:'',component:HomeComponent
+        path:'', component:HomeComponent
     },
     {
-        path:'login',component:LoginComponent
+        path:'login', component:LoginComponent
     },
     {
         path:'kapcsolat',component:KapcsolatComponent
@@ -20,8 +20,8 @@ export const routes: Routes = [
         path:'register',component:RegisterComponent
     },
     {
-        path:'rolunk',component:AboutComponent
+        path:'manager', component:ManagerComponent
     }
-   
 
+    
 ];
