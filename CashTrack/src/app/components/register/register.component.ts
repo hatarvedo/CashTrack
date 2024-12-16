@@ -2,22 +2,15 @@ import { Component } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-<<<<<<< Updated upstream
-=======
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-register',
   standalone: true,
-<<<<<<< Updated upstream
-  imports: [FormsModule],
-=======
   imports: [FormsModule,RouterModule,HttpClientModule],
   providers: [PostService,HttpClient],
->>>>>>> Stashed changes
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
