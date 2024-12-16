@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  standalone:true,
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
