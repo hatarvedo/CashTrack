@@ -5,6 +5,7 @@ import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
+  standalone:true,
   imports: [RouterLink,],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
