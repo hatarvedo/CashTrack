@@ -21,6 +21,10 @@ export const routes: Routes = [
     },
     {
         path:'rolunk',component:AboutComponent
+    },
+    { 
+        path: '**', component:HomeComponent
+
     }
    
 

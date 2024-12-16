@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  private felhasznalokUrl = 'http:/127.0.0.1:8000/api/felhasznalok';
-  private felhasznaloEmailUrl = 'http:/127.0.0.1:8000/api/felhasznalok/';
+  private felhasznalokUrl = 'http://127.0.0.1:8000/api/felhasznalok';
+  private felhasznaloEmailUrl = 'http://127.0.0.1:8000/api/felhasznalok/';
   constructor(private http: HttpClient) { }
 
   getFelhasznalok(): Observable<any> {
