@@ -1,5 +1,5 @@
 
-<div class="container" id="signup" >
+<!-- <div class="container" id="signup" >
     <h1 class="form-title">Regisztráció</h1>
     <form >
         <div class="input-group">
@@ -24,11 +24,40 @@
         <label for="password">Jelszó</label></div>
         <input type="submit" class="btn" value="Regisztráció" name="signUp">
     
-    </form>
-      <!-- Belépés gomb reg oldalon-->
-    <div class="signInDiv">
+    </form> -->
+       <!-- Belépés gomb reg oldalon
+   <div class="signInDiv">
         <p>Van már fiókod?</p>
         <button id="signInButton" routerLink="/login">Belépés</button>
     </div>
-</div>
+    </div>  -->
+    <div class="register-form">
+        <h2>Regisztráció</h2>
+        <form (ngSubmit)="onSubmit()">
+          <div>
+            <label for="firstName">Vezetéknév</label>
+            <input type="text" id="vezetekNev" [(ngModel)]="vezetekNev" name="vezetekNev" required />
+          </div>
+          
+          <div>
+            <label for="lastName">Keresztnév</label>
+            <input type="text" id="keresztNev" [(ngModel)]="keresztNev" name="keresztNev" required />
+          </div>
+      
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" [(ngModel)]="email" name="email" required />
+          </div>
+      
+          <div>
+            <label for="password">Jelszó</label>
+            <input type="password" id="password" [(ngModel)]="password" name="password" required />
+          </div>
+      
+          <button type="submit">Regisztrálok</button>
+        </form>
+      </div>
+      
+
+
 
