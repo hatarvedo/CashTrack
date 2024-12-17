@@ -18,7 +18,7 @@ export class PostService {
     return this.http.get(this.felhasznalokUrl);
   }
 
-  registerUser(userData: { vezetekNev: string, keresztNev: string, email: string, password: string }): Observable<any> {
+  registerUser(userData: { vezeteknev: string, keresztnev: string, email: string, jelszo: string }): Observable<any> {
     return this.http.post(this.felhasznalokUrl, userData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

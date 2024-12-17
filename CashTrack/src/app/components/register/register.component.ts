@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -16,20 +15,29 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class RegisterComponent {
   
-  vezetekNev: string = '';
-  keresztNev: string = '';
+  vezeteknev: string = '';
+  keresztnev: string = '';
   email: string = '';
   password: string = '';
   constructor(private postService: PostService) { }
+  /* constructor(private http: HttpClient) { } */
   onSubmit(): void {
     console.log('onsubmit fuggveny');
-    const userData = { vezetekNev: this.vezetekNev,
-      keresztNev: this.keresztNev,
+    const userData = { vezeteknev: this.vezeteknev,
+      keresztnev: this.keresztnev,
       email: this.email,
-      password: this.password };
+      jelszo: this.password };
     this.postService.registerUser(userData).subscribe((response)=>{
       console.log(response);
     });
+    /* this.http.post('http://127.0.0.1:8000/api/felhasznalok', userData).subscribe((response:any)=>{
+      console.log('Sikeres Regisztráció',response);  
+    },
+    error=>{
+      console.error('sikertelen Regisztráció',error);
+    }); */
+    
+  
   }
 
 }

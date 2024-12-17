@@ -16,15 +16,18 @@
                 </div>
                 <br>
             </div>
+            <form (ngSubmit)="onSubmit()">
+
+           
             <h3> Bejelentkezés</h3>
             <div class="mb-3">
                 <label class="form-label toLeft">E-mail</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail">
+                <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail">
 
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1 " class="form-label toLeft">Jelszó</label>
-                <input type="password" class="form-control" id="password" placeholder="Jelszó">
+                <input type="password" [(ngModel)]="jelszo" name="jelszo" class="form-control" id="password" placeholder="Jelszó">
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input " id="remember">
@@ -35,8 +38,9 @@
                 <button type="submit" class="loginButton">Bejelentkezés</button>
                 <p class="question"><b>Nincs fiókod?</b> &nbsp; <a routerLink="/register">Regisztrálj!</a></p>
             </div>
-
+        </form>
         </div>
+        
 
         <div class="col-3">
              <!--BLANK-->
