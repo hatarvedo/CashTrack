@@ -57,6 +57,12 @@ class FelhasznaloController extends Controller
     }
     public function updateFelhasznalo(Request $request, $felhasznaloID){
         $felhasznalo = Felhasznalo::find($felhasznaloID);
+        $validator = Validator::make($felhasznalo->all(),[
+            'vezeteknev' => 'required',
+            'keresztnev' => 'required',
+            'email' => 'required',
+            'jelszo' => 'required'
+        ]);
         if(is_null($felhasznalo)){
             return response()->json(['message' => 'Felhasznalo nem talalhato'], 404);
         }

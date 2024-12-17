@@ -23,7 +23,7 @@ export class LoginComponent {
     this.http.get(`http://127.0.0.1:8000/api/felhasznalok/email/${this.email}`).subscribe((response:any)=>{
       if(userData.email === response.email && userData.jelszo === response.jelszo){
         console.log('Sikeres bejelentkezés');
-        this.router.navigate(['/home']);
+        this.router.navigate(['dashboard']);
       }
       else{
         console.log('Sikertelen bejelentkezés, hibás email vagy jelszó.');

@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { KapcsolatComponent } from './components/kapcsolat/kapcsolat.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AboutComponent } from './components/about/about.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 export const routes: Routes = [
@@ -22,10 +23,14 @@ export const routes: Routes = [
     {
         path:'rolunk',component:AboutComponent
     },
+    {
+        path:'dashboard', component:DashboardComponent
+    },
     { 
         path: '**', component:HomeComponent
 
     }
+    
    
 
 ];
