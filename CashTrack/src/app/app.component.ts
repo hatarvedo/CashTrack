@@ -13,4 +13,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'CashTrack';
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {
+    const user = localStorage.getItem('felhasznalo');
+    if (user) {
+      this.router.navigate(['dashboard']);
+    } else {
+      this.router.navigate(['home']);
+  }
+}
 }

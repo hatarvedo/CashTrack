@@ -28,6 +28,17 @@ class FelhasznaloController extends Controller
         return response()->json($felhasznalo, 200);
     }
 
+    //Belépés Auth-tal
+    public function login(Request $request){
+        $credentials = $request->only(['email', 'password']);
+        if(!auth()->attempt($credentials)){
+            return response()->json(['message' => 'Helytelen bejelentkezés'], 401);
+        }
+        $user = auth()->user();
+        session()->put('logged_in', true);
+        return response()->json($user, 200);
+    }
+
 
 
 
@@ -52,8 +63,10 @@ class FelhasznaloController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
-        $felhasznalok = Felhasznalo::create($request->all());
-        return response($felhasznalok,201);
+            $felhasznalok = Felhasznalo::create($request->all());
+            return response($felhasznalok,201);
+        
+       
     }
     public function updateFelhasznalo(Request $request, $felhasznaloID){
         $felhasznalo = Felhasznalo::find($felhasznaloID);

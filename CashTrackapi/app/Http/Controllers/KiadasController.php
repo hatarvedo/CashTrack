@@ -38,9 +38,17 @@ class KiadasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kiadas $kiadas)
+    public function show(Kiadas $kiadas, $kiadasID)
     {
-        
+        $kiadas = Kiadas::find($kiadas->kiadasID);
+        return response()->json($kiadas,200);
+    }
+
+
+    public function showByUser(Request $request)
+    {
+        $kiadas = Kiadas::where('felhasznaloID',$request->felhasznaloID)->get();
+        return response()->json($kiadas,200);
     }
 
     /**
@@ -59,7 +67,7 @@ class KiadasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kiadas $kiadas)
+    public function destroy(Kiadas $kiadas , Request $request)
     {
         $kiadas =Kiadas::find($request->kiadasID);
         if(is_null($kiadas)){

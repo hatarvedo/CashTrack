@@ -12,4 +12,6 @@ class Kiadas extends Model
     protected $primaryKey = "kiadasID";
     public $timestamps = false;
     public $guarded = [];
+
+
 }

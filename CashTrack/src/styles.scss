@@ -29,9 +29,11 @@
    
   }
 body {
-    background-image: url('assets/bg.jpg'); /* A helyes útvonalat használd */
-    background-repeat: repeat-x;
+  background: fixed;
     background-color: black;
+    background-image: url('assets/bg.jpg'); /* A helyes útvonalat használd */
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: "Satoshi-Variable";
     font-variation-settings: wght 900.0;
     color: white;

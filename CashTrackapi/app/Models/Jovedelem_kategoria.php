@@ -11,5 +11,5 @@ class Jovedelem_kategoria extends Model
     public $table = "jovedelemKategoriak";
     public $timestamps = false;
     protected $primaryKey = "kategoriaID";
-    public $guarded = ["jovedelemKategoria","kategoriaID"];
+    public $guarded = ["jovedelemKategoria"];
 }

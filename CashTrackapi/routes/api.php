@@ -27,6 +27,9 @@ Route::post('/felhasznalok',[FelhasznaloController::class, 'addFelhasznalo']);
 Route::put('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'updateFelhasznalo']);
 Route::delete('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'deleteFelhasznalo']);
 
+//LOGIN Auth
+Route::post('/login', [FelhasznaloController::class, 'login']);
+
 
 
 //Jövedelem Route-ok
@@ -46,8 +49,9 @@ Route::get('/jovedelemkategoriak',[JovedelemKategoriaController::class,'index'])
 //Kiadások Route-ok
 Route::get('/kiadasok',[KiadasController::class,'index']);
 Route::post('/kiadasok',[KiadasController::class,'store']);
-Route::get('/kiadasok/showid/{kiadasID}',[KiadasController::class, 'show']);
-Route::delete('/kiadasok/delete/{kiadasID}',[KiadasController::class,'destroy']);
+Route::get('/kiadasok/{kiadasID}',[KiadasController::class, 'show']);
+Route::get('/kiadasok/felhasznalo/{felhasznaloID}',[KiadasController::class,'showByUser']);
+Route::delete('/kiadasok{kiadasID}',[KiadasController::class,'destroy']);
 
 
 
