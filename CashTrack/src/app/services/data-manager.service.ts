@@ -11,6 +11,7 @@ export class DataManagerService {
   private apiUrl = 'http://127.0.0.1:8000/api/';
   havikiadasok():Observable<any>{
     return this.http.get(`${this.apiUrl}/kiadasok/felhasznalo/${localStorage.getItem('felhasznalo.id')}`);
-
-}
+    
+    
+  }
 }

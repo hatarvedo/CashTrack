@@ -9,7 +9,11 @@
             <h5>Havi kiadás</h5>
             <p></p>
         </div>
-
+        <ul>
+            <li *ngFor="let kiadas of havikiadasok">
+                {{kiadas.nev}}: {{kiadas.osszeg}} Ft
+            </li>
+        </ul>
 
         </div>
         </div>
