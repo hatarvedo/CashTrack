@@ -15,14 +15,17 @@ import { HttpClient} from '@angular/common/http';
 export class DashboardComponent {
 kiadasok:any[] = [];
   havikoltseg = 0;
+  user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
+
+  
 constructor(private http: HttpClient,private dataManagerService:DataManagerService) { }
 
 ngOnInit(): void {
   this.dataManagerService.havikiadasok().subscribe((data)=>{
-    this.kiadasok = data;
-    for (let i = 0; i < this.kiadasok.length; i++) {
-    this.havikoltseg = this.havikoltseg + this.kiadasok[i].osszeg;
-    }
-
-});
+      this.kiadasok = data;
+      for (let i = 0; i < this.kiadasok.length; i++) {
+      this.havikoltseg = this.havikoltseg + this.kiadasok[i].osszeg;
+      }
+    });
+  
 }}
