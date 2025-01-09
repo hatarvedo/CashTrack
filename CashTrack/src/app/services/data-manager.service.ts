@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataManagerService {
-
-  constructor(private http:HttpClient) { }
-  private apiUrl = 'http://127.0.0.1:8000/api/';
-  havikiadasok():Observable<any>{
-    return this.http.get(`${this.apiUrl}/kiadasok/felhasznalo/${localStorage.getItem('felhasznalo.id')}`);
-    
+  private apiUrl = 'http://127.0.0.1:8000/api/kiadasok';
+  constructor(private http: HttpClient) { }
+  
+ havikiadasok():Observable<any>{
+    const user = localStorage.getItem('felhasznalo.felhasznaloID');
+    return this.http.get(`${this.apiUrl}/felhasznalo/${user}`);
+     
     
   }
 }
