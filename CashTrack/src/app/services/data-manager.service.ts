@@ -10,8 +10,8 @@ export class DataManagerService {
   constructor(private http: HttpClient) { }
   
  havikiadasok():Observable<any>{
-    const user = localStorage.getItem('felhasznalo.felhasznaloID');
-    return this.http.get(`${this.apiUrl}/felhasznalo/${user}`);
+    const user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
+    return this.http.get(`${this.apiUrl}/felhasznalo/${user.felhasznaloID}`);
      
     
   }

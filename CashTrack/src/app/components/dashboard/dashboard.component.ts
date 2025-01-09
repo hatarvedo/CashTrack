@@ -13,7 +13,7 @@ import { HttpClient} from '@angular/common/http';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-kiadasok:any[] = [];
+  kiadasok = [];
   havikoltseg = 0;
   user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
 
@@ -22,10 +22,13 @@ constructor(private http: HttpClient,private dataManagerService:DataManagerServi
 
 ngOnInit(): void {
   this.dataManagerService.havikiadasok().subscribe((data)=>{
-      this.kiadasok = data;
-      for (let i = 0; i < this.kiadasok.length; i++) {
-      this.havikoltseg = this.havikoltseg + this.kiadasok[i].osszeg;
-      }
+
+    this.kiadasok = data;
+    this.kiadasok.forEach((kiadas:any)=>{
+      this.havikoltseg += kiadas.kiadasHUF;
+
     });
-  
+  });
+
+
 }}
