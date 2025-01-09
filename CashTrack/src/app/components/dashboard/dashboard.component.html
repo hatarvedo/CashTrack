@@ -19,13 +19,13 @@
             </li>
           </ul>
           <hr>
-          <p><strong>Összes bevétel:</strong></p>
+          <p><strong>Összes bevétel <br> {{currentYear}}. év {{currentMonth}}. hónapban:</strong></p>
           <p class="text-success">{{bevetelSum}} HUF <br> {{ (bevetelSum / EURtoHUF) | number:'1.2-2' }} EUR</p>
 
-          <p><strong>Összes kiadás:</strong></p>
+          <p><strong>Összes kiadás <br> {{currentYear}}. év {{currentMonth}}. hónapban:</strong></p>
           <p class="text-danger">-{{kiadasSum}} HUF <br> -{{ (kiadasSum / EURtoHUF) | number:'1.2-2' }} EUR</p>
 
-          <p><strong>Egyenleg:</strong></p>
+          <p><strong>Egyenleg <br> {{currentYear}}. év {{currentMonth}}. hónapban:</strong></p>
           <p>{{bevetelSum - kiadasSum}} HUF <br> {{ ((bevetelSum - kiadasSum) / EURtoHUF) | number:'1.2-2' }} EUR</p>
           <hr>
           <div class="dropdown">
@@ -45,9 +45,15 @@
   
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ms-5">
         <div class="row ms-3">
-          <div class="col-6">
-            asd
-          </div>
+          <!--div class="col-6">
+            <input type="number" [(ngModel)]="bevetelInput" placeholder="Add bevétel">
+        <button (click)="addBevetel()">Hozzáad</button>
+          </!--div-->
+
+          <!--div class="col-6">
+            <input type="number" [(ngModel)]="kiadasInput" placeholder="Add kiadás">
+            <button (click)="addKiadas()">Hozzáad</button>
+          </!--div-->
         </div>
       </main>
 

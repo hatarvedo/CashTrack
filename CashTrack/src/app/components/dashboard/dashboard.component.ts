@@ -1,39 +1,45 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common'; // Importáld a CommonModule-t
 import { DataManagerService } from '../../services/data-manager.service';
-import { CommonModule } from '@angular/common'; //
 import { NgFor } from '@angular/common';
-import { HttpClient} from '@angular/common/http';
 import { NgApexchartsModule } from 'ng-apexcharts';
-
-
+import { FormsModule } from '@angular/forms'; // Importáld a FormsModule-t
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true, 
-  imports: [NgFor, NgApexchartsModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule, NgFor, NgApexchartsModule, FormsModule], // Add hozzá a CommonModule-t és a FormsModule-t az imports-hoz
   providers: [DataManagerService],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   kiadasok = [];
   havikoltseg = 0;
   user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
-  bevetelSum:number = 7612;
-  kiadasSum:number = 3162;
-  EURtoHUF:number = 413.70;
-  
-constructor(private http: HttpClient,private dataManagerService:DataManagerService) { }
+  bevetelSum: number = 0;
+  kiadasSum: number = 0;
+  EURtoHUF: number = 413.70;
+  bevetelInput: number = 0; // Új változó a bevétel inputhoz
+  kiadasInput: number = 0; // Új változó a kiadás inputhoz
+  currentYear: number = 0; // Új változó az aktuális évhez
+  currentMonth: number = 0; // Új változó az aktuális hónaphoz
 
-ngOnInit(): void {
-  this.dataManagerService.havikiadasok().subscribe((data)=>{
+  constructor(private http: HttpClient, private dataManagerService: DataManagerService) { }
 
-    this.kiadasok = data;
-    this.kiadasok.forEach((kiadas:any)=>{
-      this.havikoltseg += kiadas.kiadasHUF;
-
+  ngOnInit(): void {
+    this.dataManagerService.havikiadasok().subscribe((data) => {
+      this.kiadasok = data;
+      this.kiadasok.forEach((kiadas: any) => {
+        this.havikoltseg += kiadas.kiadasHUF;
+      });
     });
-  });
 
+    const currentDate = new Date();
+    this.currentYear = currentDate.getFullYear();
+    this.currentMonth = currentDate.getMonth() + 1; // Hónapok 0-tól 11-ig vannak számozva, ezért hozzáadunk 1-et
+  }
 
-}}
+ 
+}
