@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthGuardService } from '../../services/auth-guard.service';
 import { NgIf } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,13 @@ import { NgIf } from '@angular/common';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(public authGuardService: AuthGuardService) {}
+  loggedIn: boolean = false;
+  constructor(public authGuardService: AuthGuardService, private authService:AuthService) {}
 
+  ngOnInit(): void {
+    this.authService.isLoggedIn.subscribe(status => this.loggedIn = status);
+  }
+
+
+  
 }

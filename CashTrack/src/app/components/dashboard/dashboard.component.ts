@@ -5,6 +5,8 @@ import { DataManagerService } from '../../services/data-manager.service';
 import { NgFor } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms'; // Importáld a FormsModule-t
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +28,7 @@ export class DashboardComponent implements OnInit {
   currentYear: number = 0; // Új változó az aktuális évhez
   currentMonth: number = 0; // Új változó az aktuális hónaphoz
 
-  constructor(private http: HttpClient, private dataManagerService: DataManagerService) { }
+  constructor(private http: HttpClient, private dataManagerService: DataManagerService, private router:Router,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.dataManagerService.havikiadasok().subscribe((data) => {
@@ -40,6 +42,16 @@ export class DashboardComponent implements OnInit {
     this.currentYear = currentDate.getFullYear();
     this.currentMonth = currentDate.getMonth() + 1; // Hónapok 0-tól 11-ig vannak számozva, ezért hozzáadunk 1-et
   }
+  logout(): void {
+    
+    this.router.navigate(['home']);
+    this.authService.logout();
+    localStorage.removeItem('felhasznalo');
+    this.authService.logout();
+   
+  }
+
+
 
  
 }

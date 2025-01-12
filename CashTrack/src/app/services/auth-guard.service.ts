@@ -5,7 +5,7 @@ import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, R
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-  isLoggedIn: boolean = false;
+  
 
   constructor(private router: Router) {}
  
@@ -13,8 +13,6 @@ export class AuthGuardService implements CanActivate {
     canActivate(): boolean {
       const user = localStorage.getItem('felhasznalo');
       if ( user ) {
-        this.isLoggedIn = true;
-        console.log(this.isLoggedIn);
         return true;
         
       } else {
@@ -22,6 +20,7 @@ export class AuthGuardService implements CanActivate {
         return false;
     }
    }
+
 }
 
 

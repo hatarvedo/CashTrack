@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   email:string = '';
   jelszo: string = '';
   
-  constructor( private http: HttpClient, private router: Router, private loginService: LoginService) { }
+  constructor( private http: HttpClient, private router: Router, private loginService: LoginService, private authService:AuthService) { }
 
   onSubmit(): void {
     console.log('Login fuggveny');
@@ -26,8 +27,10 @@ export class LoginComponent {
       if(this.email === response.email && this.jelszo === response.jelszo){
         console.log('Sikeres bejelentkezés');
         localStorage.setItem('felhasznalo',JSON.stringify(response));
+        
         console.log('Felhasználó adatai: ',response);
         this.router.navigate(['dashboard']);
+        this.authService.login();
 
       }
       else{
@@ -38,8 +41,6 @@ export class LoginComponent {
     );
   }
 
-  logout(): void {
-    this.loginService.logout();
-    this.router.navigate(['login']);
-  }
+
 }
+
