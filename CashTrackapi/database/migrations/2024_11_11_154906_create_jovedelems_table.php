@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('jovedelmek', function (Blueprint $table) {
             $table->id('jovedelemID');
             $table->foreignId('felhasznaloID')->references('felhasznaloID')->on('felhasznalok');
-            $table->integer('bevetelMennyiseg');
+            $table->integer('bevetelHUF');
             $table->date('bevetelDatum')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->foreignId('kategoriaID')->references('kategoriaID')->on('jovedelemKategoriak');
         });

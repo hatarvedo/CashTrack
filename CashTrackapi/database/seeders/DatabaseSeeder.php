@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
           [1,1500000,'2024-12-24',1]
         ];
         foreach ($jovedelmek as $key => $value) {
-          Jovedelem::create(['felhasznaloID' => $value[0], 'bevetelMennyiseg' => $value[1], 'bevetelDatum' => $value[2], 'kategoriaID' => $value[3]]);
+          Jovedelem::create(['felhasznaloID' => $value[0], 'bevetelHUF' => $value[1], 'bevetelDatum' => $value[2], 'kategoriaID' => $value[3]]);
         }
     }
 }

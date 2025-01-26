@@ -24,7 +24,7 @@ class JovedelemController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'felhasznaloID' => 'required',
-            'bevetelMennyiseg' => 'required',
+            'bevetelHUF' => 'required',
             'bevetelDatum' => 'required',
             'kategoriaID' => 'required'
         ]);
