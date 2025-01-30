@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthGuardService } from '../../services/auth-guard.service';
+
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 
@@ -8,16 +8,26 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-header',
   standalone: true,
   imports: [RouterLink, NgIf],
-  providers: [AuthGuardService],
+  providers: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  loggedIn: boolean = false;
-  constructor(public authGuardService: AuthGuardService, private authService:AuthService) {}
+  isLoggedIn: boolean = false;
+  private subscription: any;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.isLoggedIn.subscribe(status => this.loggedIn = status);
+    this.subscription = this.authService.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 

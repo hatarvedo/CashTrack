@@ -5,7 +5,7 @@ import { KapcsolatComponent } from './components/kapcsolat/kapcsolat.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AuthGuardService } from './services/auth-guard.service';
+
 
 
 export const routes: Routes = [
@@ -25,7 +25,7 @@ export const routes: Routes = [
         path:'rolunk',component:AboutComponent
     },
     {
-        path:'dashboard',canActivate:[AuthGuardService], component:DashboardComponent
+        path:'dashboard', component:DashboardComponent
     },
     { 
         path: '**', component:HomeComponent

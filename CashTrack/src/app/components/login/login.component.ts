@@ -29,7 +29,7 @@ export class LoginComponent {
         localStorage.setItem('felhasznalo',JSON.stringify(response));
         
         console.log('Felhasználó adatai: ',response);
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/dashboard']);
         this.authService.login();
 
       }

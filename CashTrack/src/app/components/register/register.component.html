@@ -6,7 +6,7 @@
       </div>
 
       <div class="col-6 login">
-        <form (ngSubmit)="onSubmit()">
+        <form  (ngSubmit)="onSubmit()">
           <div class="logo">
               <div class="banner">
                   <div class="title">
@@ -37,13 +37,15 @@
               <label for="exampleInputPassword1" class="form-label toLeft" >Jelszó</label>
               <input type="password"  [(ngModel)]="password" class="form-control" id="password" name="password" placeholder="Jelszó">
           </div>
-
           <div class="mb-3 mt-3 centered">
-              <button type="submit" class="loginButton">Bejelentkezés</button>
-              <p class="question"><b>Már van fiókod?</b> &nbsp; <a routerLink="/login">Jelentkezz be!</a></p>
-          </div>
+            <button type="submit" class="loginButton">Bejelentkezés</button>
+            
+        </div>
+          
         </form>
+        <p class="question"><b>Már van fiókod?</b> &nbsp; <button routerLink="/login">Jelentkezz be!</button></p>
       </div>
+      
 
       <div class="col-3">
            <!--BLANK-->

@@ -110,16 +110,18 @@ export class DashboardComponent implements OnInit {
   kiadasInput: number = 0; // Új változó a kiadás inputhoz
   currentYear: number = 0; // Új változó az aktuális évhez
   currentMonth: number = 0; // Új változó az aktuális hónaphoz
-
+  private subscription: any;
 
 
   ngOnInit(): void {
-    this.dataManagerService.havikiadasok().subscribe((data) => {
+    this.subscription = this.dataManagerService.havikiadasok().subscribe((data) => {
       this.kiadasok = data;
       this.kiadasok.forEach((kiadas: any) => {
         this.havikoltseg += kiadas.kiadasHUF;
       });
     });
+
+    
 
     const currentDate = new Date();
     this.currentYear = currentDate.getFullYear();
@@ -132,6 +134,11 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('felhasznalo');
     this.authService.logout();
    
+  }
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 
