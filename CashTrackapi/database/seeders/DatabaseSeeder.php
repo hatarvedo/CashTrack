@@ -35,20 +35,33 @@ class DatabaseSeeder extends Seeder
           Jovedelem_kategoria::create(['jovedelemKategoria' => $value]);
         }
         $felhasznalok = [
-          ['Porkoláb','Martin','porkolab.martin@szikszi-ozd.hu','123']
+          ['Porkoláb','Martin','porkolab.martin@szikszi-ozd.hu','123'],
+          
+
         ];
         foreach ($felhasznalok as $key => $value) {
           Felhasznalo::create(['vezeteknev' => $value[0], 'keresztnev' => $value[1], 'email' => $value[2], 'jelszo' => $value[3]]);
         }
         $kiadasok = [
-          [1,20000,'2024-12-24',9,'teszt']
+          [1,20000,'2024-12-24',9,'teszt'],
+          [1,23000,'2025-01-01',7,'teszt2'],
+          [1,30000,'2025-01-04',5,'teszt3'],
+          [1,45000,'2025-01-08',6,'teszt4'],
+          [1,70000,'2025-01-11',7,'teszt5'],
+          [1,8500,'2025-01-21',1,'teszt6']
+
         ];
         foreach ($kiadasok as $key => $value) {
           Kiadas::create(['felhasznaloID' => $value[0], 'kiadasHUF' => $value[1], 'kiadasDatum' => $value[2], 'kategoriaID' => $value[3], 'kiadasKomment' => $value[4]]);
         }
 
         $jovedelmek =[
-          [1,1500000,'2024-12-24',1]
+          [1,1500000,'2024-12-24',1],
+          [1,2000000,'2025-01-31',2],
+          [1,2300000,'2024-12-31',3],
+          [1,400000,'2025-01-21',4],
+          [1,210000,'2025-01-23',4],
+          [1,10000,'2025-01-12',2]
         ];
         foreach ($jovedelmek as $key => $value) {
           Jovedelem::create(['felhasznaloID' => $value[0], 'bevetelHUF' => $value[1], 'bevetelDatum' => $value[2], 'kategoriaID' => $value[3]]);

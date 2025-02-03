@@ -41,14 +41,22 @@ class KiadasController extends Controller
     public function show(Kiadas $kiadas, $kiadasID)
     {
         $kiadas = Kiadas::find($kiadas->kiadasID);
-        return response()->json($kiadas,200);
+        if(is_null($kiadas)){
+            return response()->json(['message' => 'Nem található a kiadás'],400);
+        }
+        else
+            return response()->json($kiadas,200);
     }
 
 
     public function showByUser(Request $request)
     {
         $kiadas = Kiadas::where('felhasznaloID',$request->felhasznaloID)->get();
-        return response()->json($kiadas,200);
+        if(is_null($kiadas)){
+            return response()->json(['message' => 'Nem található a kiadás'],400);
+        }
+        else
+            return response()->json($kiadas,200);
     }
 
     /**
@@ -56,12 +64,28 @@ class KiadasController extends Controller
      */
     public function update(Request $request, Kiadas $kiadas)
     {
-        $kiadas = Kiadas::find($request->kiadasID);
-        if(is_null($kiadas)){
-            return response()->json(['message' => 'Nem található a kiadás'],400);
+        $validator = Validator::make($request->all(),[
+            'felhasznaloID' => 'required',
+            'kiadasHUF' => 'required',
+            'kiadasDatum' => 'required',
+            'kategoriaID' => 'required'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json(['message' => 'Nem megfelelő adatok'],400);
         }
-        $kiadas->update($request->all());
-        return response()->json($kiadas,200);
+        else{
+            $kiadas = Kiadas::find($request->kiadasID);
+            if(is_null($kiadas))
+            {
+                return response()->json(['message' => 'Nem található a kiadás'],400);
+            }
+            else
+            {
+                $kiadas->update($request->all());
+                return response()->json($kiadas,200);    
+            }  
+        }
     }
 
     /**

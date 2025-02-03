@@ -10,4 +10,13 @@ class KiadasKategoria extends Controller
     {
         return Kiadas_kategoria::all();
     }
+
+    public function show(kiadasKategoria $kiadasKategoria)
+    {
+        $kiadas = Kiadaas::find($kategoriaID);
+        if(is_null($kiadas)){
+            return response()->json(['message' => 'Felhasznalo nem talalhato'],404);
+        }
+        return response()->json($kiadas,200);
+    }
 }

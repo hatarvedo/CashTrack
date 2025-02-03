@@ -34,9 +34,8 @@ export class RegisterComponent {
       console.log(response);
       if(response){
         alert('Sikeres regisztráció');
-        this.router.navigate(['dashboard']);
-        localStorage.setItem('felhasznalo',JSON.stringify(response));
-        this.authService.login();
+        this.router.navigate(['login']);
+        /* localStorage.setItem('felhasznalo',JSON.stringify(response)); */
         
       }
       else{

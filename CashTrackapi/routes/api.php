@@ -38,6 +38,7 @@ Route::post('/jovedelmek',[JovedelemController::class,'store']);
 Route::get('/jovedelmek/{jovedelemID}',[JovedelemController::class, 'show']);
 Route::delete('/jovedelmek/{jovedelemID}',[JovedelemController::class,'destroy']);
 
+
 //Kiadás Kategóriák Route-ok
 Route::get('/kiadaskategoriak',[KiadasKategoria::class,'index']);
 
@@ -46,11 +47,13 @@ Route::get('/kiadaskategoriak',[KiadasKategoria::class,'index']);
 Route::get('/jovedelemkategoriak',[JovedelemKategoriaController::class,'index']);
 
 
+
 //Kiadások Route-ok
 Route::get('/kiadasok',[KiadasController::class,'index']);
 Route::post('/kiadasok',[KiadasController::class,'store']);
 Route::get('/kiadasok/{kiadasID}',[KiadasController::class, 'show']);
 Route::get('/kiadasok/felhasznalo/{felhasznaloID}',[KiadasController::class,'showByUser']);
+Route::put('/kiadasok/{kiadasID}',[KiadasController::class,'update']);
 Route::delete('/kiadasok{kiadasID}',[KiadasController::class,'destroy']);
 
 

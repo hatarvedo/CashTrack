@@ -72,6 +72,7 @@ class JovedelemController extends Controller
         }
         $jovedelem->delete();
         return response()->json(null,204);
-
     }
+
+    
 }
