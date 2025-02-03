@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth.service';
+import { PostService } from '../../services/post.service';
+import { NgIf } from '@angular/common';
+import { routes } from '../../app.routes';
+import { RouterModule, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
   standalone:true,
-  imports: [RouterLink,FormsModule,HttpClientModule],
-  providers: [HttpClient,LoginService],
+  imports: [FormsModule,HttpClientModule,NgIf,RouterModule],
+  providers: [LoginService,PostService,AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -18,9 +21,9 @@ export class LoginComponent {
   email:string = '';
   jelszo: string = '';
   
-  constructor( private http: HttpClient, private router: Router, private loginService: LoginService, private authService:AuthService) { }
+  constructor( private http: HttpClient,private router: Router,  private loginService: LoginService, private authService:AuthService, private postService: PostService) { }
 
-  onSubmit(): void {
+  belepes(): void {
     console.log('Login fuggveny');
     const userData = {email:this.email,jelszo:this.jelszo};
     this.loginService.login(this.email,this.jelszo).subscribe((response:any)=>{
@@ -40,6 +43,39 @@ export class LoginComponent {
     }
     );
   }
+  vezeteknev: string = '';
+  keresztnev: string = '';
+  emailcim: string = '';
+  password: string = '';
+  regisztracio(): void {
+    console.log('onsubmit fuggveny');
+    const userData = { vezeteknev: this.vezeteknev,
+      keresztnev: this.keresztnev,
+      email: this.emailcim,
+      jelszo: this.password };
+    this.postService.registerUser(userData).subscribe((response)=>{
+      console.log(response);
+      if(response){
+        alert('Sikeres regisztráció');
+        this.belepesVizsgalat=true
+        /* localStorage.setItem('felhasznalo',JSON.stringify(response)); */
+        
+      }
+      else{
+        alert('Sikertelen regisztráció');
+      }
+    });
+  }
+belepesVizsgalat=true;
+/* ngOnInit(): void {
+  this.LogOrReg();
+} */
+
+LogOrReg(): void {
+  this.belepesVizsgalat = !this.belepesVizsgalat;
+ 
+}
+
 
 
 }

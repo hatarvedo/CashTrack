@@ -114,6 +114,7 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.authService.login();
     this.subscription = this.dataManagerService.havikiadasok().subscribe((data) => {
       this.kiadasok = data;
       this.kiadasok.forEach((kiadas: any) => {

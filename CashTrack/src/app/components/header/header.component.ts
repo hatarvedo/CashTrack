@@ -24,11 +24,11 @@ export class HeaderComponent {
     });
   }
 
-  ngOnDestroy(): void {
+/*   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
+  } */
 
 
   

@@ -42,9 +42,6 @@ export class RegisterComponent {
         alert('Sikertelen regisztráció');
       }
     });
-   
-    
-  
   }
 
 }
