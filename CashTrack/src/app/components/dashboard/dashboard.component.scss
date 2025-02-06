@@ -20,6 +20,17 @@
     margin-bottom: -25px;
   }
 
+  #expenseComment{
+    width: 350px;
+    height: 210px;
+  }
+  
+  .favicon{
+    width: 20px;
+    height: 20px;
+    text-align: center;
+  }
+
   .dropdown-menu{
     background-color: rgba($color: #2e2e2e, $alpha: 0.3);
     color: white;

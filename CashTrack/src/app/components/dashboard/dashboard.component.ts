@@ -106,10 +106,12 @@ export class DashboardComponent implements OnInit {
   bevetelSum: number = 0;
   kiadasSum: number = 0;
   EURtoHUF: number = 413.70;
-  bevetelInput: number = 0; // Új változó a bevétel inputhoz
-  kiadasInput: number = 0; // Új változó a kiadás inputhoz
-  currentYear: number = 0; // Új változó az aktuális évhez
-  currentMonth: number = 0; // Új változó az aktuális hónaphoz
+  bevetelInput: number = 0;
+  kiadasInput: number = 0; 
+  currentYear: number = 0; 
+  currentMonth: number = 0; 
+  currentDay: number = 0;
+  wholeYear: number = 0;
   private subscription: any;
 
 
@@ -127,6 +129,9 @@ export class DashboardComponent implements OnInit {
     const currentDate = new Date();
     this.currentYear = currentDate.getFullYear();
     this.currentMonth = currentDate.getMonth() + 1; // Hónapok 0-tól 11-ig vannak számozva, ezért hozzáadunk 1-et
+    this.currentDay = currentDate.getDay();
+    this.wholeYear = currentDate.getFullYear();
+
   }
   logout(): void {
     
