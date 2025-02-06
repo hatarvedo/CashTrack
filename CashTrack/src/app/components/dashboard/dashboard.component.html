@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!div class="container-fluid">
     <div class="row">
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar me-3">
         <div class="position-sticky">
@@ -42,37 +42,48 @@
           </div>
         </div>
       </nav>
+    </div>
 
-      <!-- Bevétel hozzáadása modal element -->
-<div class="modal fade" id="addIncome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Bevétel hozzáadása</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p> <img src="../../../assets/favicon/category.png" alt="" class="favicon"> 
-          Bevétel típusa: 
-          <select name="expenseCategory" id="incomeCategory">
-            <option value="Válassz!">Válassz!</option>
-          </select>
-        </p>
-        <p> <img src="../../../assets/favicon/cash.png" alt="" class="favicon"> Érték: <input type="number" name="incomeHUF" id="incomeHUF"> HUF</p>
-        <p> <img src="../../../assets/favicon/calendar.png" alt="" class="favicon"> Bevétel dátuma: <input type="date" name="incomeDate" id="incomeDate"></p>
+    <!--IDE A CONTENT-->
+
+    <p></p>
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Bezárás</button>
-        <button type="button" class="btn btn-success">Bevétel mentése</button>
+    <!--CONTENT EDDIG-->
+  
+<!-- Bevétel hozzáadása modal element -->
+    <div class="modal fade incomeModal" id="addIncome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Bevétel hozzáadása</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p style="display: flex; justify-content: space-between;"> <span class="bi bi-list-check text-light">&nbsp;Bevétel típusa: </span>
+             
+              <select name="expenseCategory" id="incomeCategory">
+                <option value="Válassz!">Válassz!</option>
+              </select>
+            </p>
+            <p style="display: flex; justify-content: space-between;">  <span class="bi bi-cash text-light">&nbsp;Érték: </span> <input type="number" name="incomeHUF" id="incomeHUF" placeholder="Érték Forintban"></p>
+            <p style="display: flex; justify-content: space-between;"> <span class="bi bi-calendar-date text-light">&nbsp;Bevétel dátuma: </span> <input type="date" name="incomeDate" id="incomeDate"></p>
+    
+    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Mégsem</button>
+            <button type="button" class="btn btn-success">Bevétel mentése</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+
+      
 
       <!-- Kiadás hozzáadása modal element -->
-      <div class="modal fade" id="addExpense" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade expenseModal" id="addExpense" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -80,26 +91,20 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-             <p> <img src="../../../assets/favicon/category.png" alt="" class="favicon"> Kiadás típusa: <select name="expenseCategory" id="expenseCategory">
+             <p> <i class="bi bi-list-check text-light"></i> Kiadás típusa: <select name="expenseCategory" id="expenseCategory">
                 <option value="Válassz!">Válassz!</option>
               </select></p>
-              <p> <img src="../../../assets/favicon/cash.png" alt="" class="favicon"> Érték: <input type="number" name="expenseHUF" id="expenseHUF"> HUF</p>
-              <p> <img src="../../../assets/favicon/calendar.png" alt="" class="favicon"> Kiadás dátuma: <input type="date" name="expenseDate" id="expenseDate"></p>
-              <p> <img src="../../../assets/favicon/comment.png" alt="" class="favicon"> Kiadás kommentelése:</p>
+              <p> <i class="bi bi-cash text-light"></i> Érték: <input type="number" name="expenseHUF" id="expenseHUF"> HUF</p>
+              <p> <i class="bi bi-calendar-date text-light"></i> Kiadás dátuma: <input type="date" name="expenseDate" id="expenseDate"></p>
+              <p> <i class="bi bi-chat-left-text text-light"></i> Kiadás kommentelése:</p>
               <textarea name="expenseComment" id="expenseComment" placeholder="pl. Vásárlás során válaszott termékek - NEM KÖTELEZŐ!"></textarea>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Bezárás</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Mégsem</button>
               <button type="button" class="btn btn-success">Kiadás mentése</button>
             </div>
           </div>
         </div>
       </div>
-  
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ms-5">
-        <div class="row ms-3">
-        
-          <apx-chart [series]="chartOptions?.series || []" [chart]="chartOptions?.chart || { type: 'line' }" [xaxis]="chartOptions?.xaxis || {}" [dataLabels]="chartOptions?.dataLabels || {}" [stroke]="chartOptions?.stroke || {}" [title]="chartOptions?.title || {}"></apx-chart>
-        </div>
-      </main>
 
+    

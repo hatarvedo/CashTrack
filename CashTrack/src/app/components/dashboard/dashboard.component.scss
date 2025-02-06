@@ -24,11 +24,37 @@
     width: 350px;
     height: 210px;
   }
+
+  .modal-content{
+    background: rgba(48, 48, 48, 0.85);
+    color: white;
+  }
+
+  .incomeModal input, .expenseModal input, .incomeModal select, .expenseModal select{
+    background: rgba(48, 48, 48, 0.15);
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid #333;
+  }
+
+  .incomeModal input:focus, .incomeModal input:focus::after, .incomeModal select:focus{
+    border: 3px solid green;
+    transition: 0.2s all ease-in-out;
+  }
+
+
+
+  .incomeModal input::placeholder, .expenseModal input::placeholder{
+    color: grey;
+    text-align: center;
+  }
   
   .favicon{
     width: 20px;
     height: 20px;
     text-align: center;
+    color: white;
   }
 
   .dropdown-menu{
