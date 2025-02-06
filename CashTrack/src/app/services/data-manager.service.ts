@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class DataManagerService {
   private apiUrl = 'http://127.0.0.1:8000/api/kiadasok';
+  private apiUrlKiadasKategoriak = 'http://127.0.0.1:8000/api/kiadaskategoriak';
+  private apiUrlJovedelemKategoriak = 'http://127.0.0.1:8000/api/jovedelemkategoriak';
+  private apiUrlJovedelmek = 'http://127.0.0.1:8000/api/jovedelmek';
   constructor(private http: HttpClient) { }
   
  havikiadasok():Observable<any>{
@@ -15,4 +18,18 @@ export class DataManagerService {
      
     
   }
+  kiadasKategoriakLekerese():Observable<any>
+  {
+    return this.http.get(`${this.apiUrlKiadasKategoriak}`)
+  };
+  kiadasFeltoltes(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID: any, kiadasKomment: string}):Observable<any>{
+    return this.http.post(`${this.apiUrl}`, kiadasAdat);
+  }
+  jovedelemKategoriakLekerese():Observable<any>
+  {
+    return this.http.get(`${this.apiUrlJovedelemKategoriak}`)
+  };
+  JovedelemFeltoltes(jovedelemAdatok:{felhasznaloID:number, bevetelHUF: number, bevetelDatum: string,kategoriaID: number}):Observable<any>{
+    return this.http.post(`${this.apiUrlJovedelmek}`, jovedelemAdatok);
+}
 }

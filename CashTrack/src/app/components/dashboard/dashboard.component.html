@@ -1,4 +1,4 @@
-<!div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar me-3">
         <div class="position-sticky">
@@ -8,12 +8,12 @@
           <hr>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addIncome">
+              <a class="nav-link" (click)="jovedelemKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addIncome">
                 Bevétel hozzáadása
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addExpense">
+              <a class="nav-link" (click)="kiadasKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addExpense">
                 Kiadás hozzáadása
               </a>
             </li>
@@ -62,18 +62,20 @@
           <div class="modal-body">
             <p style="display: flex; justify-content: space-between;"> <span class="bi bi-list-check text-light">&nbsp;Bevétel típusa: </span>
              
-              <select name="expenseCategory" id="incomeCategory">
+              <select name="expenseCategory" id="incomeCategory"  [(ngModel)]="jovedelemTipus">
                 <option value="Válassz!">Válassz!</option>
+                <option *ngFor="let kategoria of jovedelemKategoriak">{{kategoria.jovedelemKategoria}}</option>
+                
               </select>
             </p>
-            <p style="display: flex; justify-content: space-between;">  <span class="bi bi-cash text-light">&nbsp;Érték: </span> <input type="number" name="incomeHUF" id="incomeHUF" placeholder="Érték Forintban"></p>
-            <p style="display: flex; justify-content: space-between;"> <span class="bi bi-calendar-date text-light">&nbsp;Bevétel dátuma: </span> <input type="date" name="incomeDate" id="incomeDate"></p>
+            <p style="display: flex; justify-content: space-between;">  <span class="bi bi-cash text-light">&nbsp;Érték: </span> <input type="number" name="incomeHUF" id="incomeHUF" placeholder="Érték Forintban"  [(ngModel)]="jovedelemErtek"></p>
+            <p style="display: flex; justify-content: space-between;"> <span class="bi bi-calendar-date text-light">&nbsp;Bevétel dátuma: </span> <input type="date" name="incomeDate" id="incomeDate"  [(ngModel)]="jovedelemDatum"></p>
     
     
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Mégsem</button>
-            <button type="button" class="btn btn-success">Bevétel mentése</button>
+            <button type="button" class="btn btn-success" (click)="jovedelemHozzadasa()" data-bs-dismiss="modal">Bevétel mentése</button>
           </div>
         </div>
       </div>
@@ -90,19 +92,23 @@
               <h1 class="modal-title fs-5" id="exampleModalLabel">Kiadás hozzáadása</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form>
             <div class="modal-body">
-             <p> <i class="bi bi-list-check text-light"></i> Kiadás típusa: <select name="expenseCategory" id="expenseCategory">
+             <p> <i class="bi bi-list-check text-light"></i> Kiadás típusa:
+              <select name="expenseCategory" id="expenseCategory" [(ngModel)]="kiadasTipus">
                 <option value="Válassz!">Válassz!</option>
+                <option *ngFor="let kategoria of kiadasKategoriak">{{ kategoria.kiadasKategoria }}</option>
               </select></p>
-              <p> <i class="bi bi-cash text-light"></i> Érték: <input type="number" name="expenseHUF" id="expenseHUF"> HUF</p>
-              <p> <i class="bi bi-calendar-date text-light"></i> Kiadás dátuma: <input type="date" name="expenseDate" id="expenseDate"></p>
+              <p> <i class="bi bi-cash text-light"></i> Érték: <input type="number" name="expenseHUF" id="expenseHUF"[(ngModel)]="kiadasErtek"> HUF</p>
+              <p> <i class="bi bi-calendar-date text-light"></i> Kiadás dátuma: <input type="date" name="expenseDate" id="expenseDate" [(ngModel)]="kiadasDatum"></p>
               <p> <i class="bi bi-chat-left-text text-light"></i> Kiadás kommentelése:</p>
-              <textarea name="expenseComment" id="expenseComment" placeholder="pl. Vásárlás során válaszott termékek - NEM KÖTELEZŐ!"></textarea>
+              <textarea name="expenseComment" id="expenseComment" [(ngModel)]="kiadasMegjegyzes" placeholder="pl. Vásárlás során válaszott termékek - NEM KÖTELEZŐ!"></textarea>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Mégsem</button>
-              <button type="button" class="btn btn-success">Kiadás mentése</button>
+              <button type="button" class="btn btn-success" (click)="kiadasHozzaadas()">Kiadás mentése</button>
             </div>
+          </form>
           </div>
         </div>
       </div>

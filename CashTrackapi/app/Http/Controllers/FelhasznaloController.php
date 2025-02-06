@@ -28,16 +28,7 @@ class FelhasznaloController extends Controller
         return response()->json($felhasznalo, 200);
     }
 
-    //Belépés Auth-tal
-    public function login(Request $request){
-        $credentials = $request->only(['email', 'password']);
-        if(!auth()->attempt($credentials)){
-            return response()->json(['message' => 'Helytelen bejelentkezés'], 401);
-        }
-        $user = auth()->user();
-        session()->put('logged_in', true);
-        return response()->json($user, 200);
-    }
+   
 
 
 

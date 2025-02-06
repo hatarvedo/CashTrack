@@ -44,6 +44,7 @@ export type ChartOptions = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+[x: string]: any;
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions?: Partial<ChartOptions>;
   constructor(private http: HttpClient, private dataManagerService: DataManagerService, private router:Router,private authService:AuthService){
@@ -98,8 +99,8 @@ export class DashboardComponent implements OnInit {
   }
   //ApexCharts
 
-
-
+  jovedelemKategoriak: any = [];
+  kiadasKategoriak: any = [];
   kiadasok = [];
   havikoltseg = 0;
   user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
@@ -113,8 +114,84 @@ export class DashboardComponent implements OnInit {
   currentDay: number = 0;
   wholeYear: number = 0;
   private subscription: any;
+//Felhasznalo ID 
+felhasznalo = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
+felhasznaloID = this.felhasznalo.felhasznaloID;
+  //Bevétel függvények
+jovedelemKategoriakLekeres():void{
+  this.dataManagerService.jovedelemKategoriakLekerese().subscribe((data) => {
+    this.jovedelemKategoriak = data;
+    console.log(this.jovedelemKategoriak);
+  });
+}
+jovedelemTipus:any = '';
+jovedelemErtek:number = 0;
+jovedelemDatum:string = '';
 
+jovedelemHozzadasa(){
+  const jovedelemAdatok ={
+    felhasznaloID: this.felhasznaloID,
+    bevetelHUF: this.jovedelemErtek,
+    bevetelDatum:this.jovedelemDatum,
+    kategoriaID: this.jovedelemTipus,
+  }
+  this.jovedelemKategoriak.forEach((kategoriak: any) => {
+    //A kategoriaID megkapja először stringben a nevét, majd az ID-t
+    if(jovedelemAdatok.kategoriaID == kategoriak.jovedelemKategoria){
+      console.log('Kategoria neve:',jovedelemAdatok.kategoriaID);
+      jovedelemAdatok.kategoriaID = kategoriak.kategoriaID
+      console.log('Kategoria ID:',jovedelemAdatok.kategoriaID);
+      console.log('Kategoriak.kategoriaID:',kategoriak.kategoriaID);
+    }
+  });
+  if(jovedelemAdatok.bevetelHUF && jovedelemAdatok.bevetelDatum && jovedelemAdatok.kategoriaID){
+    this.dataManagerService.JovedelemFeltoltes(jovedelemAdatok).subscribe((data) => {
+      console.log(data);
+    });
+  }
+}
 
+  //Kiadás függvények
+kiadasKategoriakLekeres(): void {
+  this.dataManagerService.kiadasKategoriakLekerese().subscribe((data) => {
+    this.kiadasKategoriak = data;
+    console.log(this.kiadasKategoriak);
+  });
+}
+kiadasTipus:any = '';
+kiadasErtek:number = 0;
+kiadasDatum:string = '';
+kiadasMegjegyzes:string = '';
+
+kiadasHozzaadas(){
+
+  const kiadasAdatok = {
+    felhasznaloID: this.felhasznaloID,
+    kiadasHUF: this.kiadasErtek,
+    kiadasDatum: this.kiadasDatum,
+    kategoriaID: this.kiadasTipus,
+    kiadasKomment: this.kiadasMegjegyzes,
+    
+  };
+  this.kiadasKategoriak.forEach((kategoriak: any) => {
+    //A kategoriaID megkapja először stringben a nevét, majd az ID-t
+    if(kiadasAdatok.kategoriaID == kategoriak.kiadasKategoria){
+      console.log('Kategoria neve:',kiadasAdatok.kategoriaID);
+      kiadasAdatok.kategoriaID = kategoriak.kategoriaID
+      console.log('Kategoria ID:',kiadasAdatok.kategoriaID);
+      console.log('Kategoriak.kategoriaID:',kategoriak.kategoriaID);
+      
+    }
+  });
+  if (kiadasAdatok.kategoriaID && kiadasAdatok.kiadasHUF && kiadasAdatok.kiadasDatum) {
+    this.dataManagerService.kiadasFeltoltes(kiadasAdatok).subscribe((response: any) => {
+      
+      if(response){
+        console.log('Kiadás hozzáadva',kiadasAdatok);
+      }
+    });
+  }
+}
   ngOnInit(): void {
     this.authService.login();
     this.subscription = this.dataManagerService.havikiadasok().subscribe((data) => {
@@ -123,15 +200,11 @@ export class DashboardComponent implements OnInit {
         this.havikoltseg += kiadas.kiadasHUF;
       });
     });
-
-    
-
     const currentDate = new Date();
     this.currentYear = currentDate.getFullYear();
     this.currentMonth = currentDate.getMonth() + 1; // Hónapok 0-tól 11-ig vannak számozva, ezért hozzáadunk 1-et
     this.currentDay = currentDate.getDay();
     this.wholeYear = currentDate.getFullYear();
-
   }
   logout(): void {
     
@@ -139,15 +212,10 @@ export class DashboardComponent implements OnInit {
     this.authService.logout();
     localStorage.removeItem('felhasznalo');
     this.authService.logout();
-   
   }
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
-
-
-
- 
 }

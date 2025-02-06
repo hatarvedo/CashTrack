@@ -28,7 +28,7 @@ Route::put('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'upda
 Route::delete('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'deleteFelhasznalo']);
 
 //LOGIN Auth
-Route::post('/login', [FelhasznaloController::class, 'login']);
+
 
 
 
