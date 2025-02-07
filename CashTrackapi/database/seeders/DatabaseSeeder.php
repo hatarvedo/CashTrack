@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
           Kategoria::create(['nev'=> $value]);
         }*/
 
-        $kiadasKategoriak = ['étel', 'ház', 'közlekedés', 'telefonszolgáltató', 'egészségügy', 'ruházat', 'higénia', 'gyerekek', 'szórakozás', 'utazás', 'edzés', 'megtakarítás', 'malacpersely','hiteltörlesztés', 'támogatás', 'egyéb'];
+        $kiadasKategoriak = ['Étel', 'Ház', 'Közlekedés', 'Telefonszolgáltató', 'Egészségügy', 'Ruházat', 'Higénia', 'Gyerekek', 'Szórakozás', 'Utazás', 'Edzés', 'Megtakarítás', 'Malacpersely','Hiteltörlesztés', 'Támogatás', 'Egyéb'];
         foreach ($kiadasKategoriak as $key => $value) {
           Kiadas_kategoria::create(['kiadasKategoria' => $value]);
         }
 
-        $jovedelemKategoriak = ['fizetés', 'banki kamat', 'hitelfelvétel', 'nyugdíj', 'ösztöndíj', 'GYES', 'GYED', 'egyéb'];
+        $jovedelemKategoriak = ['Fizetés', 'Banki kamat', 'Hitelfelvétel', 'Nyugdíj', 'Ösztöndíj', 'GYES', 'GYED', 'Egyéb'];
         foreach ($jovedelemKategoriak as $key => $value) {
           Jovedelem_kategoria::create(['jovedelemKategoria' => $value]);
         }

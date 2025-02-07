@@ -36,16 +36,23 @@
     </div>
 
     <!--IDE A CONTENT-->
-  <div class="content">
+  <div class="container">
+    <div class="row">
+    <div class="col-2">
+    </div>
+    <div class="content col-4">
     <ol class="list-group">
       <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let kiadas of kiadasokOsszes" >
         <div class="ms-2 me-auto">
           <div class="fw-bold" >{{kiadas.kategoriaNev}}</div>
-          {{kiadas.kiadasHUF}}
+          {{kiadas.kiadasHUF}} Ft
         </div>
         <span class="badge text-bg-primary rounded-pill">1</span>
       </li>
     </ol>
+    </div>
+  </div>
+  </div>
     
     
 
