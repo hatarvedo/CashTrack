@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
 
   jovedelemKategoriak: any = [];
   kiadasKategoriak: any = [];
-  kiadasok: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any, kiadasKomment: string}[]  =[];
+  kiadasok: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any  , kiadasKomment: string}[]  =[];
   havikoltseg = 0;
   user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
   currentYear: number = 0; 
@@ -152,6 +152,7 @@ jovedelemHozzadasa(){
 kiadasKategoriakLekeres(): void {
   this.dataManagerService.kiadasKategoriakLekerese().subscribe((data) => {
     this.kiadasKategoriak = data;
+    (localStorage.setItem('kiadaskategoriak',JSON.stringify(data)))
     console.log(this.kiadasKategoriak);
   });
 }
@@ -183,12 +184,33 @@ kiadasHozzaadas(){
       if(response){
         console.log('Kiadás hozzáadva',kiadasAdatok);
         alert('Kiadás sikeresen hozzáadva!');
+        this.kiadasListaMutat()
       }
       else{
         alert('Kiadás hozzáadása sikertelen!');
       }
     });
   }
+}
+kiadasokOsszes: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any ,kategoriaNev: string , kiadasKomment: string}[]= [];
+kiadaskategoriatomb: any[] = [];
+
+kiadasListaMutat(){
+  this.kiadasokOsszes = JSON.parse(localStorage.getItem('kiadasok')|| '{}' )
+    this.kiadasKategoriakLekeres();
+    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}')
+   
+     
+    console.log('A kiadás kategóriák',this.kiadasKategoriak)
+    this.kiadasokOsszes.forEach((element : any) => {
+      this.kiadaskategoriatomb.forEach((kiadasKategoriak: any) => {
+        if(element.kategoriaID == kiadasKategoriak.kategoriaID){
+          element.kategoriaID = kiadasKategoriak.kiadasKategoria
+          console.log('kategoria neve:', element)
+          element.kategoriaNev = kiadasKategoriak.kiadasKategoria;
+        }
+      });
+    });
 }
   ngOnInit(): void {
     this.authService.login();
@@ -197,30 +219,40 @@ kiadasHozzaadas(){
     this.currentMonth = currentDate.getMonth() + 1; // Hónapok 0-tól 11-ig vannak számozva, ezért hozzáadunk 1-et
     this.currentDay = currentDate.getDay();
     this.wholeYear = currentDate.getFullYear();
+    
     //Kiadások Listázás
     this.dataManagerService.kiadasok().subscribe((response:any) => {
       if(response){
         console.log(response)
         this.kiadasok = response;
+        localStorage.setItem('kiadasok', JSON.stringify(response));
       }
       else{
         console.log(console.error());
       }
     })
-    
-    
+
+
+    this.kiadasokOsszes = JSON.parse(localStorage.getItem('kiadasok')|| '{}' )
+    this.kiadasKategoriakLekeres();
+    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}')
+   
+     
+    console.log('A kiadás kategóriák',this.kiadasKategoriak)
+    this.kiadasokOsszes.forEach((element : any) => {
+      this.kiadaskategoriatomb.forEach((kiadasKategoriak: any) => {
+        if(element.kategoriaID == kiadasKategoriak.kategoriaID){
+          element.kategoriaID = kiadasKategoriak.kiadasKategoria
+          console.log('kategoria neve:', element)
+          element.kategoriaNev = kiadasKategoriak.kiadasKategoria;
+        }
+      });
+    });
+   
       
+  
     }
-  //Kiadas listazas
-  kiadasKategoriaKezeles(kategoriaID : any){
-    this.kiadasKategoriak.forEach((kategoria:any) => {
-      if(kategoria.kategoriaID == kategoriaID){
-        return kategoriaID = kategoria.kiadasKategoria; 
-      }
-    }
-    
-  );
-  }
+ 
   logout(): void {
     
     this.router.navigate(['home']);
