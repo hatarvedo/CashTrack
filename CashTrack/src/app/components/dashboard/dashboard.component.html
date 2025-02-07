@@ -19,15 +19,6 @@
             </li>
           </ul>
           <hr>
-          <p><strong>Összes bevétel <br> {{currentYear}}. év {{currentMonth}}. hónapban:</strong></p>
-          <p class="text-success">{{bevetelSum}} HUF <br> {{ (bevetelSum / EURtoHUF) | number:'1.2-2' }} EUR</p>
-
-          <p><strong>Összes kiadás <br> {{currentYear}}. év {{currentMonth}}. hónapban:</strong></p>
-          <p class="text-danger">-{{kiadasSum}} HUF <br> -{{ (kiadasSum / EURtoHUF) | number:'1.2-2' }} EUR</p>
-
-          <p><strong>Egyenleg <br> {{currentYear}}. év {{currentMonth}}. hónapban:</strong></p>
-          <p>{{bevetelSum - kiadasSum}} HUF <br> {{ ((bevetelSum - kiadasSum) / EURtoHUF) | number:'1.2-2' }} EUR</p>
-          <hr>
           <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="{{user.profilkepUrl}}" alt="" width="32" height="32" class="rounded-circle me-2">

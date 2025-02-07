@@ -104,11 +104,6 @@ export class DashboardComponent implements OnInit {
   kiadasok = [];
   havikoltseg = 0;
   user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
-  bevetelSum: number = 0;
-  kiadasSum: number = 0;
-  EURtoHUF: number = 413.70;
-  bevetelInput: number = 0;
-  kiadasInput: number = 0; 
   currentYear: number = 0; 
   currentMonth: number = 0; 
   currentDay: number = 0;
