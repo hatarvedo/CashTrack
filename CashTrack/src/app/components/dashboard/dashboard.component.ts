@@ -147,7 +147,11 @@ jovedelemHozzadasa(){
   if(jovedelemAdatok.bevetelHUF && jovedelemAdatok.bevetelDatum && jovedelemAdatok.kategoriaID){
     this.dataManagerService.JovedelemFeltoltes(jovedelemAdatok).subscribe((data) => {
       console.log(data);
+      alert('Bevétel sikeresen hozzáadva!')
     });
+  }
+  else{
+    alert('Bevétel hozzáadása sikertelen!');
   }
 }
 
@@ -188,6 +192,10 @@ kiadasHozzaadas(){
       
       if(response){
         console.log('Kiadás hozzáadva',kiadasAdatok);
+        alert('Kiadás sikeresen hozzáadva!');
+      }
+      else{
+        alert('Kiadás hozzáadása sikertelen!');
       }
     });
   }

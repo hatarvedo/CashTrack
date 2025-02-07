@@ -94,14 +94,14 @@
             </div>
             <form>
             <div class="modal-body">
-             <p> <i class="bi bi-list-check text-light"></i> Kiadás típusa:
+             <p style="display: flex; justify-content: space-between;"> <span class="bi bi-list-check text-light">&nbsp;Kiadás típusa: </span>
               <select name="expenseCategory" id="expenseCategory" [(ngModel)]="kiadasTipus">
                 <option value="Válassz!">Válassz!</option>
                 <option *ngFor="let kategoria of kiadasKategoriak">{{ kategoria.kiadasKategoria }}</option>
               </select></p>
-              <p> <i class="bi bi-cash text-light"></i> Érték: <input type="number" name="expenseHUF" id="expenseHUF"[(ngModel)]="kiadasErtek"> HUF</p>
-              <p> <i class="bi bi-calendar-date text-light"></i> Kiadás dátuma: <input type="date" name="expenseDate" id="expenseDate" [(ngModel)]="kiadasDatum"></p>
-              <p> <i class="bi bi-chat-left-text text-light"></i> Kiadás kommentelése:</p>
+              <p style="display: flex; justify-content: space-between;"> <span class="bi bi-cash text-light">&nbsp;Érték: </span> <input type="number" name="expenseHUF" id="expenseHUF"[(ngModel)]="kiadasErtek" placeholder="Érték forintban"></p>
+              <p style="display: flex; justify-content: space-between;"> <span class="bi bi-calendar-date text-light">&nbsp;Kiadás dátuma: </span><input type="date" name="expenseDate" id="expenseDate" [(ngModel)]="kiadasDatum"></p>
+              <p> <span class="bi bi-chat-left-text text-light"></span> Kiadás kommentelése:</p>
               <textarea name="expenseComment" id="expenseComment" [(ngModel)]="kiadasMegjegyzes" placeholder="pl. Vásárlás során válaszott termékek - NEM KÖTELEZŐ!"></textarea>
             </div>
             <div class="modal-footer">
