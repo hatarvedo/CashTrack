@@ -1,47 +1,50 @@
 <div class="container-fluid">
-    <div class="row">
-      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar me-3">
-        <div class="position-sticky">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-4">Üdvözlünk, {{user.keresztnev}}</span>
-          </a>
-          <hr>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" (click)="jovedelemKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addIncome">
-                Bevétel hozzáadása
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" (click)="kiadasKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addExpense">
-                Kiadás hozzáadása
-              </a>
-            </li>
-          </ul>
-          <hr>
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{user.profilkepUrl}}" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong>{{user.vezeteknev}} {{user.keresztnev}}</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="#">Profil megtekintése</a></li>
-              <li><a class="dropdown-item" href="#">Beállítások</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item text-danger" (click)="logout()">Kijelentkezés</a></li>
-            </ul>
+      <div class="row flex-nowrap">
+          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark" id="sidebar">
+              <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
+                  <a href="/" class="d-flex align-items-center pb-3 me-md-auto text-white text-decoration-none">
+                      <span class="fs-5 d-none d-sm-inline">Üdvözlünk, {{user.keresztnev}}</span>
+                  </a>
+                  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                      <li class="nav-item">
+                          <a (click)="jovedelemKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addIncome" class="nav-link align-middle px-0">
+                              <i class="fs-4 bi-wallet2"></i> <span class="ms-1 d-none d-sm-inline nav-item-anim">&nbsp;Bevétel hozzáadása&nbsp;</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a (click)="kiadasKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addExpense" class="nav-link px-0 align-middle">
+                              <i class="fs-4 bi-cash-coin"></i> <span class="ms-1 d-none d-sm-inline nav-item-anim">&nbsp;Kiadás hozzáadása&nbsp;</span> 
+                          </a>
+                         
+                      </li>
+                          </ul>
+                  <hr>
+                  <div class="dropdown">
+                      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="{{user.profilkepUrl}}" alt="{{user.vezeteknev}} {{user.keresztnev}} profilképe" title="{{user.vezeteknev}} {{user.keresztnev}} profilképe" width="30" height="30" class="rounded-circle">
+                          <span class="d-none d-sm-inline mx-1">&nbsp;<b>{{user.vezeteknev}} {{user.keresztnev}}</b></span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                          <li><a class="dropdown-item" (click)="notWorking()">Profil megtekintése</a></li>
+                          <li><a class="dropdown-item" (click)="notWorking()">Beállítások</a></li>
+                          <li>
+                              <hr class="dropdown-divider">
+                          </li>
+                          <li><a class="dropdown-item text-danger" (click)="logout()">Kijelentkezés</a></li>
+                      </ul>
+                  </div>
+              </div>
           </div>
-        </div>
-      </nav>
-    </div>
+      </div>
+  </div>
 
     <!--IDE A CONTENT-->
   <div class="container">
     <div class="row">
-    <div class="col-2">
+    <div class="col-3">
     </div>
-    <div class="content col-4">
-    <ol class="list-group">
+    <div class="content col-5">
+    <!--ol class="list-group">
       <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let kiadas of kiadasokOsszes" >
         <div class="ms-2 me-auto">
           <div class="fw-bold" >{{kiadas.kategoriaNev}}</div>
@@ -49,7 +52,17 @@
         </div>
         <span class="badge text-bg-primary rounded-pill">1</span>
       </li>
-    </ol>
+    </!--ol-->
+    <div class="list-group mt-2">
+    <div class="list-group-item list-group-item-action flex-column align-items-start" style="background-color: rgba(240, 240, 240, 0.8); color: rgb(40, 40, 40);" *ngFor="let kiadas of kiadasokOsszes">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{kiadas.kategoriaNev}}</h5>
+        <small class="text-secondary">{{kiadas.kiadasDatum}}</small>
+      </div>
+      <p class="mb-2">{{kiadas.kiadasHUF}} Ft</p>
+      <small class="text-secondary">{{kiadas.kiadasKomment}}</small>
+    </div> 
+  </div>
     </div>
   </div>
   </div>
@@ -65,7 +78,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Bevétel hozzáadása</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <p style="display: flex; justify-content: space-between;"> <span class="bi bi-list-check text-light">&nbsp;Bevétel típusa: </span>

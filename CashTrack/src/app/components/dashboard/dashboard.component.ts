@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common'; // Importáld a CommonModule-t
 import { DataManagerService } from '../../services/data-manager.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importáld a FormsModule-t
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 import {
@@ -260,9 +260,15 @@ kiadasListaMutat(){
     localStorage.removeItem('felhasznalo');
     this.authService.logout();
   }
+
+  notWorking(): void{
+    alert('Ez a funkció jelenleg nem elérhető!');
+  }
+  
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
 }
+
