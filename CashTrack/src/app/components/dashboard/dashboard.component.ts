@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
 
   jovedelemKategoriak: any = [];
   kiadasKategoriak: any = [];
-  kiadasok = [];
+  kiadasok: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any, kiadasKomment: string}[]  =[];
   havikoltseg = 0;
   user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
   currentYear: number = 0; 
@@ -122,7 +122,6 @@ jovedelemKategoriakLekeres():void{
 jovedelemTipus:any = '';
 jovedelemErtek:number = 0;
 jovedelemDatum:string = '';
-
 jovedelemHozzadasa(){
   const jovedelemAdatok ={
     felhasznaloID: this.felhasznaloID,
@@ -149,7 +148,6 @@ jovedelemHozzadasa(){
     alert('Bevétel hozzáadása sikertelen!');
   }
 }
-
   //Kiadás függvények
 kiadasKategoriakLekeres(): void {
   this.dataManagerService.kiadasKategoriakLekerese().subscribe((data) => {
@@ -161,16 +159,13 @@ kiadasTipus:any = '';
 kiadasErtek:number = 0;
 kiadasDatum:string = '';
 kiadasMegjegyzes:string = '';
-
 kiadasHozzaadas(){
-
   const kiadasAdatok = {
     felhasznaloID: this.felhasznaloID,
     kiadasHUF: this.kiadasErtek,
     kiadasDatum: this.kiadasDatum,
     kategoriaID: this.kiadasTipus,
-    kiadasKomment: this.kiadasMegjegyzes,
-    
+    kiadasKomment: this.kiadasMegjegyzes
   };
   this.kiadasKategoriak.forEach((kategoriak: any) => {
     //A kategoriaID megkapja először stringben a nevét, majd az ID-t
@@ -197,17 +192,34 @@ kiadasHozzaadas(){
 }
   ngOnInit(): void {
     this.authService.login();
-    this.subscription = this.dataManagerService.havikiadasok().subscribe((data) => {
-      this.kiadasok = data;
-      this.kiadasok.forEach((kiadas: any) => {
-        this.havikoltseg += kiadas.kiadasHUF;
-      });
-    });
     const currentDate = new Date();
     this.currentYear = currentDate.getFullYear();
     this.currentMonth = currentDate.getMonth() + 1; // Hónapok 0-tól 11-ig vannak számozva, ezért hozzáadunk 1-et
     this.currentDay = currentDate.getDay();
     this.wholeYear = currentDate.getFullYear();
+    //Kiadások Listázás
+    this.dataManagerService.kiadasok().subscribe((response:any) => {
+      if(response){
+        console.log(response)
+        this.kiadasok = response;
+      }
+      else{
+        console.log(console.error());
+      }
+    })
+    
+    
+      
+    }
+  //Kiadas listazas
+  kiadasKategoriaKezeles(kategoriaID : any){
+    this.kiadasKategoriak.forEach((kategoria:any) => {
+      if(kategoria.kategoriaID == kategoriaID){
+        return kategoriaID = kategoria.kiadasKategoria; 
+      }
+    }
+    
+  );
   }
   logout(): void {
     

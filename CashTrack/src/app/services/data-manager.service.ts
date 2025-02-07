@@ -12,11 +12,9 @@ export class DataManagerService {
   private apiUrlJovedelmek = 'http://127.0.0.1:8000/api/jovedelmek';
   constructor(private http: HttpClient) { }
   
- havikiadasok():Observable<any>{
+ kiadasok():Observable<any>{
     const user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
     return this.http.get(`${this.apiUrl}/felhasznalo/${user.felhasznaloID}`);
-     
-    
   }
   kiadasKategoriakLekerese():Observable<any>
   {

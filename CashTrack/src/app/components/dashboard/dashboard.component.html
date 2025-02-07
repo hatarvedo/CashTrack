@@ -36,8 +36,18 @@
     </div>
 
     <!--IDE A CONTENT-->
-
-    <p></p>
+  <div class="content">
+    <ol class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let kiadas of kiadasok" >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold" onload="kiadasKategoriaKezeles(kiadas.kategoriaID)">{{kiadas.kategoriaID}}</div>
+          faszomat bele
+        </div>
+        <span class="badge text-bg-primary rounded-pill">14</span>
+      </li>
+    </ol>
+    
+    
 
 
     <!--CONTENT EDDIG-->
