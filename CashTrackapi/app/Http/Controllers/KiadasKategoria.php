@@ -11,9 +11,9 @@ class KiadasKategoria extends Controller
         return Kiadas_kategoria::all();
     }
 
-    public function show(kiadasKategoria $kiadasKategoria)
+    public function show(Request $request)
     {
-        $kiadas = Kiadaas::find($kategoriaID);
+        $kiadas = Kiadas_kategoria::find($request->id);
         if(is_null($kiadas)){
             return response()->json(['message' => 'Felhasznalo nem talalhato'],404);
         }

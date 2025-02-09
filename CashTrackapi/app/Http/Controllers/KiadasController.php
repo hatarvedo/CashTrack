@@ -91,13 +91,13 @@ class KiadasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kiadas $kiadas , Request $request)
+    public function destroy(Request $request)
     {
-        $kiadas =Kiadas::find($request->kiadasID);
-        if(is_null($kiadas)){
-            return response()->json(['message' => 'Nem található a kiadás'],400);
+        $kiadas = Kiadas::find($request->kiadasID);
+        if (is_null($kiadas)) {
+            return response()->json(['message' => 'Nem található a kiadás'], 400);
         }
         $kiadas->delete();
-        return response()->json(null,204);
+        return response()->json(null, 204);
     }
 }

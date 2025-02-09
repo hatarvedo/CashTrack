@@ -23,6 +23,10 @@ export class DataManagerService {
   kiadasFeltoltes(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID: any, kiadasKomment: string}):Observable<any>{
     return this.http.post(`${this.apiUrl}`, kiadasAdat);
   }
+  kiadasTorlese(kiadasID: number):Observable<any>{
+    /* const kiadas = JSON.parse(localStorage.getItem('kiadas') || '{}'); */
+    return this.http.delete(`${this.apiUrl}/${kiadasID}`);
+  }
   jovedelemKategoriakLekerese():Observable<any>
   {
     return this.http.get(`${this.apiUrlJovedelemKategoriak}`)

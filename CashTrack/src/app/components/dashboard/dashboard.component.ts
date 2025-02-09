@@ -195,10 +195,19 @@ kiadasHozzaadas(){
 kiadasokOsszes: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any ,kategoriaNev: string , kiadasKomment: string}[]= [];
 kiadaskategoriatomb: any[] = [];
 
+kiadasTorles(kiadasID: number){
+  this.dataManagerService.kiadasTorlese(kiadasID).subscribe((data) => {
+    console.log(data);
+    alert('Kiadás sikeresen törölve!')
+    this.kiadasListaMutat()
+  });
+}
+
 kiadasListaMutat(){
   this.kiadasokOsszes = JSON.parse(localStorage.getItem('kiadasok')|| '{}' )
     this.kiadasKategoriakLekeres();
     this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}')
+    this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
    
      
     console.log('A kiadás kategóriák',this.kiadasKategoriak)
@@ -235,7 +244,8 @@ kiadasListaMutat(){
 
     this.kiadasokOsszes = JSON.parse(localStorage.getItem('kiadasok')|| '{}' )
     this.kiadasKategoriakLekeres();
-    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}')
+    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}');
+    this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
    
      
     console.log('A kiadás kategóriák',this.kiadasKategoriak)
