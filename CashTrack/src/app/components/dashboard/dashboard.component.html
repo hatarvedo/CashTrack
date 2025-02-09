@@ -44,26 +44,7 @@
     <div class="col-3">
     </div>
     <div class="content col-5">
-    <!--ol class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let kiadas of kiadasokOsszes" >
-        <div class="ms-2 me-auto">
-          <div class="fw-bold" >{{kiadas.kategoriaNev}}</div>
-          {{kiadas.kiadasHUF}} Ft
-        </div>
-        <span class="badge text-bg-primary rounded-pill">1</span>
-      </li>
-    </!--ol-->
-    <div class="list-group mt-2">
-    <div class="list-group-item list-group-item-action flex-column align-items-start" style="background-color: rgba(240, 240, 240, 0.8); color: rgb(40, 40, 40);" *ngFor="let kiadas of kiadasokOsszes">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{kiadas.kategoriaNev}}</h5>
-        <small class="text-secondary">{{kiadas.kiadasDatum}}</small>
-      </div>
-      <p class="mb-2">{{kiadas.kiadasHUF}} Ft</p>
-      <small class="text-secondary">{{kiadas.kiadasKomment}}</small>
-      <button class="btn btn-danger" (click)="kiadasTorles(kiadas.kiadasID)">Törlés</button>
-    </div> 
-  </div>
+      <app-expenselist></app-expenselist>
     </div>
   </div>
   </div>
@@ -127,7 +108,7 @@
               <textarea name="expenseComment" id="expenseComment" [(ngModel)]="kiadasMegjegyzes" placeholder="pl. Vásárlás során válaszott termékek - NEM KÖTELEZŐ!"></textarea>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Mégsem</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="ngOnInit()">Mégsem</button>
               <button type="button" class="btn btn-success" (click)="kiadasHozzaadas()">Kiadás mentése</button>
             </div>
           </form>

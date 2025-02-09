@@ -54,7 +54,7 @@ Route::post('/kiadasok',[KiadasController::class,'store']);
 Route::get('/kiadasok/{kiadasID}',[KiadasController::class, 'show']);
 Route::get('/kiadasok/felhasznalo/{felhasznaloID}',[KiadasController::class,'showByUser']);
 Route::put('/kiadasok/{kiadasID}',[KiadasController::class,'update']);
-Route::delete('/kiadasok{kiadasID}',[KiadasController::class,'destroy']);
+Route::delete('/kiadasok/{kiadasID}',[KiadasController::class,'destroy']);
 
 
 

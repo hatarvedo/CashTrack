@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit,Output,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common'; // Importáld a CommonModule-t
 import { DataManagerService } from '../../services/data-manager.service';
@@ -19,6 +19,7 @@ import {
   ApexLegend,
  
 } from "ng-apexcharts";
+import { ExpenselistComponent } from './expenselist/expenselist.component';
 
 
 export type ChartOptions = {
@@ -38,7 +39,7 @@ export type ChartOptions = {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule,  NgApexchartsModule, FormsModule, ReactiveFormsModule], // Add hozzá a CommonModule-t és a FormsModule-t az imports-hoz
+  imports: [CommonModule,  NgApexchartsModule, FormsModule,ReactiveFormsModule,ExpenselistComponent], 
   providers: [DataManagerService],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
@@ -148,6 +149,7 @@ jovedelemHozzadasa(){
     alert('Bevétel hozzáadása sikertelen!');
   }
 }
+
   //Kiadás függvények
 kiadasKategoriakLekeres(): void {
   this.dataManagerService.kiadasKategoriakLekerese().subscribe((data) => {
@@ -184,43 +186,24 @@ kiadasHozzaadas(){
       if(response){
         console.log('Kiadás hozzáadva',kiadasAdatok);
         alert('Kiadás sikeresen hozzáadva!');
-        this.kiadasListaMutat()
+        
+        
       }
       else{
         alert('Kiadás hozzáadása sikertelen!');
       }
     });
   }
+ 
+ this.ngOnInit();
+}
+ablakUjraToltes(){
+  window.location.reload();
 }
 kiadasokOsszes: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any ,kategoriaNev: string , kiadasKomment: string}[]= [];
 kiadaskategoriatomb: any[] = [];
 
-kiadasTorles(kiadasID: number){
-  this.dataManagerService.kiadasTorlese(kiadasID).subscribe((data) => {
-    console.log(data);
-    alert('Kiadás sikeresen törölve!')
-    this.kiadasListaMutat()
-  });
-}
 
-kiadasListaMutat(){
-  this.kiadasokOsszes = JSON.parse(localStorage.getItem('kiadasok')|| '{}' )
-    this.kiadasKategoriakLekeres();
-    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}')
-    this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
-   
-     
-    console.log('A kiadás kategóriák',this.kiadasKategoriak)
-    this.kiadasokOsszes.forEach((element : any) => {
-      this.kiadaskategoriatomb.forEach((kiadasKategoriak: any) => {
-        if(element.kategoriaID == kiadasKategoriak.kategoriaID){
-          element.kategoriaID = kiadasKategoriak.kiadasKategoria
-          console.log('kategoria neve:', element)
-          element.kategoriaNev = kiadasKategoriak.kiadasKategoria;
-        }
-      });
-    });
-}
   ngOnInit(): void {
     this.authService.login();
     const currentDate = new Date();
@@ -246,9 +229,6 @@ kiadasListaMutat(){
     this.kiadasKategoriakLekeres();
     this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}');
     this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
-   
-     
-    console.log('A kiadás kategóriák',this.kiadasKategoriak)
     this.kiadasokOsszes.forEach((element : any) => {
       this.kiadaskategoriatomb.forEach((kiadasKategoriak: any) => {
         if(element.kategoriaID == kiadasKategoriak.kategoriaID){
