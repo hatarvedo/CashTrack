@@ -12,7 +12,7 @@
                           </a>
                       </li>
                       <li>
-                          <a (click)="kiadasKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addExpense" class="nav-link px-0 align-middle">
+                          <a  href="#" data-bs-toggle="modal" data-bs-target="#addExpense" class="nav-link px-0 align-middle">
                               <i class="fs-4 bi-cash-coin"></i> <span class="ms-1 d-none d-sm-inline nav-item-anim">&nbsp;Kiadás hozzáadása&nbsp;</span> 
                           </a>
                          
@@ -100,7 +100,7 @@
              <p style="display: flex; justify-content: space-between;"> <span class="bi bi-list-check text-light">&nbsp;Kiadás típusa: </span>
               <select name="expenseCategory" id="expenseCategory" [(ngModel)]="kiadasTipus">
                 <option value="Válassz!">Válassz!</option>
-                <option *ngFor="let kategoria of kiadasKategoriak">{{ kategoria.kiadasKategoria }}</option>
+                <option *ngFor="let kategoria of kiadaskategoriatomb">{{ kategoria.kiadasKategoria }}</option>
               </select></p>
               <p style="display: flex; justify-content: space-between;"> <span class="bi bi-cash text-light">&nbsp;Érték: </span> <input type="number" name="expenseHUF" id="expenseHUF"[(ngModel)]="kiadasErtek" placeholder="Érték forintban"></p>
               <p style="display: flex; justify-content: space-between;"> <span class="bi bi-calendar-date text-light">&nbsp;Kiadás dátuma: </span><input type="date" name="expenseDate" id="expenseDate" [(ngModel)]="kiadasDatum"></p>
@@ -108,7 +108,7 @@
               <textarea name="expenseComment" id="expenseComment" [(ngModel)]="kiadasMegjegyzes" placeholder="pl. Vásárlás során válaszott termékek - NEM KÖTELEZŐ!"></textarea>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="ngOnInit()">Mégsem</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Mégsem</button>
               <button type="button" class="btn btn-success" (click)="kiadasHozzaadas()">Kiadás mentése</button>
             </div>
           </form>

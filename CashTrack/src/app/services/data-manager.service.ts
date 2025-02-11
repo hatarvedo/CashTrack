@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,26 +10,121 @@ export class DataManagerService {
   private apiUrlKiadasKategoriak = 'http://127.0.0.1:8000/api/kiadaskategoriak';
   private apiUrlJovedelemKategoriak = 'http://127.0.0.1:8000/api/jovedelemkategoriak';
   private apiUrlJovedelmek = 'http://127.0.0.1:8000/api/jovedelmek';
-  constructor(private http: HttpClient) { }
-  
- kiadasok():Observable<any>{
-    const user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
-    return this.http.get(`${this.apiUrl}/felhasznalo/${user.felhasznaloID}`);
-  }
-  kiadasKategoriakLekerese():Observable<any>
+  constructor(private http: HttpClient) 
   {
-    return this.http.get(`${this.apiUrlKiadasKategoriak}`)
+    window.addEventListener('storage', (event) => {
+      if (event.key === this.kiadaskulcs) {
+        this.kiadasokFigyeles.next(this.kiadasokLekerese());
+      }
+    });
+  }
+  kiadasokOsszes: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any ,kategoriaNev: string , kiadasKomment: string}[]= []
+
+  kiadaskategoriatomb:any[] = []
+ kiadasok(){
+    const user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
+    this.http.get(`${this.apiUrl}/felhasznalo/${user.felhasznaloID}`).subscribe((data: any) => {
+      this.kiadasokOsszes = data;
+      this.kiadasKategoriakLekerese()
+      this.kiadasokOsszes.forEach((element : any) => {
+        this.kiadaskategoriatomb.forEach((kiadasKategoriak: any) => {
+          if(element.kategoriaID == kiadasKategoriak.kategoriaID){
+            element.kategoriaNev = kiadasKategoriak.kiadasKategoria;
+          }
+        });
+      });
+      this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
+      localStorage.setItem('kiadasok', JSON.stringify(this.kiadasokOsszes))
+    });
+
+    return this.kiadasokOsszes;
+  }
+
+  kiadasKategoriakLekerese(): any[]
+  {
+     this.http.get(`${this.apiUrlKiadasKategoriak}`).subscribe((data:any) => {
+      this.kiadaskategoriatomb = data;
+      localStorage.setItem('kiadaskategoriak', JSON.stringify(this.kiadaskategoriatomb))
+     })
+     return this.kiadaskategoriatomb;
   };
   kiadasFeltoltes(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID: any, kiadasKomment: string}):Observable<any>{
     return this.http.post(`${this.apiUrl}`, kiadasAdat);
   }
   kiadasTorlese(kiadasID: number):Observable<any>{
-    /* const kiadas = JSON.parse(localStorage.getItem('kiadas') || '{}'); */
+    let taroltTomb = JSON.parse(localStorage.getItem('kiadasok') || '[]');
+      taroltTomb = taroltTomb.filter((item: any) => item.kiadasID !== kiadasID);
+      localStorage.setItem('kiadasok', JSON.stringify(taroltTomb));
+      console.log(JSON.parse(localStorage.getItem('kiadasok') || '[]'))
     return this.http.delete(`${this.apiUrl}/${kiadasID}`);
+      
   }
-  jovedelemKategoriakLekerese():Observable<any>
+  //KIADAS TESZT
+  private kiadaskulcs = "kiadasok";
+  private kiadasokFigyeles = new BehaviorSubject<any[]>(this.kiadasokLekerese());
+  kiadasok$ = this.kiadasokFigyeles.asObservable();
+  private kiadasokLekerese(): any[] {
+    return JSON.parse(localStorage.getItem(this.kiadaskulcs) || '[]');
+  }
+  kiadasTorles(index: number, kiadasID: number) {
+    const updatedExpenses = this.kiadasokLekerese().filter((_, i) => i !== index);
+    this.kiadasokFrissitese(updatedExpenses);
+    console.log(JSON.parse(localStorage.getItem(this.kiadaskulcs) || '[]'));
+    return this.http.delete(`${this.apiUrl}/${kiadasID}`).subscribe(Response => {
+      console.log(Response);
+    });
+    
+  
+  }
+  kiadasokKategoriaNeve(){
+    this.kiadasok();
+    this.kiadasKategoriakLekerese();
+
+    this.kiadasokOsszes.forEach(element => {
+      this.kiadaskategoriatomb.forEach(kiadasKategoriak => 
+        {
+        if(element.kategoriaID = kiadasKategoriak.kategoriaID)
+          {
+          element.kategoriaNev = kiadasKategoriak.kiadasKategoria
+          }
+        
+      });
+    });
+    localStorage.setItem('kiadasok', JSON.stringify(this.kiadasokOsszes));
+  }
+  kiadasokFrissitese(ujKiadasok: any[]) {
+    localStorage.setItem(this.kiadaskulcs, JSON.stringify(ujKiadasok));
+    this.kiadasokFigyeles.next(ujKiadasok); 
+  }
+  kiadasHozzaadas(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID: any, kiadasKomment: string}):Observable<any>{
+    const frissitettAdat = [...this.kiadasokLekerese(), kiadasAdat];
+    this.kiadasokFrissitese(frissitettAdat);
+    return this.http.post(`${this.apiUrl}`, kiadasAdat)
+    
+  }
+  /* kiadasTorles(kiadasID: number) {
+    let taroltTomb = JSON.parse(localStorage.getItem('kiadasok') || '[]');
+      taroltTomb = taroltTomb.filter((item: any) => item.kiadasID !== kiadasID);
+      localStorage.setItem('kiadasok', JSON.stringify(taroltTomb));
+      console.log(JSON.parse(localStorage.getItem('kiadasok') || '[]'))
+    return this.http.delete(`${this.apiUrl}/${kiadasID}`);
+  } */
+  
+
+ 
+
+
+
+
+
+
+
+  jovedelemkategoriak: any[] =[]  
+  jovedelemKategoriakLekerese()
   {
-    return this.http.get(`${this.apiUrlJovedelemKategoriak}`)
+    this.http.get(`${this.apiUrlJovedelemKategoriak}`).subscribe((data:any) =>{
+      this.jovedelemkategoriak = data;
+    })
   };
   JovedelemFeltoltes(jovedelemAdatok:{felhasznaloID:number, bevetelHUF: number, bevetelDatum: string,kategoriaID: number}):Observable<any>{
     return this.http.post(`${this.apiUrlJovedelmek}`, jovedelemAdatok);

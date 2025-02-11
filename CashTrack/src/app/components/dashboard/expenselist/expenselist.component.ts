@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { DataManagerService } from '../../../services/data-manager.service';
 import { NgFor } from '@angular/common';
-import { defer } from 'rxjs';
+import { BehaviorSubject, defer } from 'rxjs';
 import { Interaction } from 'chart.js';
 
 @Component({
@@ -11,61 +11,27 @@ import { Interaction } from 'chart.js';
   styleUrl: './expenselist.component.scss'
 })
 export class ExpenselistComponent {
-  kiadasKategoriak: any;
-  constructor(private dataManagerService: DataManagerService){}
-  kiadasokOsszes: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any ,kategoriaNev: string , kiadasKomment: string}[]= [];
+  kiadasKategoriak: any[]=[];
+  kiadasok: any[] = []
+  constructor(private dataManagerService: DataManagerService){
+    this.kiadasok = JSON.parse(localStorage.getItem('kiadasok')|| '[]' );
+  }
 
-  kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}');
+kiadasokFelugyelet:any[] = []
 
+  
+kiadaskategoriatomb: any[] =[];
 ngOnInit(): void {
-  this.kiadasListaMutat();
-  this.kiadasokOsszes = JSON.parse(localStorage.getItem('kiadasok') || '[]');
-  this.kiadasKategoriakLekeres();
-  this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]');
-  this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
-  this.kiadasokOsszes.forEach((element: any) => {
-    this.kiadaskategoriatomb.forEach((kiadasKategoriak: any) => {
-      if (element.kategoriaID == kiadasKategoriak.kategoriaID) {
-        element.kategoriaID = kiadasKategoriak.kiadasKategoria;
-        console.log('kategoria neve:', element);
-        element.kategoriaNev = kiadasKategoriak.kiadasKategoria;
-      }
-    });
-  });
+  this.dataManagerService.kiadasok()
+  this.dataManagerService.kiadasokKategoriaNeve();
+  this.kiadasokFelugyelet = JSON.parse(localStorage.getItem('kiadasok')|| '[]' );
+  console.log(this.kiadasokFelugyelet);
+  this.dataManagerService.kiadasok$.subscribe((data) => {
+    this.kiadasok = data;
+  }); 
 }
-  kiadasTorles(kiadasID: number){
-    this.dataManagerService.kiadasTorlese(kiadasID).subscribe((response : any) => {
-      if(response){
-        alert('Kiadás sikeresen törölve!');
-        this.kiadasListaMutat();
-        console.log(response);
-        
-      }
-      
-      
 
-    });
-  }
- 
-  kiadasKategoriakLekeres(): void {
-    this.dataManagerService.kiadasKategoriakLekerese().subscribe((data) => {
-      this.kiadasKategoriak = data;
-      (localStorage.setItem('kiadaskategoriak',JSON.stringify(data)))
-      console.log(this.kiadasKategoriak);
-    });
-  }
-  kiadasListaMutat(){
-    this.kiadasokOsszes = JSON.parse(localStorage.getItem('kiadasok')|| '{}' );
-      this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '{}');
-      this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
-      this.kiadasokOsszes.forEach((element : any) => {
-        this.kiadaskategoriatomb.forEach((kiadasKategoriak: any) => {
-          if(element.kategoriaID == kiadasKategoriak.kategoriaID){
-            element.kategoriaID = kiadasKategoriak.kiadasKategoria;
-            console.log('kategoria neve:', element);
-            element.kategoriaNev = kiadasKategoriak.kiadasKategoria;
-          }
-        });
-      });
+  kiadasTorles(index: number,kiadasID: number) {
+    this.dataManagerService.kiadasTorles(index,kiadasID);
   }
 }

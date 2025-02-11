@@ -98,6 +98,6 @@ class KiadasController extends Controller
             return response()->json(['message' => 'Nem található a kiadás'], 400);
         }
         $kiadas->delete();
-        return response()->json(null, 204);
+        return response()->json(['message' => 'Törölve lett a rekord.'], 204);
     }
 }
