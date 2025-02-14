@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { HeaderComponent } from '../header/header.component';
 
 
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule,HttpClientModule,RouterLink],
+  imports: [FormsModule,HttpClientModule,RouterLink,HeaderComponent],
   providers: [PostService,HttpClient,Router],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

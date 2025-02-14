@@ -6,14 +6,19 @@
                       <span class="fs-5 d-none d-sm-inline">Üdvözlünk, {{user.keresztnev}}</span>
                   </a>
                   <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                      <li class="nav-item">
+                    <li class="nav-item">
+                      <a routerLink='/home'>
+                        <span class="ms-1 d-none d-sm-inline nav-item-anim"><i class="fs-4 bi-house mt-1"></i> &nbsp;Kezdőlap&nbsp;</span>
+                      </a>
+                    </li>  
+                    <li class="nav-item">
                           <a (click)="jovedelemKategoriakLekeres()" href="#" data-bs-toggle="modal" data-bs-target="#addIncome" class="nav-link align-middle px-0">
-                              <i class="fs-4 bi-wallet2"></i> <span class="ms-1 d-none d-sm-inline nav-item-anim">&nbsp;Bevétel hozzáadása&nbsp;</span>
+                            <span class="ms-1 d-none d-sm-inline nav-item-anim"><i class="fs-4 bi-wallet2"></i> &nbsp;Bevétel hozzáadása&nbsp;</span>
                           </a>
                       </li>
                       <li>
                           <a  href="#" data-bs-toggle="modal" data-bs-target="#addExpense" class="nav-link px-0 align-middle">
-                              <i class="fs-4 bi-cash-coin"></i> <span class="ms-1 d-none d-sm-inline nav-item-anim">&nbsp;Kiadás hozzáadása&nbsp;</span> 
+                            <span class="ms-1 d-none d-sm-inline nav-item-anim"><i class="fs-4 bi-cash-coin"></i> &nbsp;Kiadás hozzáadása&nbsp;</span> 
                           </a>
                          
                       </li>

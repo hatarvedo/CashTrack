@@ -39,7 +39,7 @@ export type ChartOptions = {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule,  NgApexchartsModule, FormsModule,ReactiveFormsModule,ExpenselistComponent], 
+  imports: [CommonModule,  NgApexchartsModule, FormsModule,ReactiveFormsModule,ExpenselistComponent, RouterLink], 
   providers: [DataManagerService],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']

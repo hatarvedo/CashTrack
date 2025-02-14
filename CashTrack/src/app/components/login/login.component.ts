@@ -7,12 +7,13 @@ import { PostService } from '../../services/post.service';
 import { NgIf } from '@angular/common';
 import { routes } from '../../app.routes';
 import { RouterModule, Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
   selector: 'app-login',
   standalone:true,
-  imports: [FormsModule,HttpClientModule,NgIf,RouterModule],
+  imports: [FormsModule,HttpClientModule,NgIf,RouterModule,HeaderComponent],
   providers: [LoginService,PostService,AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
