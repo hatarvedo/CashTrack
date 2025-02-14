@@ -32,6 +32,7 @@ export class AuthService {
     logout() {
       localStorage.removeItem('isLoggedIn');
       this.isLoggedInSource.next(false);
+      localStorage.removeItem('kiadasok');
     }
   
     private checkLoginStatus(): boolean {
