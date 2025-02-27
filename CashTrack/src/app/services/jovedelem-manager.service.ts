@@ -1,11 +1,12 @@
-import { Injectable,signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JovedelemManagerService {
+
   private apiUrlJovedelemKategoriak = 'http://127.0.0.1:8000/api/jovedelemkategoriak';
   private apiUrlJovedelmek = 'http://127.0.0.1:8000/api/jovedelmek';
 
@@ -76,6 +77,5 @@ jovOsszeadas(){
     return this.havijovedelem
   }); 
 }
-
 
 }

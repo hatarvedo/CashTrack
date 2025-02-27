@@ -3,18 +3,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth.service';
-import { PostService } from '../../services/post.service';
 import { NgIf } from '@angular/common';
 import { routes } from '../../app.routes';
 import { RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { RegisterService } from '../../services/register.service';
 
 
 @Component({
   selector: 'app-login',
   standalone:true,
   imports: [FormsModule,HttpClientModule,NgIf,RouterModule,HeaderComponent],
-  providers: [LoginService,PostService,AuthService],
+  providers: [LoginService,AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -22,7 +22,7 @@ export class LoginComponent {
   email:string = '';
   jelszo: string = '';
   
-  constructor( private http: HttpClient,private router: Router,  private loginService: LoginService, private authService:AuthService, private postService: PostService) { }
+  constructor( private http: HttpClient,private router: Router,  private loginService: LoginService, private authService:AuthService, private regiserService: RegisterService) { }
 
   belepes(): void {
     console.log('Login fuggveny');
@@ -54,7 +54,7 @@ export class LoginComponent {
       keresztnev: this.keresztnev,
       email: this.emailcim,
       jelszo: this.password };
-    this.postService.registerUser(userData).subscribe((response)=>{
+    this.regiserService.registerUser(userData).subscribe((response:any)=>{
       console.log(response);
       if(response){
         alert('Sikeres regisztráció');

@@ -1,12 +1,9 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { KapcsolatComponent } from './components/kapcsolat/kapcsolat.component';
-import { RegisterComponent } from './components/register/register.component';
 import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
-
+import { KapcsolatComponent } from './components/kapcsolat/kapcsolat.component';
 
 export const routes: Routes = [
     {
@@ -19,9 +16,6 @@ export const routes: Routes = [
         path:'kapcsolat',component:KapcsolatComponent
     },
     {
-        path:'register',component:RegisterComponent
-    },
-    {
         path:'rolunk',component:AboutComponent
     },
     {
@@ -32,7 +26,4 @@ export const routes: Routes = [
         path: '**', component:HomeComponent
 
     }
-    
-   
-
 ];
