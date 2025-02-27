@@ -6,11 +6,12 @@ import { JovedelemManagerService } from '../../services/jovedelem-manager.servic
 import { KiadasManagerService } from '../../services/kiadas-manager.service';
 import { AuthService } from '../../services/auth.service';
 import { NgFor } from '@angular/common';
+import { ExpenselistComponent } from './expenselist/expenselist.component';
 
 
 @Component({
     selector: 'app-dashboard',
-    imports: [FormsModule, RouterLink,NgFor],
+    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
@@ -72,9 +73,7 @@ currentYear: number = 0;
       alert('Bevétel hozzáadása sikertelen!');
     }
   }
-  jovedelemAdatok(jovedelemAdatok: any) {
-    throw new Error('Method not implemented.');
-  }
+ 
   
     //Kiadás függvények
   
@@ -101,7 +100,7 @@ currentYear: number = 0;
       }
     });
     if (kiadasAdatok.kategoriaID && kiadasAdatok.kiadasHUF && kiadasAdatok.kiadasDatum) {
-      this.kiadasokService.kiadasHozzaadas(kiadasAdatok).subscribe((response: any) => {
+      this.kiadasService.kiadasHozzaadas(kiadasAdatok).subscribe((response: any) => {
         
         if(response){
           console.log('Kiadás hozzáadva',kiadasAdatok);
@@ -142,6 +141,7 @@ currentYear: number = 0;
    
       this.HaviJovedelemFrissitese();
       this.HaviKiadasokFrissitese();
+      this.HaviOsszesFrissitese(); 
 
 
     
@@ -164,6 +164,7 @@ currentYear: number = 0;
       
       this.jovedelemHaviTemp = this.jovedelemHaviTemp + element.bevetelHUF
     });
+    this.HaviOsszesFrissitese(); 
     return this.havijovedelmek.update(count => this.jovedelemHaviTemp)
     
   }
@@ -177,8 +178,14 @@ currentYear: number = 0;
     this.kiadasok = JSON.parse(localStorage.getItem('kiadasok') || '[]');
     this.kiadasok.forEach((element:any) => {
       this.havikiadasokSzamolo = this.havikiadasokSzamolo + element.kiadasHUF;
-    })
+    });
+    this.HaviOsszesFrissitese(); 
     return this.havikiadasok.update(count => this.havikiadasokSzamolo)
+  }
+
+  haviosszes = signal(0);
+  HaviOsszesFrissitese(){
+    return this.haviosszes.update(count => this.havijovedelmek() - this.havikiadasok())
   }
     logout(): void {
       this.authService.logout();
