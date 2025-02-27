@@ -33,7 +33,7 @@ Route::delete('/felhasznalok/{felhasznaloID}', [FelhasznaloController::class, 'd
 
 
 //Jövedelem Route-ok
-Route::get('/jovedelmek',[JovedelemController::class,'index']);
+Route::get('/jovedelmek/felhasznalo/{felhasznaloID}',[JovedelemController::class,'showByUser']);
 Route::post('/jovedelmek',[JovedelemController::class,'store']);
 Route::get('/jovedelmek/{jovedelemID}',[JovedelemController::class, 'show']);
 Route::delete('/jovedelmek/{jovedelemID}',[JovedelemController::class,'destroy']);

@@ -47,6 +47,15 @@ class JovedelemController extends Controller
         }
         return response()->json($jovedelem,200);
     }
+    public function showByUser(Request $request)
+    {
+        $jovedelem = Jovedelem::where('felhasznaloID',$request->felhasznaloID)->get();
+        if(is_null($jovedelem)){
+            return response()->json(['message' => 'Nem található a kiadás'],400);
+        }
+        else
+            return response()->json($jovedelem,200);
+    }
 
     /**
      * Update the specified resource in storage.

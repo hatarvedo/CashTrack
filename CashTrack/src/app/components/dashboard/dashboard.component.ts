@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit,Output,ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit,Output,signal,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common'; // Importáld a CommonModule-t
 import { DataManagerService } from '../../services/data-manager.service';
@@ -20,6 +20,10 @@ import {
  
 } from "ng-apexcharts";
 import { ExpenselistComponent } from './expenselist/expenselist.component';
+import { JovedelemManagerService } from '../../services/jovedelem-manager.service';
+import { DataComponent } from './data/data.component';
+import { count } from 'rxjs';
+import { sign } from 'chart.js/helpers';
 
 
 export type ChartOptions = {
@@ -40,7 +44,7 @@ export type ChartOptions = {
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule,  NgApexchartsModule, FormsModule,ReactiveFormsModule,ExpenselistComponent, RouterLink], 
-  providers: [DataManagerService],
+  providers: [DataManagerService, JovedelemManagerService],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -48,7 +52,7 @@ export class DashboardComponent implements OnInit {
 [x: string]: any;
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions?: Partial<ChartOptions>;
-  constructor(private http: HttpClient, private dataManagerService: DataManagerService, private router:Router,private authService:AuthService){
+  constructor(private http: HttpClient, private dataManagerService: DataManagerService, private router:Router,private authService:AuthService, private jovedelemService:JovedelemManagerService){
     const series = {
       monthDataSeries1: {
         prices: [10, 41, 35, 51, 49, 62, 69, 91, 126],
@@ -96,7 +100,7 @@ export class DashboardComponent implements OnInit {
         horizontalAlign: "left"
       }
     };
-    
+    this.jovedelmek =  JSON.parse(localStorage.getItem('jovedelmek') || '[]');
       /* setTimeout(() => {
         this.adat = JSON.parse(localStorage.getItem('kiadasok') || '[]'); // Change occurs automatically
       }, 1000); // Simulating change without click */
@@ -106,6 +110,7 @@ export class DashboardComponent implements OnInit {
   jovedelemKategoriak: any = [];
   kiadasKategoriak: any = [];
   kiadasok: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any  , kiadasKomment: string}[]  =[];
+  jovedelmek:{jovedelemID:number, felhasznaloID:number, bevetelHUF:number,bevetelDatum: string,kategoriaID:any}[] = []
   havikoltseg = 0;
   user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
   currentYear: number = 0; 
@@ -118,7 +123,7 @@ felhasznalo = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
 felhasznaloID = this.felhasznalo.felhasznaloID;
   //Bevétel függvények
 jovedelemKategoriakLekeres():void{
-  this.dataManagerService.jovedelemKategoriakLekerese() 
+  this.jovedelemService.KategoriakLekerese() 
 }
 jovedelemTipus:any = '';
 jovedelemErtek:number = 0;
@@ -129,8 +134,9 @@ jovedelemHozzadasa(){
     bevetelHUF: this.jovedelemErtek,
     bevetelDatum:this.jovedelemDatum,
     kategoriaID: this.jovedelemTipus,
+    
   }
-  this.jovedelemKategoriak.forEach((kategoriak: any) => {
+  this.jovedelemkategoriatomb.forEach((kategoriak: any) => {
     //A kategoriaID megkapja először stringben a nevét, majd az ID-t
     if(jovedelemAdatok.kategoriaID == kategoriak.jovedelemKategoria){
       console.log('Kategoria neve:',jovedelemAdatok.kategoriaID);
@@ -140,9 +146,14 @@ jovedelemHozzadasa(){
     }
   });
   if(jovedelemAdatok.bevetelHUF && jovedelemAdatok.bevetelDatum && jovedelemAdatok.kategoriaID){
-    this.dataManagerService.JovedelemFeltoltes(jovedelemAdatok).subscribe((data) => {
+    this.jovedelemService.jovedelemHozzaadas(jovedelemAdatok).subscribe((data: any) => {
       console.log(data);
+      
       alert('Bevétel sikeresen hozzáadva!')
+      this.jovedelmek.push(this['jovedelemAdatok']);
+      this.jovedelemService.jovedelemLekeres()
+      this.HaviJovedelemFrissitese();
+      
     });
   }
   else{
@@ -181,6 +192,8 @@ kiadasHozzaadas(){
         console.log('Kiadás hozzáadva',kiadasAdatok);
         alert('Kiadás sikeresen hozzáadva!');
         this.kiadasok.push(this['kiadasAdatok'])
+        this.dataManagerService.kiadasok();
+        this.HaviKiadasokFrissitese();
         
         
       }
@@ -191,9 +204,13 @@ kiadasHozzaadas(){
   }
 }
 kiadaskategoriatomb: any[] = [];
-
+jovedelemkategoriatomb: any[] = [];
 
 kiadasokFelugyelet: any[] = []
+
+
+
+  jovedelemFelugyelet:any[] = []
   ngOnInit(): void {
     this.authService.login();
     const currentDate = new Date();
@@ -201,29 +218,50 @@ kiadasokFelugyelet: any[] = []
     this.currentMonth = currentDate.getMonth() + 1; // Hónapok 0-tól 11-ig vannak számozva, ezért hozzáadunk 1-et
     this.currentDay = currentDate.getDay();
     this.wholeYear = currentDate.getFullYear();
+    this.dataManagerService.kiadasKategoriakLekerese();
+    this.jovedelemService.KategoriakLekerese();
+    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]');
+    this.jovedelemkategoriatomb = JSON.parse(localStorage.getItem('jovedelemkategoriak') || '[]');
 
-    
-    /* //Kiadások Listázás
-    this.dataManagerService.kiadasok().subscribe((response:any) => {
-      if(response){
-        console.log(response)
-       
-      }
-      else{
-        console.log(console.error());
-      }
-    });
-    this.dataManagerService.kiadasKategoriakLekerese()
-    this.dataManagerService.kiadasok$.subscribe((data) => {
-      this.kiadasokFelugyelet = data;
-    });
-    }
-    kiadasKategoriakLekeres(): void {
-      this.dataManagerService.kiadasKategoriakLekerese() 
-      this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]');
-    }
-  */
+    this.jovedelemService.jovedelemLekeres();
+ 
+    this.HaviJovedelemFrissitese();
+    this.HaviKiadasokFrissitese();
   }
+
+
+  //Jövedelem havi kezelése
+jovedelemHaviTemp : number = 0;
+havijovedelmek = signal(0);
+
+HaviJovedelemFrissitese(){
+  this.jovedelemFelugyelet = JSON.parse(localStorage.getItem('jovedelmek')|| '[]' );
+  console.log('jovedelem havi frissitese',this.jovedelemFelugyelet);
+  this.jovedelemService.jovedelem$.subscribe((data) =>
+    {
+      this.jovedelmek = data;
+    });
+    this.jovedelemHaviTemp = 0;
+  this.jovedelemFelugyelet.forEach((element:any) => {
+    
+    this.jovedelemHaviTemp = this.jovedelemHaviTemp + element.bevetelHUF
+  });
+  return this.havijovedelmek.update(count => this.jovedelemHaviTemp)
+  
+}
+
+//Kiadások havi kezelése
+havikiadasokSzamolo:number = 0;
+havikiadasok =signal(0);
+
+
+HaviKiadasokFrissitese(){
+  this.kiadasok = JSON.parse(localStorage.getItem('kiadasok') || '[]');
+  this.kiadasok.forEach((element:any) => {
+    this.havikiadasokSzamolo = this.havikiadasokSzamolo + element.kiadasHUF;
+  })
+  return this.havikiadasok.update(count => this.havikiadasokSzamolo)
+}
   logout(): void {
     this.authService.logout();
     localStorage.removeItem('felhasznalo');
@@ -240,5 +278,6 @@ kiadasokFelugyelet: any[] = []
       this.subscription.unsubscribe();
     }
   }
+ 
 }
 

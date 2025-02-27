@@ -8,9 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class DataManagerService {
   private apiUrl = 'http://127.0.0.1:8000/api/kiadasok';
   private apiUrlKiadasKategoriak = 'http://127.0.0.1:8000/api/kiadaskategoriak';
-  private apiUrlJovedelemKategoriak = 'http://127.0.0.1:8000/api/jovedelemkategoriak';
-  private apiUrlJovedelmek = 'http://127.0.0.1:8000/api/jovedelmek';
-  constructor(private http: HttpClient) 
+    constructor(private http: HttpClient) 
   {
     window.addEventListener('storage', (event) => {
       if (event.key === this.kiadaskulcs) {
@@ -67,8 +65,8 @@ export class DataManagerService {
     return JSON.parse(localStorage.getItem(this.kiadaskulcs) || '[]');
   }
   kiadasTorles(index: number, kiadasID: number) {
-    const updatedExpenses = this.kiadasokLekerese().filter((_, i) => i !== index);
-    this.kiadasokFrissitese(updatedExpenses);
+    const frissitettKiadas = this.kiadasokLekerese().filter((_, i) => i !== index);
+    this.kiadasokFrissitese(frissitettKiadas);
     console.log(JSON.parse(localStorage.getItem(this.kiadaskulcs) || '[]'));
     return this.http.delete(`${this.apiUrl}/${kiadasID}`).subscribe(Response => {
       console.log(Response);
@@ -102,31 +100,5 @@ export class DataManagerService {
     return this.http.post(`${this.apiUrl}`, kiadasAdat)
     
   }
-  /* kiadasTorles(kiadasID: number) {
-    let taroltTomb = JSON.parse(localStorage.getItem('kiadasok') || '[]');
-      taroltTomb = taroltTomb.filter((item: any) => item.kiadasID !== kiadasID);
-      localStorage.setItem('kiadasok', JSON.stringify(taroltTomb));
-      console.log(JSON.parse(localStorage.getItem('kiadasok') || '[]'))
-    return this.http.delete(`${this.apiUrl}/${kiadasID}`);
-  } */
-  
 
- 
-
-
-
-
-
-
-
-  jovedelemkategoriak: any[] =[]  
-  jovedelemKategoriakLekerese()
-  {
-    this.http.get(`${this.apiUrlJovedelemKategoriak}`).subscribe((data:any) =>{
-      this.jovedelemkategoriak = data;
-    })
-  };
-  JovedelemFeltoltes(jovedelemAdatok:{felhasznaloID:number, bevetelHUF: number, bevetelDatum: string,kategoriaID: number}):Observable<any>{
-    return this.http.post(`${this.apiUrlJovedelmek}`, jovedelemAdatok);
-}
 }

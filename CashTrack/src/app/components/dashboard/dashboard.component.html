@@ -49,6 +49,21 @@
     <div class="col-3">
     </div>
     <div class="content col-5">
+      <div>
+        <div class="">
+            <h3>Havi jövedelem</h3>
+            <h1 class="text-success">{{havijovedelmek()}}</h1>
+        </div>
+        <div class="">
+            <h3>Havi kiadások</h3>
+            <h1 class="text-danger">{{havikiadasok()}}</h1>
+        </div>
+        
+        <div class=""></div>
+        <div class=""></div>
+    </div>
+    </div>
+    <div class="content col-5">
       <app-expenselist></app-expenselist>
     </div>
   </div>
@@ -72,7 +87,7 @@
              
               <select name="expenseCategory" id="incomeCategory"  [(ngModel)]="jovedelemTipus">
                 <option value="Válassz!">Válassz!</option>
-                <option *ngFor="let kategoria of jovedelemKategoriak">{{kategoria.jovedelemKategoria}}</option>
+                <option *ngFor="let kategoria of jovedelemkategoriatomb">{{kategoria.jovedelemKategoria}}</option>
                 
               </select>
             </p>
