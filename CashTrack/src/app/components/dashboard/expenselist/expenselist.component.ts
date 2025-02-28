@@ -8,7 +8,7 @@ import { KiadasManagerService } from '../../../services/kiadas-manager.service';
   selector: 'app-expenselist',
   imports: [NgFor],
   templateUrl: './expenselist.component.html',
-  styleUrl: './expenselist.component.scss'
+  styleUrl: './expenselist.component.css'
 })
 export class ExpenselistComponent {
   kiadasKategoriak: any[]=[];

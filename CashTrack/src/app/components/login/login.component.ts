@@ -16,7 +16,7 @@ import { RegisterService } from '../../services/register.service';
   imports: [FormsModule,HttpClientModule,NgIf,RouterModule,HeaderComponent],
   providers: [LoginService,AuthService],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
   email:string = '';
