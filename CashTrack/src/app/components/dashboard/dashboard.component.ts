@@ -7,11 +7,13 @@ import { KiadasManagerService } from '../../services/kiadas-manager.service';
 import { AuthService } from '../../services/auth.service';
 import { NgFor } from '@angular/common';
 import { ExpenselistComponent } from './expenselist/expenselist.component';
+import { graphComponent } from '../graph/graph.component';
+
 
 
 @Component({
     selector: 'app-dashboard',
-    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent],
+    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent,graphComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
@@ -66,6 +68,7 @@ currentYear: number = 0;
         this.jovedelmek.push(jovedelemAdatok);
         this.jovedelemService.jovedelemLekeres()
         this.HaviJovedelemFrissitese();
+        this.HaviOsszesFrissitese(); 
         
       });
     }
@@ -81,6 +84,7 @@ currentYear: number = 0;
   kiadasErtek:number = 0;
   kiadasDatum:string = '';
   kiadasMegjegyzes:string = '';
+  kiadaskategoriatomb:any[] = [];
   kiadasHozzaadas(){
     const kiadasAdatok = {
       felhasznaloID: this.felhasznaloID,
@@ -89,9 +93,10 @@ currentYear: number = 0;
       kategoriaID: this.kiadasTipus,
       kiadasKomment: this.kiadasMegjegyzes
     };
-    this.kiadasKategoriak.forEach((kategoriak: any) => {
+    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]')
+    this.kiadaskategoriatomb.forEach((kategoriak: any) => {
       //A kategoriaID megkapja először stringben a nevét, majd az ID-t
-      if(kiadasAdatok.kategoriaID == kategoriak.kiadasKategoria){
+      if(this.kiadasTipus == kategoriak.kiadasKategoria){
         console.log('Kategoria neve:',kiadasAdatok.kategoriaID);
         kiadasAdatok.kategoriaID = kategoriak.kategoriaID
         console.log('Kategoria ID:',kiadasAdatok.kategoriaID);
@@ -99,15 +104,16 @@ currentYear: number = 0;
         
       }
     });
-    if (kiadasAdatok.kategoriaID && kiadasAdatok.kiadasHUF && kiadasAdatok.kiadasDatum) {
+    if (kiadasAdatok.kiadasHUF && kiadasAdatok.kiadasDatum && kiadasAdatok.kategoriaID) {
       this.kiadasService.kiadasHozzaadas(kiadasAdatok).subscribe((response: any) => {
         
         if(response){
           console.log('Kiadás hozzáadva',kiadasAdatok);
           alert('Kiadás sikeresen hozzáadva!');
           this.kiadasok.push(kiadasAdatok);
-          this.kiadasokService.kiadasok();
+          this.kiadasService.kiadasokLekeres();
           this.HaviKiadasokFrissitese();
+          this.HaviOsszesFrissitese(); 
           
           
         }
@@ -117,7 +123,8 @@ currentYear: number = 0;
       });
     }
   }
-  kiadaskategoriatomb: any[] = [];
+ 
+
   jovedelemkategoriatomb: any[] = [];
   
   kiadasokFelugyelet: any[] = []
@@ -136,9 +143,7 @@ currentYear: number = 0;
       this.jovedelemService.KategoriakLekerese();
       this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]');
       this.jovedelemkategoriatomb = JSON.parse(localStorage.getItem('jovedelemkategoriak') || '[]');
-  
       this.jovedelemService.jovedelemLekeres();
-   
       this.HaviJovedelemFrissitese();
       this.HaviKiadasokFrissitese();
       this.HaviOsszesFrissitese(); 
@@ -161,12 +166,10 @@ currentYear: number = 0;
       });
       this.jovedelemHaviTemp = 0;
     this.jovedelemFelugyelet.forEach((element:any) => {
-      
       this.jovedelemHaviTemp = this.jovedelemHaviTemp + element.bevetelHUF
     });
     this.HaviOsszesFrissitese(); 
     return this.havijovedelmek.update(count => this.jovedelemHaviTemp)
-    
   }
   
   //Kiadások havi kezelése
@@ -176,11 +179,13 @@ currentYear: number = 0;
   
   HaviKiadasokFrissitese(){
     this.kiadasok = JSON.parse(localStorage.getItem('kiadasok') || '[]');
+    this.havikiadasokSzamolo = 0;
     this.kiadasok.forEach((element:any) => {
       this.havikiadasokSzamolo = this.havikiadasokSzamolo + element.kiadasHUF;
     });
-    this.HaviOsszesFrissitese(); 
+    this.HaviOsszesFrissitese();
     return this.havikiadasok.update(count => this.havikiadasokSzamolo)
+    
   }
 
   haviosszes = signal(0);

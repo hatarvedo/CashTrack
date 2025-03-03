@@ -95,7 +95,7 @@ export class KiadasManagerService {
     localStorage.setItem(this.kiadaskulcs, JSON.stringify(ujKiadasok));
     this.kiadasokFigyeles.next(ujKiadasok); 
   }
-  kiadasHozzaadas(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID: any, kiadasKomment: string}):Observable<any>{
+  kiadasHozzaadas(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID:  number, kiadasKomment: string}):Observable<any>{
     const frissitettAdat = [...this.kiadasokLekereseReturn(), kiadasAdat];
     this.kiadasokFrissitese(frissitettAdat);
     return this.http.post(`${this.apiUrl}`, kiadasAdat)
