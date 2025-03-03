@@ -65,19 +65,21 @@ public polarAreaLegend = true;
 public polarAreaOptions: ChartConfiguration<'polarArea'>['options'] = {
 
   responsive: true,
-  scales: {
+  /* scales: {
     r: {
       min: 0,
-      max: 100,
+      max: 10,
     }
-  }
+  } */
 };
 constructor() {
 }
 ngOnInit():void{
-  this.kiadasokKategorizlasa();
   this.polarAreaChartDatasets[0].data = new Array(this.polarAreaChartLabels.length).fill(0);
+  this.kiadasokKategorizlasa();
   console.log('datasets',this.polarAreaChartDatasets);
+  console.log(this.kiadaskategoriatomb);
+  console.log(this.kiadasoktomb);
 }
 
 
