@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Monthly Expenses Line Chart</title>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="chart"></div>
+<div>
+<button onclick="updateChart(2021)">View 2021</button>
+<button onclick="updateChart(2022)">View 2022</button>
+<button onclick="updateChart(2023)">View 2023</button>
+</div>
+<script>
+        let expensesData = {
+            2021: [20, 22, 18, 25, 30, 28, 23, 24, 27, 25, 30, 32],
+            2022: [22, 24, 20, 26, 33, 30, 27, 29, 31, 28, 32, 35],
+            2023: [24, 25, 21, 28, 35, 34, 30, 31, 29, 33, 36, 38]
+        };
+        let currentYear = 2021;
+
+        function renderChart() {
+            var options = {
+                chart: {
+                    type: 'line',
+                    height: 350,
+                    background: 'black',
+                },
+                series: [{
+                    name: 'Monthly Expenses',
+                    data: expensesData[currentYear]
+                }],
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                },
+                colors: ['green'],
+                stroke: {
+                    curve: 'smooth'
+                },
+                theme: {
+                    mode: 'dark'
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector('#chart'), options);
+            chart.render();
+        }
+
+        function updateChart(year) {
+            currentYear = year;
+            renderChart();
+        }
+
+        renderChart();
+    </script>
+</body>
+</html>

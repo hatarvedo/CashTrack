@@ -7,13 +7,13 @@ import { KiadasManagerService } from '../../services/kiadas-manager.service';
 import { AuthService } from '../../services/auth.service';
 import { NgFor } from '@angular/common';
 import { ExpenselistComponent } from './expenselist/expenselist.component';
-import { graphComponent } from '../graph/graph.component';
+import { GraphComponent } from '../graph/graph.component';
 
 
 
 @Component({
     selector: 'app-dashboard',
-    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent,graphComponent],
+    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent,GraphComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
@@ -197,6 +197,7 @@ currentYear: number = 0;
       localStorage.removeItem('felhasznalo');
       this.router.navigate(['home']);
       this.authService.logout();
+      localStorage.clear();
     }
   
     notWorking(): void{

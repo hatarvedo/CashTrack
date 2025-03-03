@@ -22,7 +22,9 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.0",
     "bootstrap-icons": "^1.11.3",
+    "chart.js": "^4.4.8",
     "ng-apexcharts": "^1.15.0",
+    "ng2-charts": "^8.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

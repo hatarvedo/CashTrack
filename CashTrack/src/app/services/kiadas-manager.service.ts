@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable,signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -72,8 +72,6 @@ export class KiadasManagerService {
     return this.http.delete(`${this.apiUrl}/${kiadasID}`).subscribe(Response => {
       console.log(Response);
     });
-    
-  
   }
   kiadasokKategoriaNeve(){
     this.kiadasokLekeres();
@@ -94,6 +92,7 @@ export class KiadasManagerService {
   kiadasokFrissitese(ujKiadasok: any[]) {
     localStorage.setItem(this.kiadaskulcs, JSON.stringify(ujKiadasok));
     this.kiadasokFigyeles.next(ujKiadasok); 
+    // this.kiadasokSignal.update(() => ujKiadasok);
   }
   kiadasHozzaadas(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID:  number, kiadasKomment: string}):Observable<any>{
     const frissitettAdat = [...this.kiadasokLekereseReturn(), kiadasAdat];
@@ -101,5 +100,8 @@ export class KiadasManagerService {
     return this.http.post(`${this.apiUrl}`, kiadasAdat)
     
   }
+  kiadastomb = signal(JSON.parse(localStorage.getItem('kiadasok') || '[]')); 
+  kiadasokSignal = signal(this.kiadastomb);
+  kiadasokSignalUpdate = signal(this.kiadasokFrissitese);
 
 }
