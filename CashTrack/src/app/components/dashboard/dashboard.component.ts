@@ -8,12 +8,13 @@ import { AuthService } from '../../services/auth.service';
 import { NgFor } from '@angular/common';
 import { ExpenselistComponent } from './expenselist/expenselist.component';
 import { GraphComponent } from '../graph/graph.component';
+import { PolarareaComponent } from '../../polararea/polararea.component';
 
 
 
 @Component({
     selector: 'app-dashboard',
-    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent,GraphComponent],
+    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent,GraphComponent,PolarareaComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
