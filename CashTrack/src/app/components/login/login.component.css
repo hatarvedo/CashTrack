@@ -137,9 +137,10 @@
   border-radius: 15px;
 }
 
-#email:focus, #password:focus{
+#email:focus, #password:focus, #vezeteknev:focus, #keresztnev:focus{
   border: 2px solid green;
   transition: all 0.2s ease-in-out;
+  color: #9f9f9f;
 }
 
 svg path {
