@@ -54,8 +54,8 @@
           <h3>Havi jövedelem</h3>
           <h1 class="text-success">{{havijovedelmek()}}</h1>
       </div>
-      <div class="">
-          <h3>Havi kiadások</h3>
+      <div class="" data-bs-toggle="modal" data-bs-target="#jovedelemModal">
+          <h3 >Havi kiadások</h3>
           <h1 class="text-danger">{{havikiadasok()}}</h1>
       </div>
       
@@ -67,7 +67,7 @@
   </div>
   </div>
   <div class="content col-5">
-    <app-expenselist></app-expenselist>
+
    
   </div>
   <app-graph></app-graph>
@@ -143,5 +143,21 @@
         </div>
       </div>
     </div>
+
+    <!-- Jövedelmek modal element -->
+     <!-- Modal -->
+<div class="modal fade" id="jovedelemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Összes jövedelem</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-expenselist></app-expenselist>
+      </div>
+    </div>
+  </div>
+</div>
 
   
