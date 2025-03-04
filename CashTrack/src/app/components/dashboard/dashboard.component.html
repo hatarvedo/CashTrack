@@ -48,20 +48,20 @@
   <div class="row">
   <div class="col-3">
   </div>
-  <div class="content col-5">
-    <div>
-      <div class="">
-          <h3>Havi jövedelem</h3>
-          <h1 class="text-success">{{havijovedelmek()}}</h1>
+  <div class="content col-5 mt-3">
+    <div class="information">
+      <div class="col-4 ">
+          <h4>Havi jövedelem</h4>
+          <h4 class="text-success">{{havijovedelmek()}} HUF</h4>
       </div>
-      <div class="" data-bs-toggle="modal" data-bs-target="#jovedelemModal">
-          <h3 >Havi kiadások</h3>
-          <h1 class="text-danger">{{havikiadasok()}}</h1>
+      <div class="col-4 " data-bs-toggle="modal" data-bs-target="#jovedelemModal">
+          <h4 >Havi kiadások</h4>
+          <h4 class="text-danger">-{{havikiadasok()}} HUF</h4>
       </div>
       
-      <div class="">
-          <h3>Havi összes</h3>
-          <h1 class="text-success">{{haviosszes()}}</h1>
+      <div class="col-4  ">
+          <h4>Havi összes</h4>
+          <h4 class="text-success">{{haviosszes()}} HUF</h4>
       </div>
       <div class=""></div>
   </div>
@@ -70,12 +70,14 @@
 
    
   </div>
-  <app-graph></app-graph>
-  <div class="pieChart">
+  <div class="areaGraph col-12 col-sm-7">
+    <app-graph></app-graph>
+  </div>
+  <div class="pieChart col-sm-7">
     <app-polararea style="height: 450px;"></app-polararea>
   </div>
 </div>
-</div>
+
   
   
 
@@ -150,7 +152,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Összes jövedelem</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Összes kiadás</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
