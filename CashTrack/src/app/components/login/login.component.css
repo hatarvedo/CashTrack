@@ -131,7 +131,7 @@
 
 }
 
-#email, #password{
+#email, #password, #vezeteknev, #keresztnev{
   background-color: rgba(12, 12, 12, 0.7);
   border: 2px solid transparent;
   border-radius: 15px;
@@ -187,7 +187,7 @@ h3{
   text-align: center;
 }
 
-#email::placeholder, #password::placeholder{
+#email::placeholder, #password::placeholder, #vezeteknev::placeholder, #keresztnev::placeholder{
   color: rgb(110, 110, 110);
 }
 
