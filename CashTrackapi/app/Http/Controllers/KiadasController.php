@@ -37,21 +37,21 @@ class KiadasController extends Controller
 
     /**
      * Display the specified resource.
-     */
-    public function show(Kiadas $kiadas, $kiadasID)
+        */
+  /*   public function show ($kiadasID)
     {
-        $kiadas = Kiadas::find($kiadas->kiadasID);
+        $kiadas = Kiadas::find($kiadasID);
         if(is_null($kiadas)){
             return response()->json(['message' => 'Nem található a kiadás'],400);
         }
         else
             return response()->json($kiadas,200);
-    }
+    } */
 
 
     public function showByUser(Request $request)
     {
-        $kiadas = Kiadas::where('felhasznaloID',$request->felhasznaloID)->get();
+        $kiadas = Kiadas::where('felhasznaloID', $request->felhasznaloID)->with('kategoria')->get();
         if(is_null($kiadas)){
             return response()->json(['message' => 'Nem található a kiadás'],400);
         }

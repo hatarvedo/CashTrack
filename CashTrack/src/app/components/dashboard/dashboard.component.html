@@ -97,7 +97,7 @@
            
             <select name="expenseCategory" id="incomeCategory"  [(ngModel)]="jovedelemTipus">
               <option value="Válassz!">Válassz!</option>
-              <option *ngFor="let kategoria of jovedelemkategoriatomb">{{kategoria.jovedelemKategoria}}</option>
+              <option *ngFor="let kategoria of jovedelemkategoriatomb" [value]="kategoria.kategoriaID">{{kategoria.jovedelemKategoria}}</option>
               
             </select>
           </p>
@@ -130,7 +130,7 @@
            <p style="display: flex; justify-content: space-between;"> <span class="bi bi-list-check text-light">&nbsp;Kiadás típusa: </span>
             <select name="expenseCategory" id="expenseCategory" [(ngModel)]="kiadasTipus">
               <option value="Válassz!">Válassz!</option>
-              <option *ngFor="let kategoria of kiadaskategoriatomb">{{ kategoria.kiadasKategoria }}</option>
+              <option *ngFor="let kategoria of kiadaskategoriatomb" [value]="kategoria.kategoriaID">{{ kategoria.kiadasKategoria }}</option>
             </select></p>
             <p style="display: flex; justify-content: space-between;"> <span class="bi bi-cash text-light">&nbsp;Érték: </span> <input type="number" name="expenseHUF" id="expenseHUF"[(ngModel)]="kiadasErtek" placeholder="Érték forintban"></p>
             <p style="display: flex; justify-content: space-between;"> <span class="bi bi-calendar-date text-light">&nbsp;Kiadás dátuma: </span><input type="date" name="expenseDate" id="expenseDate" [(ngModel)]="kiadasDatum"></p>

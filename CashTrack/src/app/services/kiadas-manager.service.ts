@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable,signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Kiadas } from '../models/Kiadas.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KiadasManagerService {
 
+ kiadasAdat = signal<Kiadas[]>([]);
   private apiUrl = 'http://127.0.0.1:8000/api/kiadasok';
   private apiUrlKiadasKategoriak = 'http://127.0.0.1:8000/api/kiadaskategoriak';
     constructor(private http: HttpClient) 
@@ -17,7 +19,7 @@ export class KiadasManagerService {
       }
     });
   }
-  kiadasokOsszes: {kiadasID: number, felhasznaloID: number, kiadasHUF: number, kiadasDatum: string, kategoriaID: any ,kategoriaNev: string , kiadasKomment: string}[]= []
+  kiadasokOsszes: Kiadas[]= []
 
   kiadaskategoriatomb:any[] = []
  kiadasokLekeres(){
@@ -34,10 +36,17 @@ export class KiadasManagerService {
       });
       this.kiadasokOsszes.sort((a, b) => new Date(b.kiadasDatum).getTime() - new Date(a.kiadasDatum).getTime());
       localStorage.setItem('kiadasok', JSON.stringify(this.kiadasokOsszes))
+      setTimeout(() => {
+      this.kiadasAdat.set(this.kiadasokOsszes);
+      console.log('Service Signal Frissitve default', this.kiadasAdat());
+      }
+      , 1000);
     });
+    
 
     return this.kiadasokOsszes;
   }
+
 
   kiadasKategoriakLekerese(): any[]
   {
@@ -47,9 +56,7 @@ export class KiadasManagerService {
      })
      return this.kiadaskategoriatomb;
   };
-/*   kiadasFeltoltes(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID: any, kiadasKomment: string}):Observable<any>{
-    return this.http.post(`${this.apiUrl}`, kiadasAdat);
-  } */
+
   kiadasTorlese(kiadasID: number):Observable<any>{
     let taroltTomb = JSON.parse(localStorage.getItem('kiadasok') || '[]');
       taroltTomb = taroltTomb.filter((item: any) => item.kiadasID !== kiadasID);
@@ -73,7 +80,7 @@ export class KiadasManagerService {
       console.log(Response);
     });
   }
-  kiadasokKategoriaNeve(){
+/*   kiadasokKategoriaNeve(){
     this.kiadasokLekeres();
     this.kiadasKategoriakLekerese();
 
@@ -88,20 +95,24 @@ export class KiadasManagerService {
       });
     });
     localStorage.setItem('kiadasok', JSON.stringify(this.kiadasokOsszes));
-  }
+  } */
   kiadasokFrissitese(ujKiadasok: any[]) {
     localStorage.setItem(this.kiadaskulcs, JSON.stringify(ujKiadasok));
     this.kiadasokFigyeles.next(ujKiadasok); 
-    // this.kiadasokSignal.update(() => ujKiadasok);
+    this.kiadasAdat.update(() => ujKiadasok);
+    this.kiadasAdat.set(ujKiadasok);
+    console.log('Service Signal Frissitve frissitett', this.kiadasAdat());
+    
+    
   }
-  kiadasHozzaadas(kiadasAdat: {felhasznaloID:number, kiadasHUF: number, kiadasDatum: string,kategoriaID:  number, kiadasKomment: string}):Observable<any>{
+  kiadasHozzaadas(kiadasAdat: Kiadas):Observable<any>{
     const frissitettAdat = [...this.kiadasokLekereseReturn(), kiadasAdat];
     this.kiadasokFrissitese(frissitettAdat);
+    this.kiadasAdat.update(() => frissitettAdat);
+    console.log('kiadasAdat SIGNAL', this.kiadasAdat);
     return this.http.post(`${this.apiUrl}`, kiadasAdat)
     
   }
-  kiadastomb = signal(JSON.parse(localStorage.getItem('kiadasok') || '[]')); 
-  kiadasokSignal = signal(this.kiadastomb);
-  kiadasokSignalUpdate = signal(this.kiadasokFrissitese);
+ 
 
 }

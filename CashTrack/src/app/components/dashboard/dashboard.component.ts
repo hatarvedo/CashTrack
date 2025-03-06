@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { JovedelemManagerService } from '../../services/jovedelem-manager.service';
@@ -9,6 +9,7 @@ import { NgFor } from '@angular/common';
 import { ExpenselistComponent } from './expenselist/expenselist.component';
 import { GraphComponent } from '../graph/graph.component';
 import { PolarareaComponent } from '../../polararea/polararea.component';
+import { Kiadas } from '../../models/Kiadas.model';
 
 
 
@@ -86,52 +87,52 @@ currentYear: number = 0;
   kiadasDatum:string = '';
   kiadasMegjegyzes:string = '';
   kiadaskategoriatomb:any[] = [];
+  Kiadas : Kiadas = {
+    kiadasID: 0,
+    felhasznaloID: 0,
+    kiadasHUF: 0,
+    kiadasDatum: '',
+    kategoriaID: 0,
+    kiadasKomment: '',
+    
+    
+  };
+  kiadasAdat = signal<Kiadas[]>([]);
+  @ViewChild('polarareachart') polarareachart: PolarareaComponent | undefined;
+  grafikonFrissitese(){
+    this.polarareachart?.refreshChart();
+   
+  }
   kiadasHozzaadas(){
-    const kiadasAdatok = {
+    const kiadasAdatok: Kiadas = {
       felhasznaloID: this.felhasznaloID,
       kiadasHUF: this.kiadasErtek,
       kiadasDatum: this.kiadasDatum,
       kategoriaID: this.kiadasTipus,
-      kiadasKomment: this.kiadasMegjegyzes
+      kiadasKomment: this.kiadasMegjegyzes,
+      
     };
-    this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]')
-    this.kiadaskategoriatomb.forEach((kategoriak: any) => {
-      //A kategoriaID megkapja először stringben a nevét, majd az ID-t
-      if(this.kiadasTipus == kategoriak.kiadasKategoria){
-        console.log('Kategoria neve:',kiadasAdatok.kategoriaID);
-        kiadasAdatok.kategoriaID = kategoriak.kategoriaID
-        console.log('Kategoria ID:',kiadasAdatok.kategoriaID);
-        console.log('Kategoriak.kategoriaID:',kategoriak.kategoriaID);
-        
-      }
-    });
+    
     if (kiadasAdatok.kiadasHUF && kiadasAdatok.kiadasDatum && kiadasAdatok.kategoriaID) {
       this.kiadasService.kiadasHozzaadas(kiadasAdatok).subscribe((response: any) => {
         
         if(response){
           console.log('Kiadás hozzáadva',kiadasAdatok);
           alert('Kiadás sikeresen hozzáadva!');
-          this.kiadasok.push(kiadasAdatok);
           this.kiadasService.kiadasokLekeres();
           this.HaviKiadasokFrissitese();
           this.HaviOsszesFrissitese(); 
-          
+          this.kiadasAdat.update(kiadasok => [...kiadasok, kiadasAdatok]);
           
         }
         else{
           alert('Kiadás hozzáadása sikertelen!');
-        }
+        };
       });
-    }
-  }
- 
-
+    };
+  };
   jovedelemkategoriatomb: any[] = [];
-  
   kiadasokFelugyelet: any[] = []
-  
-  
-  
     jovedelemFelugyelet:any[] = []
     ngOnInit(): void {
       this.authService.login();
@@ -143,17 +144,13 @@ currentYear: number = 0;
       this.kiadasService.kiadasKategoriakLekerese();
       this.jovedelemService.KategoriakLekerese();
       this.kiadaskategoriatomb = JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]');
+      console.log('kiadaskategoriak:',this.kiadaskategoriatomb);
       this.jovedelemkategoriatomb = JSON.parse(localStorage.getItem('jovedelemkategoriak') || '[]');
       this.jovedelemService.jovedelemLekeres();
       this.HaviJovedelemFrissitese();
       this.HaviKiadasokFrissitese();
       this.HaviOsszesFrissitese(); 
-
-
-    
     }
-  
-  
     //Jövedelem havi kezelése
   jovedelemHaviTemp : number = 0;
   havijovedelmek = signal(0);

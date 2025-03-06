@@ -49,7 +49,7 @@ class JovedelemController extends Controller
     }
     public function showByUser(Request $request)
     {
-        $jovedelem = Jovedelem::where('felhasznaloID',$request->felhasznaloID)->get();
+        $jovedelem = Jovedelem::where('felhasznaloID',$request->felhasznaloID)->with('kategoria')->get();
         if(is_null($jovedelem)){
             return response()->json(['message' => 'Nem található a kiadás'],400);
         }

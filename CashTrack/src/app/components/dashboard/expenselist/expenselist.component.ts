@@ -23,7 +23,7 @@ kiadasokFelugyelet:any[] = []
 kiadaskategoriatomb: any[] =[];
 ngOnInit(): void {
   this.kiadasService.kiadasokLekeres()
-  this.kiadasService.kiadasokKategoriaNeve();
+  /* this.kiadasService.kiadasokKategoriaNeve(); */
   this.kiadasokFelugyelet = JSON.parse(localStorage.getItem('kiadasok')|| '[]' );
   console.log(this.kiadasokFelugyelet);
   this.kiadasService.kiadasok$.subscribe((data) => {
