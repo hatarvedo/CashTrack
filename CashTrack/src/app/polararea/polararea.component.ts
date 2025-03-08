@@ -80,6 +80,13 @@ public polarAreaLegend = true;
 public polarAreaOptions: ChartConfiguration<'polarArea'>['options'] = {
 
   responsive: true,
+  scales: {
+    r: {
+      ticks: {
+        display: false // Eltünteti a skálaértékeket
+      },
+    }
+  }
  
 }
 
