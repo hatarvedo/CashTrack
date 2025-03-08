@@ -98,9 +98,9 @@ currentYear: number = 0;
     
   };
   kiadasAdat = signal<Kiadas[]>([]);
-  @ViewChild('polarareachart') polarareachart: PolarareaComponent | undefined;
+  @ViewChild(PolarareaComponent) polarareachart: PolarareaComponent | undefined;
   grafikonFrissitese(){
-    this.polarareachart?.refreshChart();
+    this.polarareachart?.ngAfterViewInit();
    
   }
   kiadasHozzaadas(){
@@ -122,7 +122,10 @@ currentYear: number = 0;
           this.kiadasService.kiadasokLekeres();
           this.HaviKiadasokFrissitese();
           this.HaviOsszesFrissitese(); 
-          this.kiadasAdat.update(kiadasok => [...kiadasok, kiadasAdatok]);
+          setTimeout(() => {
+            this.grafikonFrissitese();
+          }, 2000);
+          
           
         }
         else{

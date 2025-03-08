@@ -16,24 +16,23 @@ export class PolarareaComponent {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   
      constructor() {
+      this.kiadasoktomb(); // Ezzel biztosítjuk, hogy figyeljük a változásokat
+    
     }
     
 
 kiadasService = inject(KiadasManagerService);
-kiadasoktomb = computed(() => this.kiadasService.kiadasAdat());
+kiadasoktomb: Signal<any[]> = computed(() => this.kiadasService.kiadasAdat());
 
  
   
 kiadaskategoriatomb= JSON.parse(localStorage.getItem('kiadaskategoriak') || '[]');
  
 // PolarArea
-public polarAreaChartLabels = this.kiadasoktomb().map((k: any) => k.kategoria?.kategoriaNev || '[]');
+public polarAreaChartLabels = this.kiadasoktomb().map((k: any) => k.kategoria?.kiadasKategoria || '[]');
 public polarAreaChartDatasets: ChartConfiguration<'polarArea'>['data']['datasets'] = [
 
-  { data: Object.values(this.kiadasoktomb().reduce((acc: { [key: string]: number }, k: any) => {
-    acc[k.kategoria?.kategoriaNev || '[]'] = (acc[k.kategoria?.kategoriaNev || '[]'] || 0) + 1;
-    return acc;
-  }, {} as { [key: string]: number })),
+  { data: this.kiadasoktomb().map((k: any) => k.kiadasHUF || 0),
     backgroundColor: [
     'rgba(0, 50, 0, 1)',
     'rgba(0, 75, 0, 1)',
@@ -81,71 +80,63 @@ public polarAreaLegend = true;
 public polarAreaOptions: ChartConfiguration<'polarArea'>['options'] = {
 
   responsive: true,
-  /* scales: {
-    r: {
-      min: 0,
-      max: 10,
-    }
-  } */
+
 };
 
-ngViewAfterInit():void{
-  this.kiadasService.kiadasokLekeres(); // Ha van ilyen metódus a service-ben
- /*  this.kiadasoktomb = this.kiadasService.kiadasAdat() */; // Helyes Signal elérés
- 
+ngAfterViewInit(){
+  setTimeout(() => {
+    this.kiadasService.kiadasokReturn();
+    this.kiadasoktomb();
+    console.log('anyam ngoninit',this.kiadasoktomb());
+    this.refreshChart();
+  }, 2000);
   
-  console.log('datasets',this.polarAreaChartDatasets);
-  console.log(this.kiadaskategoriatomb);
   
-  
- setTimeout(() => {
-  console.log('kiadasokXDDD', this.kiadasService.kiadasAdat());
-  this.polarAreaChartDatasets[0].data = this.kiadasoktomb().map((kiadas: any) => kiadas.value);
- 
-  this.refreshChart();
- }, 2000);
-
 }
-
-
-kiadasokKategorizlasa(): void {
-  
-  
-  console.log('Kiadasok:', this.kiadasoktomb());
-  console.log('Kiadás kategóriák:', this.kiadaskategoriatomb);
-  console.log('polarAreaChartLabels:', this.polarAreaChartDatasets[0].data);
-  this.kiadaskategoriatomb.forEach((element: any) => {
-    this.polarAreaChartLabels.push(element.kiadasKategoria);
-  });
-  this.kiadasoktomb().forEach((kiadas: any) => {
-    const index = this.polarAreaChartLabels.indexOf(kiadas.kategoriaNev);
-    if (index !== -1) {
-      this.polarAreaChartDatasets[0].data[index] = (this.polarAreaChartDatasets[0].data[index] || 0) + 1;
-    }
-  });
-  this.polarAreaChartDatasets = [...this.polarAreaChartDatasets];
-}
-// chart declaration removed as it is already declared with @ViewChild
 
 refreshChart() {
-  this.kiadaskategoriatomb.forEach((element: any) => {
-    this.polarAreaChartLabels.push(element.kiadasKategoria);
-  });
-  this.kiadasoktomb().forEach((kiadas: any) => {
-    const index = this.polarAreaChartLabels.indexOf(kiadas.kategoria.kiadasKategoria);
-    if (index !== -1) {
-      this.polarAreaChartDatasets[0].data[index] = (this.polarAreaChartDatasets[0].data[index] || 0) + 1;
+  setTimeout(() => {
+    
+  
+  const kiadasok = this.kiadasoktomb();
+  console.log('refreshChart metodus',this.kiadasoktomb());
+
+  // Ha még nincsenek adatok, ne csináljunk semmit
+  if (!kiadasok || kiadasok.length === 0) {
+    console.log("Nincsenek adatok a charthoz.");
+    return;
+  }
+
+  // Kategória darabszámok összesítése
+  const categoryCounts: { [key: string]: number } = {};
+  kiadasok.forEach(kiadas => {
+    if (kiadas.kategoria && kiadas.kategoria.kiadasKategoria) {
+      const category = kiadas.kategoria.kiadasKategoria;
+      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
     }
   });
 
-  this.polarAreaChartLabels = this.kiadasService.kiadasAdat().map((k: any) => k.kategoria?.kiadasKategoria || '');
-  
-  if (this.chart) {
-    this.chart.update(); // Kényszerített frissítés
+  // Ha nincs érvényes adat, ne frissítsünk
+  if (Object.keys(categoryCounts).length === 0) {
+    console.warn("Nem található érvényes kategória a chart frissítéséhez.");
+    return;
   }
-}
+
+  // Frissítjük a chart adatait
+  this.polarAreaChartLabels = Object.keys(categoryCounts);
+  this.polarAreaChartDatasets[0].data = Object.values(categoryCounts);
+
+  // Ha a chart még nem jött létre, ne próbáljuk frissíteni
+  if (!this.chart) {
+    console.warn("A chart még nem inicializálódott.");
+    return;
+  }
+
+  this.chart.update(); // Frissítés
+}, 2000);
 }
 
+}
 
 
 

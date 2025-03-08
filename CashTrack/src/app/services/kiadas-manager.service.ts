@@ -72,6 +72,9 @@ export class KiadasManagerService {
   private kiadasokLekereseReturn(): any[] {
     return JSON.parse(localStorage.getItem(this.kiadaskulcs) || '[]');
   }
+  kiadasokReturn(): any[] {
+    return this.kiadasokLekereseReturn();
+  }
   kiadasTorles(index: number, kiadasID: number) {
     const frissitettKiadas = this.kiadasokLekereseReturn().filter((_, i) => i !== index);
     this.kiadasokFrissitese(frissitettKiadas);
@@ -96,20 +99,15 @@ export class KiadasManagerService {
     });
     localStorage.setItem('kiadasok', JSON.stringify(this.kiadasokOsszes));
   } */
-  kiadasokFrissitese(ujKiadasok: any[]) {
+  kiadasokFrissitese(ujKiadasok: Kiadas[]) {
     localStorage.setItem(this.kiadaskulcs, JSON.stringify(ujKiadasok));
     this.kiadasokFigyeles.next(ujKiadasok); 
-    this.kiadasAdat.update(() => ujKiadasok);
-    this.kiadasAdat.set(ujKiadasok);
+    this.kiadasAdat.update(kiadasok => [...kiadasok, ...ujKiadasok]);
     console.log('Service Signal Frissitve frissitett', this.kiadasAdat());
-    
-    
   }
   kiadasHozzaadas(kiadasAdat: Kiadas):Observable<any>{
     const frissitettAdat = [...this.kiadasokLekereseReturn(), kiadasAdat];
     this.kiadasokFrissitese(frissitettAdat);
-    this.kiadasAdat.update(() => frissitettAdat);
-    console.log('kiadasAdat SIGNAL', this.kiadasAdat);
     return this.http.post(`${this.apiUrl}`, kiadasAdat)
     
   }

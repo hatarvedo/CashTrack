@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jovedelem_kategoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Jovedelem;
 
 class JovedelemKategoriaController extends Controller
 {
