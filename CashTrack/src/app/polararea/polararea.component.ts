@@ -80,8 +80,8 @@ public polarAreaLegend = true;
 public polarAreaOptions: ChartConfiguration<'polarArea'>['options'] = {
 
   responsive: true,
-
-};
+ 
+}
 
 ngAfterViewInit(){
   setTimeout(() => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, OnInit, Signal, signal, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { KiadasManagerService } from '../../services/kiadas-manager.service';
@@ -10,13 +10,14 @@ import { KiadasManagerService } from '../../services/kiadas-manager.service';
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.css'
 })
-export class GraphComponent implements OnInit {
-  public chart: any;
+export class GraphComponent implements OnInit  {
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   constructor(private kiadasService: KiadasManagerService) {
     /* this.kiadasadatok = signal(this.kiadasService.kiadastomb); */
-    
+    this.kiadastomb();
   }
-  kiadasadatok: any[] = JSON.parse(localStorage.getItem('kiadasok') || '[]');
+  kiadastomb: Signal<any[]> = computed(() => this.kiadasService.kiadasAdat());
+/*   kiadasadatok: any[] = JSON.parse(localStorage.getItem('kiadasok') || '[]'); */
   
  /*  kiadasadatok: any; */
   
@@ -99,12 +100,23 @@ export class GraphComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.processExpenseData();
     
+    setTimeout(() => {
+      this.kiadasService.kiadasokReturn();
+      this.kiadastomb();
+      console.log('kiadasadatok',this.kiadastomb());
+      this.processExpenseData();
+    
+    }, 2000);
   }
 
   processExpenseData(): void {
-    if (!this.kiadasadatok || this.kiadasadatok.length === 0) {
+    setTimeout(() => {
+      
+   
+    const kiadasadatok = this.kiadastomb();
+    console.log('kiadasadatok processexpense',kiadasadatok);
+    if (!kiadasadatok || kiadasadatok.length === 0) {
       return;
     }
 
@@ -112,7 +124,7 @@ export class GraphComponent implements OnInit {
     const monthlyTotals = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     // Group expenses by month
-    this.kiadasadatok.forEach((kiadas: any) => {
+    kiadasadatok.forEach((kiadas: any) => {
       if (kiadas.kiadasDatum) {
         const date = new Date(kiadas.kiadasDatum);
         const month = date.getMonth(); // 0-11 for Jan-Dec
@@ -154,5 +166,8 @@ export class GraphComponent implements OnInit {
         }
       }
     }
+    this.chart?.update();
+  }, 2000);
   }
+  
 }

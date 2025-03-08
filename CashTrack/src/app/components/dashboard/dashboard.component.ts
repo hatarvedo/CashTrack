@@ -99,8 +99,10 @@ currentYear: number = 0;
   };
   kiadasAdat = signal<Kiadas[]>([]);
   @ViewChild(PolarareaComponent) polarareachart: PolarareaComponent | undefined;
+  @ViewChild(GraphComponent) graph: GraphComponent | undefined;
   grafikonFrissitese(){
     this.polarareachart?.ngAfterViewInit();
+    this.graph?.ngOnInit();
    
   }
   kiadasHozzaadas(){
