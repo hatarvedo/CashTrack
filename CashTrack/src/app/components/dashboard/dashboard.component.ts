@@ -5,22 +5,24 @@ import { Router, RouterLink } from '@angular/router';
 import { JovedelemManagerService } from '../../services/jovedelem-manager.service';
 import { KiadasManagerService } from '../../services/kiadas-manager.service';
 import { AuthService } from '../../services/auth.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ExpenselistComponent } from './expenselist/expenselist.component';
 import { GraphComponent } from '../graph/graph.component';
 import { PolarareaComponent } from '../../polararea/polararea.component';
 import { Kiadas } from '../../models/Kiadas.model';
+import { IncomelistComponent } from './incomelist/incomelist.component';
 
 
 
 @Component({
     selector: 'app-dashboard',
-    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent,GraphComponent,PolarareaComponent],
+    imports: [FormsModule, RouterLink,NgFor,ExpenselistComponent,GraphComponent,PolarareaComponent,NgIf,IncomelistComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
   kiadasokService: any;
+
   
 constructor(private router: Router,private http: HttpClient, private kiadasService: KiadasManagerService, private jovedelemService: JovedelemManagerService, private authService: AuthService){}
 

@@ -77,5 +77,13 @@ jovOsszeadas(){
     return this.havijovedelem
   }); 
 }
+jovedelemTorles(index: number, jovedelemID: number) {
+  const frissitettJovedelem = this.jovedelemVizsgalatLekerese().filter((_, i) => i !== index);
+  this.jovdelemekFrissitese(frissitettJovedelem);
+  console.log(JSON.parse(localStorage.getItem(this.jovedelemkulcs) || '[]'));
+  return this.http.delete(`${this.apiUrlJovedelmek}/${jovedelemID}`).subscribe(response => {
+    console.log(response);
+  });
+}
 
 }
