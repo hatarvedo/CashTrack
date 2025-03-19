@@ -94,8 +94,8 @@ refreshChart() {
   const categoryCounts: { [key: string]: number } = {};
   jovedelmek.forEach(jovedelem => {
     if (jovedelem.kategoria && jovedelem.kategoria.jovedelemKategoria) {
-      const category = jovedelem.kategoria.jovedelemKategoria;
-      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+      const osszeg = jovedelem.kategoria.jovedelemKategoria;
+      categoryCounts[osszeg] = (categoryCounts[osszeg] || 0) + jovedelem.bevetelHUF;
     }
   });
 

@@ -79,19 +79,40 @@ jovdelemekFrissitese(ujJovedelmek: any[]) {
   return this.http.post(`${this.apiUrlJovedelmek}`, jovedelemAdat)
   
 } 
+tomb: any[] = []
+szamolas = signal<number>(0);
+countTemp = 0;
+jovOsszeadas(){
+  const user = JSON.parse(localStorage.getItem('felhasznalo') || '{}');
+  this.http.get(`${this.apiUrlJovedelmek}/felhasznalo/${user.felhasznaloID}`).subscribe((data:any) => {
+    this.tomb = data;
+    console.log('Tömb adatok (jövedelem)',this.tomb);
+    this.countTemp = 0;
+    this.tomb.forEach(element => {
+      
+      this.countTemp  += element.bevetelHUF;
+      console.log("countTemp változó:",this.countTemp);
+    });
+    this.szamolas.update(count => this.countTemp)
+    console.log("Ez itt mi?",this.szamolas())
+  });
+  return this.szamolas;
+}
 
 //Jovedelem adatok figyelése és kezelése
 havijovedelem = signal<number>(0);
 jovedelemlista: any[] = [];
-szamolas = signal<number>(0);
+
 havijovedelemVegleges = signal(this.havijovedelem)
 
 jovedelemTorles(index: number, jovedelemID: number) {
   const frissitettJovedelem = this.jovedelemVizsgalatLekerese().filter((_, i) => i !== index);
   this.jovdelemekFrissitese(frissitettJovedelem);
   console.log(JSON.parse(localStorage.getItem(this.jovedelemkulcs) || '[]'));
+  
   return this.http.delete(`${this.apiUrlJovedelmek}/${jovedelemID}`).subscribe(response => {
     console.log(response);
+    this.jovOsszeadas();
   });
 }
 
