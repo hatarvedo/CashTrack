@@ -18,6 +18,7 @@
     margin: 25px;
     margin-bottom: -25px;
     z-index: 100;
+    transition: all 0.3s ease;
 }
 
 .main-content {
@@ -26,6 +27,7 @@
     min-height: 100vh;
     position: relative;
     z-index: 1;
+    transition: all 0.3s ease;
 }
 
 hr {
@@ -170,6 +172,7 @@ hr {
         background: rgba(0, 0, 0, 0.9);
         backdrop-filter: blur(10px);
         z-index: 100;
+        border: none;
     }
 
     .main-content {
@@ -231,6 +234,17 @@ hr {
 
     .container-fluid {
         padding: 0 10px;
+    }
+
+    /* Elrejtjük a felesleges elemeket */
+    .d-flex.align-items-center.pb-3.me-md-auto {
+        display: none !important;
+    }
+
+    /* A sidebar tartalmát igazítjuk */
+    .d-flex.flex-column.align-items-center.align-items-sm-start.px-3.pt-2.text-white {
+        padding: 0 !important;
+        width: 100%;
     }
 }
 
