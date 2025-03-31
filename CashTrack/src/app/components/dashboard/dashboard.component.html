@@ -65,7 +65,8 @@
                                 <h4 class="card-title">Havi összes</h4>
                                 <h4 *ngIf="haviosszes() > 0; else negative" class="text-success">{{haviosszes()}} HUF</h4>
                                 <ng-template #negative>
-                                    <h4 class="text-danger">-{{haviosszes()}} HUF</h4>
+                                    <h4 class="text-danger">
+                                      {{haviosszes()}} HUF</h4>
                                 </ng-template>
                             </div>
                         </div>
