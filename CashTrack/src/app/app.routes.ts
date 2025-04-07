@@ -5,6 +5,7 @@ import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { KapcsolatComponent } from './components/kapcsolat/kapcsolat.component';
 import { authGuard } from './guards/auth.guard';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
     {
@@ -12,6 +13,9 @@ export const routes: Routes = [
     },
     {
         path:'login',component:LoginComponent
+    },
+    {
+        path:'register',component:RegisterComponent
     },
     {
         path:'kapcsolat',component:KapcsolatComponent

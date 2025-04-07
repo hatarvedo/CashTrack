@@ -76,7 +76,11 @@ export class LoginComponent {
         alert('Sikertelen regisztráció');
       }
     });
+  };
+  RegisterRoute(): void {
+    this.router.navigate(['/register']);
   }
+
 belepesVizsgalat=true;
 /* ngOnInit(): void {
   this.LogOrReg();

@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="container belepesFelulet" *ngIf="belepesVizsgalat; else regisztralas;">
+<div class="container belepesFelulet">
     <div class="row">
         <div class="col-3">
             <!--BLANK-->
@@ -46,7 +46,7 @@
               
             </div>
         </form>
-        <p class="question"><b>Nincs még fiókod?</b> &nbsp; <button class="btn btn-dark" (click)="LogOrReg()">Regisztrálj!</button></p>
+        <p class="question"><b>Nincs még fiókod?</b> &nbsp; <button class="btn btn-dark" (click)="RegisterRoute()">Regisztrálj!</button></p>
         </div>
       
         
@@ -56,11 +56,11 @@
         </div>
     </div>
 </div>
-<ng-template #regisztralas>
+<!-- <ng-template #regisztralas>
     <div class="container regisztraciosFelulet">
         <div class="row">
             <div class="col-3">
-                <!--BLANK-->
+                
             </div>
       
             <div class="col-6 login">
@@ -107,11 +107,11 @@
            
       
             <div class="col-3">
-                 <!--BLANK-->
+                 
             </div>
         </div>
       </div>
-</ng-template>
+</ng-template> -->
 
 
 
