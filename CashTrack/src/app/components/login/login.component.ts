@@ -13,7 +13,7 @@ import { RegisterService } from '../../services/register.service';
 @Component({
   selector: 'app-login',
   standalone:true,
-  imports: [FormsModule,HttpClientModule,NgIf,RouterModule,HeaderComponent],
+  imports: [FormsModule,HttpClientModule,RouterModule,HeaderComponent],
   providers: [LoginService,AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
