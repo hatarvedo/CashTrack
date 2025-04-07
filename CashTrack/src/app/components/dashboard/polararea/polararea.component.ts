@@ -1,9 +1,8 @@
 import { Component, computed, inject, signal, Signal, ViewChild } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { KiadasManagerService } from '../services/kiadas-manager.service';
-import { Kiadas } from '../models/Kiadas.model';
-import { count } from 'rxjs';
+import { KiadasManagerService } from '../../../services/kiadas-manager.service';
+
 
 @Component({
   selector: 'app-polararea',
@@ -80,6 +79,19 @@ public polarAreaLegend = true;
 public polarAreaOptions: ChartConfiguration<'polarArea'>['options'] = {
 
   responsive: true,
+  plugins: {
+    title: {
+      text: 'Kiadások kategóriák szerint',
+      display: true,
+      font: {
+        size: 20,
+        weight: 'bold',
+        family: 'Arial',
+        lineHeight: 1.2,
+        
+      }
+    }
+  },
   scales: {
     r: {
       ticks: {

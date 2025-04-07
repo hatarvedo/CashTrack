@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ExpenselistComponent } from './expenselist/expenselist.component';
 import { GraphComponent } from '../graph/graph.component';
-import { PolarareaComponent } from '../../polararea/polararea.component';
+import { PolarareaComponent } from './polararea/polararea.component';
 import { Kiadas } from '../../models/Kiadas.model';
 import { IncomelistComponent } from './incomelist/incomelist.component';
 import { PiechartComponent } from '../piechart/piechart.component';
