@@ -84,6 +84,7 @@ export class GraphComponent implements OnInit  {
       title: {
         text: 'Kiadások és Jövedelmek',
         display: true,
+        color: 'white',
         font: {
           size: 20,
           weight: 'bold',

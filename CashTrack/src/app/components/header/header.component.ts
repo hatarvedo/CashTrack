@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import AOS from 'aos';
 
 @Component({
     selector: 'app-header',
@@ -19,6 +20,7 @@ export class HeaderComponent {
       this.subscription = this.authService.isLoggedIn$.subscribe(status => {
         this.isLoggedIn = status;
       });
+      AOS.init();
     }
   
 }

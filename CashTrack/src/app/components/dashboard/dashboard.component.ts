@@ -13,7 +13,7 @@ import { Kiadas } from '../../models/Kiadas.model';
 import { IncomelistComponent } from './incomelist/incomelist.component';
 import { PiechartComponent } from '../piechart/piechart.component';
 import { count } from 'rxjs';
-
+import AOS from 'aos';
 @Component({
     selector: 'app-dashboard',
     standalone: true,
@@ -93,6 +93,9 @@ currentYear: number = 0;
         setTimeout(() => {
           this.incomelist?.ngOnInit();
         }, 700);
+        setTimeout(() => {
+          this.grafikonFrissitese();
+        }, 2000);
         
         
       });
@@ -177,6 +180,7 @@ currentYear: number = 0;
 
       // Adatok inicializálása
       this.initializeData();
+      AOS.init();
     }
 
     private initializeData(): void {

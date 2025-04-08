@@ -24,6 +24,7 @@ export class PiechartComponent {
     title: {
       text: 'Bevételek kategóriák szerint',
       display: true,
+      color: 'white',
       font: {
         size: 20,
         weight: 'bold',

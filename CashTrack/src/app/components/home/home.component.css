@@ -110,16 +110,20 @@
 
 .registerButton{
     display: flex;
+    justify-content: center;
+    padding: 10px !important;
+    
+
+    
 }
 .spline-container{
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 70vh;
-  width: 100%;
+  bottom: 100px;
   position: relative;
-  grid-column: 7/12;
-  margin-top: 50px;
+  grid-column: 4/10;
+
 }
 .phone-3d{
   position: absolute;

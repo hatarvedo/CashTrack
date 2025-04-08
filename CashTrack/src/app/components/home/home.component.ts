@@ -2,6 +2,7 @@ import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import AOS from 'aos';
 
 @Component({
     selector: 'app-home',
@@ -18,5 +19,6 @@ export class HomeComponent implements OnInit {
         script.type = 'module';
         script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js';
         document.head.appendChild(script);
+        AOS.init();
     }
 }

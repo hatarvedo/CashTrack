@@ -33,40 +33,40 @@ public polarAreaChartDatasets: ChartConfiguration<'polarArea'>['data']['datasets
 
   { data: this.kiadasoktomb().map((k: any) => k.kiadasHUF || 0),
     backgroundColor: [
-    'rgba(0, 50, 0, 1)',
-    'rgba(0, 75, 0, 1)',
-    'rgba(0, 100, 0, 1)',
-    'rgba(0, 125, 0, 1)',
-    'rgba(0, 150, 0, 1)',
-    'rgba(0, 175, 0, 1)',
-    'rgba(0, 200, 0, 1)',
-    'rgba(0, 225, 0, 1)',
-    'rgba(25, 255, 25, 1)',
-    'rgba(50, 255, 50, 1)',
-    'rgba(75, 255, 75, 1)',
-    'rgba(100, 255, 100, 1)',
-    'rgba(125, 255, 125, 1)',
-    'rgba(150, 255, 150, 1)',
-    'rgba(175, 255, 175, 1)',
-    'rgba(200, 255, 200, 1)'
+    'rgba(50, 0, 0, 1)',
+    'rgba(75, 0, 0, 1)',
+    'rgba(100, 0, 0, 1)',
+    'rgba(125, 0, 0, 1)',
+    'rgba(150, 0, 0, 1)',
+    'rgba(175, 0, 0, 1)',
+    'rgba(200, 0, 0, 1)',
+    'rgba(225, 0, 0, 1)',
+    'rgba(255, 25, 25, 1)',
+    'rgba(255, 50, 50, 1)',
+    'rgba(255, 75, 75, 1)',
+    'rgba(255, 100, 100, 1)',
+    'rgba(255, 125, 125, 1)',
+    'rgba(255, 150, 150, 1)',
+    'rgba(255, 175, 175, 1)',
+    'rgba(255, 200, 200, 1)'
     ],
     borderColor: [
-      'rgba(0, 50, 0, 1)',
-    'rgba(0, 75, 0, 1)',
-    'rgba(0, 100, 0, 1)',
-    'rgba(0, 125, 0, 1)',
-    'rgba(0, 150, 0, 1)',
-    'rgba(0, 175, 0, 1)',
-    'rgba(0, 200, 0, 1)',
-    'rgba(0, 225, 0, 1)',
-    'rgba(25, 255, 25, 1)',
-    'rgba(50, 255, 50, 1)',
-    'rgba(75, 255, 75, 1)',
-    'rgba(100, 255, 100, 1)',
-    'rgba(125, 255, 125, 1)',
-    'rgba(150, 255, 150, 1)',
-    'rgba(175, 255, 175, 1)',
-    'rgba(200, 255, 200, 1)'
+      'rgba(50, 0, 0, 1)',
+    'rgba(75, 0, 0, 1)',
+    'rgba(100, 0, 0, 1)',
+    'rgba(125, 0, 0, 1)',
+    'rgba(150, 0, 0, 1)',
+    'rgba(175, 0, 0, 1)',
+    'rgba(200, 0, 0, 1)',
+    'rgba(225, 0, 0, 1)',
+    'rgba(255, 25, 25, 1)',
+    'rgba(255, 50, 50, 1)',
+    'rgba(255, 75, 75, 1)',
+    'rgba(255, 100, 100, 1)',
+    'rgba(255, 125, 125, 1)',
+    'rgba(255, 150, 150, 1)',
+    'rgba(255, 175, 175, 1)',
+    'rgba(255, 200, 200, 1)'
     ],
     
     borderWidth: 2
@@ -83,12 +83,12 @@ public polarAreaOptions: ChartConfiguration<'polarArea'>['options'] = {
     title: {
       text: 'Kiadások kategóriák szerint',
       display: true,
+      color: 'white',
       font: {
         size: 20,
         weight: 'bold',
         family: 'Arial',
-        lineHeight: 1.2,
-        
+        lineHeight: 1.2
       }
     }
   },
